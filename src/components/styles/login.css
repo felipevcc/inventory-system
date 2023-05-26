@@ -1,3 +1,6 @@
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css?family=Poppins:600&display=swap');
+
 * {
 	padding: 0;
 	margin: 0;
@@ -78,7 +81,7 @@ form {
 	align-items: center;
 }
 
-.icon i {
+.icon .i {
 	transition: .3s;
 }
 
@@ -140,7 +143,7 @@ form {
 	font-size: 15px;
 }
 
-.input-div.focus > .icon > i {
+.input-div.focus > .icon > .i {
 	color: #BE6752;
 }
 
