@@ -24,49 +24,43 @@
     --tran-05: all 0.3s ease;
 }
 
-/* ===== Sidebar ===== */
-.sidebar {
-    position: fixed;
-    z-index: 2;
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+::selection {
+    background-color: var(--primary-color);
+    color: #fff;
 }
 
 /* ===== Navbar ===== */
 .navbar {
     position: fixed;
-    top: 0;
-    left: 250px;
-    width: calc(100% - 250px);
+    height: 70px;
+    /*width in App.css*/
+    padding: 2px 14px;
+    /*background-color: var(--sidebar-color);*/
+    background-color: #24292ef7;
     transition: var(--tran-05);
-    z-index: 1;
-}
-
-/* ===== Content ===== */
-.main-content {
-    position: absolute;
-    top: 100px;
-    left: 250px;
-    height: 100vh;
-    width: calc(100% - 250px);
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
-
-/* ===== Content text ===== */
-.main-content .text {
-    font-size: 30px;
-    font-weight: 500;
     color: var(--text-color);
-    padding: 12px 60px;
+    display: flex;
+    align-items: center;
 }
 
-/* ===== Components when sidebar is closed ===== */
-.sidebar.close ~ .navbar {
-    left: 88px;
-    width: calc(100% - 78px);
+.navbar .text {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 500;
+    margin-right: 35px;
+    margin-left: auto;
+    white-space: nowrap;
+    opacity: 1;
 }
 
-.sidebar.close ~ .main-content {
-    left: 88px;
-    height: 100vh;
-    width: calc(100% - 78px);
+.navbar .text .icon {
+    margin-right: 10px;
+    font-size: 20px;
 }

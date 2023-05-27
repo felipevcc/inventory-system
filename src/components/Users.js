@@ -2,14 +2,14 @@ import React from 'react';
 //import React, { useEffect, useState } from 'react';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import './styles/home.css';
+import './styles/users.css';
 
-const Home = () => {
+const Users = () => {
     return (
         <div className="main-container">
-            <div class="text">Dashboard</div>
+            <div class="text">Usuarios</div>
         </div>
     );
 }
 
-export default Home;
+export default Users;

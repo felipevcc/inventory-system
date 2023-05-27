@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faHouse, faTags, faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDollar, faUsersGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import logo from './img/logo.png';
@@ -10,6 +11,14 @@ const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    // Logout
+    const navigate = useNavigate();
+    function handleLogout (event) {
+        event.preventDefault();
+        // Actions to logout
+        navigate('/login');
     };
 
     return (
@@ -34,61 +43,61 @@ const Sidebar = () => {
                 <div className="menu">
                     <ul className="menu-links">
                         <li className="nav-link">
-                            <a href="home.html">
+                            <Link to="/home">
                                 <FontAwesomeIcon icon={faHouse} className="icon" />
                                 <span className="text nav-text">Inicio</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link">
-                            <a href="#">
+                            <Link to="/categories">
                                 <FontAwesomeIcon icon={faTags} className="icon" />
                                 <span className="text nav-text">Categorías</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link">
-                            <a href="#">
+                            <Link to="/items">
                                 <FontAwesomeIcon icon={faBoxesStacked} className="icon" />
                                 <span className="text nav-text">Artículos</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link">
-                            <a href="#">
+                            <Link to="/providers">
                                 <FontAwesomeIcon icon={faTruckFast} className="icon" />
                                 <span className="text nav-text">Proveedores</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link">
-                            <a href="#">
+                            <Link to="/purchases">
                                 <FontAwesomeIcon icon={faBasketShopping} className="icon" />
                                 <span className="text nav-text">Compras</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link">
-                            <a href="#">
+                            <Link to="/customers">
                                 <FontAwesomeIcon icon={faUsers} className="icon" />
                                 <span className="text nav-text">Clientes</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link">
-                            <a href="#">
+                            <Link to="/sales">
                                 <FontAwesomeIcon icon={faHandHoldingDollar} className="icon" />
                                 <span className="text nav-text">Ventas</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
                 <div className="bottom-content">
                     <li className="">
-                        <a href="#">
+                        <Link to="/users">
                             <FontAwesomeIcon icon={faUsersGear} className="icon" />
                             <span className="text nav-text">Usuarios</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="">
-                        <a href="#">
+                        <Link onClick={handleLogout}>
                             <FontAwesomeIcon icon={faRightFromBracket} rotation={180} className="icon" />
                             <span className="text nav-text">Cerrar sesión</span>
-                        </a>
+                        </Link>
                     </li>
                 </div>
             </div>

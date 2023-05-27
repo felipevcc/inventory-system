@@ -45,8 +45,8 @@ body {
     padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 100;  
 }
+
 .sidebar.close {
     width: 88px;
 }
