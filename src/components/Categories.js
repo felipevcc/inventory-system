@@ -1,13 +1,17 @@
 import React from 'react';
 //import React, { useEffect, useState } from 'react';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import './styles/categories.css';
+import SearchBox from './SearchBox';
 
 const Categories = () => {
+    const handleSearch = (query) => {
+        console.log("Busqueda:", query);
+    };
+
     return (
-        <div className="main-container">
-            <div class="text">Categorías</div>
+        <div className="categories-container">
+            <div className="text">Categorías</div>
+            <SearchBox onSearch={handleSearch} />
         </div>
     );
 }

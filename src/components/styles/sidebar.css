@@ -1,42 +1,5 @@
-/* Google Font Import - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-:root {
-    /* ===== Colors ===== */
-    --body-color: #E4E9F7;
-    --sidebar-color: #24292E;
-    --primary-color: #dc7055;
-    --primary-color-light: #3a3b3c;
-    --toggle-color: #fff;
-    --text-color: #ccc;
-
-    /* ====== Transition ====== */
-    --tran-03: all 0.2s ease;
-    --tran-03: all 0.3s ease;
-    --tran-04: all 0.3s ease;
-    --tran-05: all 0.3s ease;
-}
-
-body {
-    min-height: 100vh;
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
-
-::selection {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
 /* ===== Sidebar ===== */
- .sidebar {
+ .sidebar-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,12 +10,12 @@ body {
     transition: var(--tran-05);
 }
 
-.sidebar.close {
+.sidebar-container.close {
     width: 88px;
 }
 
 /* ===== Reusable code - Here ===== */
-.sidebar li {
+.sidebar-container li {
     height: 50px;
     list-style: none;
     display: flex;
@@ -60,13 +23,13 @@ body {
     margin-top: 10px;
 }
 
-.sidebar header .image,
-.sidebar .icon {
+.sidebar-container header .image,
+.sidebar-container .icon {
     min-width: 60px;
     border-radius: 6px;
 }
 
-.sidebar .icon {
+.sidebar-container .icon {
     min-width: 60px;
     border-radius: 6px;
     height: 43%;
@@ -76,32 +39,32 @@ body {
     font-size: 20px;
 }
 
-.sidebar .text,
-.sidebar .icon {
+.sidebar-container .text,
+.sidebar-container .icon {
     color: var(--text-color);
     transition: var(--tran-03);
 }
 
-.sidebar .text {
+.sidebar-container .text {
     font-size: 17px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
 }
-.sidebar.close .text {
+.sidebar-container.close .text {
     opacity: 0;
 }
 /* =========================== */
 
-.sidebar header {
+.sidebar-container header {
     position: relative;
 }
 
-.sidebar header .image-text {
+.sidebar-container header .image-text {
     display: flex;
     align-items: center;
 }
-.sidebar header .logo-text {
+.sidebar-container header .logo-text {
     display: flex;
     flex-direction: column;
 }
@@ -117,18 +80,18 @@ header .image-text .profession {
     display: block;
 }
 
-.sidebar header .image{
+.sidebar-container header .image{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.sidebar header .image img {
+.sidebar-container header .image img {
     width: 40px;
     border-radius: 6px;
 }
 
-.sidebar header .toggle {
+.sidebar-container header .toggle {
     position: absolute;
     top: 50%;
     right: -25px;
@@ -147,15 +110,15 @@ header .image-text .profession {
     transition: var(--tran-05);
 }
 
-.sidebar.close .toggle {
+.sidebar-container.close .toggle {
     transform: translateY(-50%) rotate(0deg);
 }
 
-.sidebar .menu{
+.sidebar-container .menu{
     margin-top: 40px;
 }
 
-.sidebar li a {
+.sidebar-container li a {
     list-style: none;
     height: 100%;
     background-color: transparent;
@@ -168,25 +131,25 @@ header .image-text .profession {
     transition: var(--tran-03);
 }
 
-.sidebar li a:hover {
+.sidebar-container li a:hover {
     background-color: var(--primary-color);
 }
-.sidebar li a:hover .icon,
-.sidebar li a:hover .text {
+.sidebar-container li a:hover .icon,
+.sidebar-container li a:hover .text {
     color: var(--sidebar-color);
 }
-body .sidebar li a:hover .icon,
-body .sidebar li a:hover .text {
+.sidebar-container li a:hover .icon,
+.sidebar-container li a:hover .text {
     color: var(--text-color);
 }
 
-.sidebar .menu-bar {
+.sidebar-container .menu-bar {
     height: calc(100% - 55px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
 }
-.menu-bar::-webkit-scrollbar {
+.sidebar-container .menu-bar::-webkit-scrollbar {
     display: none;
 }

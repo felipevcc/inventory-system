@@ -6,8 +6,8 @@ import './styles/home.css';
 
 const Home = () => {
     return (
-        <div className="main-container">
-            <div class="text">Dashboard</div>
+        <div className="home-container">
+            <div className="text">Dashboard</div>
         </div>
     );
 }

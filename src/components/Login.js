@@ -75,7 +75,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="login-container">
             <link rel="icon" href={logo} />
 
             <img className="wave" src={wave} />

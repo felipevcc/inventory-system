@@ -24,14 +24,19 @@
     --tran-05: all 0.3s ease;
 }
 
+::selection {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
 /* ===== Sidebar ===== */
-.sidebar {
+.sidebar-container {
     position: fixed;
     z-index: 2;
 }
 
 /* ===== Navbar ===== */
-.navbar {
+.navbar-container {
     position: fixed;
     top: 0;
     left: 250px;
@@ -43,11 +48,12 @@
 /* ===== Content ===== */
 .main-content {
     position: absolute;
-    top: 100px;
+    top: 70px;
     left: 250px;
-    height: 100vh;
+    padding-top: 30px;
+    height: calc(100% - 70px);
     width: calc(100% - 250px);
-    background-color: var(--body-color);
+    background-color: var(--toggle-color);
     transition: var(--tran-05);
 }
 
@@ -60,13 +66,12 @@
 }
 
 /* ===== Components when sidebar is closed ===== */
-.sidebar.close ~ .navbar {
+.sidebar-container.close ~ .navbar-container {
     left: 88px;
-    width: calc(100% - 78px);
+    width: calc(100% - 88px);
 }
 
-.sidebar.close ~ .main-content {
+.sidebar-container.close ~ .main-content {
     left: 88px;
-    height: 100vh;
-    width: calc(100% - 78px);
+    width: calc(100% - 88px);
 }

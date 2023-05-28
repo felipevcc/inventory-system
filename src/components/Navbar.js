@@ -5,7 +5,7 @@ import './styles/navbar.css';
 
 const Navbar = () => {
     return (
-        <div className="navbar">
+        <div className="navbar-container">
             <div className="text">
                 <FontAwesomeIcon icon={faUser} className="icon" />
                 <span className="username">Felipe Villamizar</span>

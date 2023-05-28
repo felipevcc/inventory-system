@@ -1,18 +1,8 @@
-/* Google Font Import - Poppins */
-@import url('https://fonts.googleapis.com/css?family=Poppins:600&display=swap');
-
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+.login-container * {
+	font-weight: 600;
 }
 
-body {
-	font-family: 'Poppins', sans-serif;
-	overflow: hidden;
-}
-
-.wave {
+.login-container .wave {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -20,7 +10,7 @@ body {
 	z-index: -1;
 }
 
-.container {
+.login-container .container {
 	width: 100vw;
 	height: 100vh;
 	display: grid;
@@ -29,39 +19,39 @@ body {
 	padding: 0 2rem;
 }
 
-.img {
+.login-container .img {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
-.login-content {
+.login-container .login-content {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
 }
 
-.img img {
+.login-container .img img {
 	width: 500px;
 }
 
-form {
+.login-container form {
 	width: 360px;
 }
 
-.login-content img {
+.login-container .login-content img {
 	height: 100px;
 }
 
-.login-content h2 {
+.login-container .login-content h2 {
 	margin: 15px 0;
 	color: #333;
 	text-transform: uppercase;
 	font-size: 2.9rem;
 }
 
-.login-content .input-div {
+.login-container .login-content .input-div {
 	position: relative;
 	display: grid;
 	grid-template-columns: 7% 93%;
@@ -70,22 +60,22 @@ form {
 	border-bottom: 2px solid #d9d9d9;
 }
 
-.login-content .input-div.one {
+.login-container .login-content .input-div.one {
 	margin-top: 0;
 }
 
-.icon {
+.login-container .icon {
 	color: #d9d9d9;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.icon .i {
+.login-container .icon .i {
 	transition: .3s;
 }
 
-.toggle-icon {
+.login-container .toggle-icon {
 	position: absolute;
 	right: 10px;
 	top: 50%;
@@ -94,17 +84,17 @@ form {
 	color: #999;
 }
 
-.toggle-icon:hover {
+.login-container .toggle-icon:hover {
 	color: #BE6752;
 	transition: .4s;
 }
 
-.input-div > div {
+.login-container .input-div > div {
 	position: relative;
 	height: 45px;
 }
 
-.input-div > div > h5 {
+.login-container .input-div > div > h5 {
 	position: absolute;
 	left: 10px;
 	top: 50%;
@@ -114,8 +104,8 @@ form {
 	transition: .3s;
 }
 
-.input-div:before,
-.input-div:after {
+.login-container .input-div:before,
+.login-container .input-div:after {
 	content: '';
 	position: absolute;
 	bottom: -2px;
@@ -125,29 +115,29 @@ form {
 	transition: .4s;
 }
 
-.input-div:before {
+.login-container .input-div:before {
 	right: 50%;
 }
 
-.input-div:after {
+.login-container .input-div:after {
 	left: 50%;
 }
 
-.input-div.focus:before,
-.input-div.focus:after {
+.login-container .input-div.focus:before,
+.login-container .input-div.focus:after {
 	width: 50%;
 }
 
-.input-div.focus > div > h5 {
+.login-container .input-div.focus > div > h5 {
 	top: -5px;
 	font-size: 15px;
 }
 
-.input-div.focus > .icon > .i {
+.login-container .input-div.focus > .icon > .i {
 	color: #BE6752;
 }
 
-.input-div > div > input {
+.login-container .input-div > div > input {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -162,11 +152,11 @@ form {
 	font-family: 'poppins', sans-serif;
 }
 
-.input-div.pass {
+.login-container .input-div.pass {
 	margin-bottom: 4px;
 }
 
-a {
+.login-container a {
 	display: block;
 	text-align: right;
 	text-decoration: none;
@@ -175,11 +165,11 @@ a {
 	transition: .3s;
 }
 
-a:hover {
+.login-container a:hover {
 	color: #BE6752;
 }
 
-.btn {
+.login-container .btn {
 	display: block;
 	width: 100%;
 	height: 50px;
@@ -197,46 +187,46 @@ a:hover {
 	transition: .5s;
 }
 
-.btn:hover {
+.login-container .btn:hover {
 	background-position: right;
 }
 
 
 @media screen and (max-width: 1050px) {
-	.container {
+	.login-container .container {
 		grid-gap: 5rem;
 	}
 }
 
 @media screen and (max-width: 1000px) {
-	form {
+	.login-container form {
 		width: 290px;
 	}
 
-	.login-content h2 {
+	.login-container .login-content h2 {
 		font-size: 2.4rem;
 		margin: 8px 0;
 	}
 
-	.img img {
+	.login-container .img img {
 		width: 400px;
 	}
 }
 
 @media screen and (max-width: 900px) {
-	.container {
+	.login-container .container {
 		grid-template-columns: 1fr;
 	}
 
-	.img {
+	.login-container .img {
 		display: none;
 	}
 
-	.wave {
+	.login-container .wave {
 		display: none;
 	}
 
-	.login-content {
+	.login-container .login-content {
 		justify-content: center;
 	}
 }

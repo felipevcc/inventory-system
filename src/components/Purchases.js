@@ -3,11 +3,17 @@ import React from 'react';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import './styles/purchases.css';
+import SearchBox from './SearchBox';
 
 const Purchases = () => {
+    const handleSearch = (query) => {
+        console.log("Busqueda:", query);
+    };
+
     return (
-        <div className="main-container">
-            <div class="text">Compras</div>
+        <div className="purchases-container">
+            <div className="text">Compras</div>
+            <SearchBox onSearch={handleSearch} />
         </div>
     );
 }
