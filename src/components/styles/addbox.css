@@ -1,0 +1,61 @@
+.add-box {
+    background-color: white;
+    color: var(--primary-color);
+    border: 3px solid var(--primary-color);
+    padding: 3px;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: 221px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-box .icon {
+    font-size: 1.4em;
+    margin-left: 12px;
+}
+
+.add-box .text {
+    color: var(--primary-color);
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-left: -40px;
+    margin-right: -40px;
+    display: flex;
+    align-items: center;
+}
+
+.add-box:hover {
+    color: #fff;
+    border: 3px solid var(--sidebar-color);
+    transition: all 0.5s ease;
+}
+
+.add-box:hover .text {
+    color: white
+}
+
+.add-box::after {
+    content: "";
+    background-color: var(--primary-color);
+    position: absolute;
+    z-index: -1;
+    padding: 16px 20px;
+    display: block;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s ease;
+}
+
+.add-box:hover::after {
+    transition: all 0.5s ease-out;
+    transform: skewX(-45deg) scale(1, 1);
+}

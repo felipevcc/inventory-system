@@ -57,12 +57,21 @@
     transition: var(--tran-05);
 }
 
-/* ===== Content text ===== */
 .main-content .text {
     font-size: 30px;
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--primary-color-light);
     padding: 12px 60px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+.main-content .options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ===== Components when sidebar is closed ===== */

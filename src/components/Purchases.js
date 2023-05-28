@@ -1,8 +1,9 @@
 import React from 'react';
 //import React, { useEffect, useState } from 'react';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './styles/purchases.css';
+import './styles/addbox.css';
 import SearchBox from './SearchBox';
 
 const Purchases = () => {
@@ -13,7 +14,13 @@ const Purchases = () => {
     return (
         <div className="purchases-container">
             <div className="text">Compras</div>
-            <SearchBox onSearch={handleSearch} />
+            <div className="options">
+                <SearchBox onSearch={handleSearch} />
+                <button class="add-box">
+                    <FontAwesomeIcon icon={faPlus} className="icon" />
+                    <span class="text">Nueva compra</span>
+                </button>
+            </div>
         </div>
     );
 }
