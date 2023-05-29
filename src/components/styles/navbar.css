@@ -5,7 +5,7 @@
     /*width in App.css*/
     padding: 2px 14px;
     /*background-color: var(--sidebar-color);*/
-    background-color: #24292ef7;
+    background-color: var(--navbar-color);
     transition: var(--tran-05);
     color: var(--text-color);
     display: flex;

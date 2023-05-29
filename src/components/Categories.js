@@ -1,10 +1,11 @@
 import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './styles/categories.css';
 import './styles/addbox.css';
 import SearchBox from './SearchBox';
+import Pagination from './Pagination';
 
 const Categories = () => {
     const handleSearch = (query) => {
@@ -13,7 +14,9 @@ const Categories = () => {
 
     return (
         <div className="categories-container">
+
             <div className="text">Categorías</div>
+
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
                 <button class="add-box">
@@ -21,6 +24,48 @@ const Categories = () => {
                     <span class="text">Nueva categoría</span>
                 </button>
             </div>
+
+            <div className="table-container">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Frenos</td>
+                            <td>
+                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Llantas</td>
+                            <td>
+                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Pachas</td>
+                            <td>
+                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <Pagination />
+            </div>
+
+
         </div>
     );
 }
