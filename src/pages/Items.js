@@ -1,27 +1,27 @@
 import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-import './styles/purchases.css';
-import './styles/addbox.css';
-import SearchBox from './SearchBox';
-import Pagination from './Pagination';
+import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import '../styles/items.css';
+import '../styles/addbox.css';
+import SearchBox from '../components/SearchBox';
+import Pagination from '../components/Pagination';
 
-const Purchases = () => {
+const Items = () => {
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
     };
 
     return (
-        <div className="purchases-container">
+        <div className="items-container">
 
-            <div className="text">Compras</div>
+            <div className="text">Artículos</div>
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
                 <button class="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span class="text">Nueva compra</span>
+                    <span class="text">Nuevo artículo</span>
                 </button>
             </div>
 
@@ -30,52 +30,54 @@ const Purchases = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>FECHA</th>
-                            <th>TOTAL</th>
+                            <th>NOMBRE</th>
+                            <th>MARCA</th>
+                            <th>STOCK</th>
+                            <th>PRECIO-COMPRA</th>
+                            <th>PRECIO-VENTA</th>
+                            <th>PESO</th>
                             <th>PROVEEDOR</th>
-                            <th>USUARIO</th>
-                            <th>DETALLES</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>27-05-2023</td>
-                            <td>$89.900</td>
+                            <td>11111</td>
+                            <td>Llanta coraza 27.5x2.0</td>
+                            <td>Chaoyang</td>
+                            <td>8</td>
+                            <td>$30.000</td>
+                            <td>$47.900</td>
+                            <td>560g</td>
                             <td>Lenimp</td>
-                            <td>Felipe Villamizar</td>
-                            <td>
-                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                            </td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>27-05-2023</td>
-                            <td>$24.900</td>
+                            <td>11112</td>
+                            <td>Freno hidraulico M7100</td>
+                            <td>Shimano</td>
+                            <td>4</td>
+                            <td>$750.000</td>
+                            <td>$885.900</td>
+                            <td>280g</td>
                             <td>Propartes</td>
-                            <td>Felipe Villamizar</td>
-                            <td>
-                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                            </td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>23-05-2023</td>
-                            <td>$132.900</td>
+                            <td>11113</td>
+                            <td>Pacha 9Vel Rel 11/42</td>
+                            <td>Cassette</td>
+                            <td>5</td>
+                            <td>$69.900</td>
+                            <td>$81.900</td>
+                            <td>451g</td>
                             <td>Esciclismo</td>
-                            <td>Felipe Villamizar</td>
-                            <td>
-                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                            </td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
@@ -91,4 +93,4 @@ const Purchases = () => {
     );
 }
 
-export default Purchases;
+export default Items;

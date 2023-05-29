@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import logo from './img/logo.png';
-import wave from './img/wave.png';
-import loginBg from './img/loginbg.svg';
-import avatar from './img/avatar.svg';
-import './styles/login.css';
+import logo from '../img/logo.png';
+import wave from '../img/wave.png';
+import loginBg from '../img/loginbg.svg';
+import avatar from '../img/avatar.svg';
+import '../styles/login.css';
 
 const Login = () => {
 
@@ -65,8 +65,8 @@ const Login = () => {
     }
 
     // Manage system login
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    //const [username, setUsername] = useState('');
+    //const [password, setPassword] = useState('');
     const navigate = useNavigate();
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -78,14 +78,14 @@ const Login = () => {
         <div className="login-container">
             <link rel="icon" href={logo} />
 
-            <img className="wave" src={wave} />
+            <img className="wave" src={wave} alt="background-wave" />
             <div className="container">
                 <div className="img">
-                    <img src={loginBg} />
+                    <img src={loginBg} alt="background-img" />
                 </div>
                 <div className="login-content">
                     <form onSubmit={handleFormSubmit}>
-                        <img src={avatar} />
+                        <img src={avatar} alt="login-avatar" />
                         <h2 className="title">Inicia sesión</h2>
                         <div className="input-div one">
                             <div className="icon">

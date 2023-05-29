@@ -1,53 +1,47 @@
 import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan, faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import './styles/sales.css';
-import './styles/addbox.css';
-import SearchBox from './SearchBox';
-import Pagination from './Pagination';
+import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import '../styles/providers.css';
+import '../styles/addbox.css';
+import SearchBox from '../components/SearchBox';
+import Pagination from '../components/Pagination';
 
-const Sales = () => {
+const Providers = () => {
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
     };
 
     return (
-        <div className="sales-container">
+        <div className="providers-container">
 
-            <div className="text">Ventas</div>
+            <div className="text">Proveedores</div>
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
                 <button class="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span class="text">Nueva venta</span>
+                    <span class="text">Nuevo proveedor</span>
                 </button>
             </div>
 
             <div className="table-container">
-            <table className="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>FECHA</th>
-                            <th>CLIENTE</th>
-                            <th>USUARIO</th>
-                            <th>TOTAL</th>
-                            <th>DETALLES</th>
+                            <th>NOMBRE</th>
+                            <th>TELÉFONO</th>
+                            <th>EMAIL</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>28-05-2023</td>
-                            <td>Martín Perea</td>
-                            <td>Felipe Villamizar</td>
-                            <td>$129.900</td>
-                            <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
-                            </td>
+                            <td>Lenimp</td>
+                            <td>+57 76712222 </td>
+                            <td>servicioalcliente@lenimp.com</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
@@ -55,13 +49,9 @@ const Sales = () => {
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>28-05-2023</td>
-                            <td>Gustavo Rodriguez</td>
-                            <td>Felipe Villamizar</td>
-                            <td>$57.900</td>
-                            <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
-                            </td>
+                            <td>Propartes</td>
+                            <td>3187522969</td>
+                            <td>serviciocliente.bicicletas@propartes.com</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
@@ -69,13 +59,9 @@ const Sales = () => {
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>25-05-2023</td>
-                            <td>David Villa</td>
-                            <td>Felipe Villamizar</td>
-                            <td>$33.900</td>
-                            <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
-                            </td>
+                            <td>Esciclismo</td>
+                            <td>3206386489</td>
+                            <td>info@esciclismo.com</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
@@ -91,4 +77,4 @@ const Sales = () => {
     );
 }
 
-export default Sales;
+export default Providers;

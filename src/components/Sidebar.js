@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faHouse, faTags, faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDollar, faUsersGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import logo from './img/logo.png';
-import './styles/sidebar.css';
+import logo from '../img/logo.png';
+import '../styles/sidebar.css';
 
 const Sidebar = () => {
 

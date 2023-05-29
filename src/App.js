@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Login from './components/Login';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Categories from './pages/Categories';
+import Items from './pages/Items';
+import Providers from './pages/Providers';
+import Purchases from './pages/Purchases';
+import Customers from './pages/Customers';
+import Sales from './pages/Sales';
+import Users from './pages/Users';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Categories from './components/Categories';
-import Items from './components/Items';
-import Providers from './components/Providers';
-import Purchases from './components/Purchases';
-import Customers from './components/Customers';
-import Sales from './components/Sales';
-import Users from './components/Users';
 
 function App() {
   return (

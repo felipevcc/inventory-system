@@ -2,10 +2,10 @@ import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import './styles/customers.css';
-import './styles/addbox.css';
-import SearchBox from './SearchBox';
-import Pagination from './Pagination';
+import '../styles/customers.css';
+import '../styles/addbox.css';
+import SearchBox from '../components/SearchBox';
+import Pagination from '../components/Pagination';
 
 const Customers = () => {
     const handleSearch = (query) => {

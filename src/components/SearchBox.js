@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
-import './styles/searchbox.css';
+import '../styles/searchbox.css';
 
 const SearchBox = ({ onSearch }) => {
 
