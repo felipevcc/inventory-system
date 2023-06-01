@@ -71,6 +71,9 @@ const Login = () => {
     function handleFormSubmit(event) {
         event.preventDefault();
         // Check login
+
+        // Delete history in localStorage
+        window.localStorage.clear();
         navigate('/home');
     }
 

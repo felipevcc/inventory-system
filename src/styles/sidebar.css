@@ -168,7 +168,7 @@ header .image-text .profession {
 
 .sidebar-container li.selected:not(:hover) .icon,
 .sidebar-container li.selected:not(:hover) .text {
-    color: #fd8d70;
+    color: var(--secondary-color);
 }
 
 .sidebar-container li.selected:not(:hover) a {

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faHouse, faTags, faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDollar, faUsersGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faHouse, faTags, faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDollar, faUsersGear } from '@fortawesome/free-solid-svg-icons';
 import logo from '../img/logo.png';
 import '../styles/sidebar.css';
 
@@ -13,19 +13,15 @@ const Sidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
-    // Logout
-    const navigate = useNavigate();
-    function handleLogout (event) {
-        event.preventDefault();
-        // Actions to logout
-        navigate('/login');
-    };
-
     // Selected view
-    const [selectedView, setSelectedView] = useState("");
+    const storedSelectedView = localStorage.getItem('selectedView');
+    const [selectedView, setSelectedView] = useState(storedSelectedView || 'home');
     const handleSelectedView = (view) => {
         setSelectedView(view);
     };
+    useEffect(() => {
+        localStorage.setItem('selectedView', selectedView); // Guardar la opción seleccionada en el almacenamiento local
+    }, [selectedView]);
 
     return (
         <nav className={`sidebar-container ${isSidebarOpen ? 'close' : ''}`}>
@@ -93,18 +89,14 @@ const Sidebar = () => {
                     </ul>
                 </div>
                 <div className="bottom-content">
-                    <li className={`${selectedView === "users" ? "selected" : ""}`}>
-                        <Link to="/users" onClick={() => handleSelectedView("users")}>
-                            <FontAwesomeIcon icon={faUsersGear} className="icon" />
-                            <span className="text nav-text">Usuarios</span>
-                        </Link>
-                    </li>
-                    <li className="">
-                        <Link onClick={handleLogout}>
-                            <FontAwesomeIcon icon={faRightFromBracket} rotation={180} className="icon" />
-                            <span className="text nav-text">Cerrar sesión</span>
-                        </Link>
-                    </li>
+                    <ul>
+                        <li className={`${selectedView === "users" ? "selected" : ""}`}>
+                            <Link to="/users" onClick={() => handleSelectedView("users")}>
+                                <FontAwesomeIcon icon={faUsersGear} className="icon" />
+                                <span className="text nav-text">Usuarios</span>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

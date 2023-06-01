@@ -2,7 +2,7 @@
 .navbar-container {
     position: fixed;
     height: 70px;
-    /*width in App.css*/
+    /*width is in App.css*/
     padding: 2px 14px;
     /*background-color: var(--sidebar-color);*/
     background-color: var(--navbar-color);
@@ -21,9 +21,101 @@
     margin-left: auto;
     white-space: nowrap;
     opacity: 1;
+    cursor: pointer;
+}
+
+.navbar-container .text:hover {
+    color: var(--secondary-color);
 }
 
 .navbar-container .text .icon {
     margin-right: 10px;
     font-size: 20px;
+    transition: var(--tran-05);
+}
+
+.navbar-container .text .username {
+    margin-right: 10px;
+    transition: var(--tran-05);
+}
+
+/* ===== OPTIONS ===== */
+.navbar-container .options {
+    position: absolute;
+    top: 95%;
+    right: 15px;
+    background-color: #24292eef;
+    padding: 10px;
+    border: 2px solid #44474a;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 2px black;
+    width: 200px;
+    z-index: 2;
+    transition: opacity 0.3s, visibility 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-container .options ul {
+    list-style-type: none;
+    padding: 0;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+.navbar-container .options ul li {
+    margin-top: 10px;
+}
+
+.navbar-container .options ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+.navbar-container .options ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.navbar-container .options ul li a .icon {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.navbar-container .options ul li a .nav-text {
+    text-decoration: none;
+}
+
+.navbar-container .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 1;
+    display: none;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.navbar-container.open .options {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-container .arrow-icon {
+    transition: var(--tran-05);
+    font-size: 20px;
+}
+
+.navbar-container.open .arrow-icon {
+    transform: rotate(180deg);
 }
