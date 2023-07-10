@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `article` (
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `provider_id` INT UNSIGNED NOT NULL,
   `category_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`provider_id`) REFERENCES `provider`(`provider_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`category_id`) REFERENCES `category`(`category_id`) ON DELETE CASCADE
+  FOREIGN KEY (`provider_id`) REFERENCES `provider`(`provider_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`category_id`) REFERENCES `category`(`category_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Table: "purchase"
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `purchase` (
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `provider_id` INT UNSIGNED NOT NULL,
   `user_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`provider_id`) REFERENCES `provider`(`provider_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON DELETE CASCADE
+  FOREIGN KEY (`provider_id`) REFERENCES `provider`(`provider_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Table: "purchase_detail"
@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS `purchase_detail` (
   `article_quantity` INT NOT NULL,
   `price` INT NOT NULL,
   PRIMARY KEY (`purchase_id`, `article_id`),
-  FOREIGN KEY (`purchase_id`) REFERENCES `purchase`(`purchase_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`article_id`) REFERENCES `article`(`article_id`) ON DELETE CASCADE
+  FOREIGN KEY (`purchase_id`) REFERENCES `purchase`(`purchase_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`article_id`) REFERENCES `article`(`article_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Table: "sale"
@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `sale` (
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `customer_id` INT UNSIGNED NOT NULL,
   `user_id` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`customer_id`) REFERENCES `customer`(`customer_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON DELETE CASCADE
+  FOREIGN KEY (`customer_id`) REFERENCES `customer`(`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Table: "sale_detail"
@@ -104,6 +104,6 @@ CREATE TABLE IF NOT EXISTS `sale_detail` (
   `article_quantity` INT NOT NULL,
   `price` INT NOT NULL,
   PRIMARY KEY (`sale_id`, `article_id`),
-  FOREIGN KEY (`sale_id`) REFERENCES `sale`(`sale_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`article_id`) REFERENCES `article`(`article_id`) ON DELETE CASCADE
+  FOREIGN KEY (`sale_id`) REFERENCES `sale`(`sale_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`article_id`) REFERENCES `article`(`article_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
