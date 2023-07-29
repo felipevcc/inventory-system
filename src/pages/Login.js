@@ -10,6 +10,9 @@ const Login = () => {
 
     useEffect(() => {
 
+        // Delete history in localStorage
+        window.localStorage.clear();
+
         // Management of the focus on the inputs
         const inputs = document.querySelectorAll('.input');
 

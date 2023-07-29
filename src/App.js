@@ -12,7 +12,7 @@ import Sales from './pages/Sales';
 import Users from './pages/Users';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import ForgotLogin from './pages/ForgotLogin';
+import ForgotLogin, { AccessValidation } from './pages/ForgotLogin';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-login" element={<ForgotLogin />} />
+          <Route path="/access-validation" element={<AccessValidation />} />
           <Route path="/*" element={<MainLayout />} />
         </Routes>
       </div>
