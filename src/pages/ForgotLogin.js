@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import avatar from '../img/avatar.svg';
+import avatar from '../assets/avatar.svg';
 import '../styles/login.css';
 import BackgroundLogin from '../components/BackgroundLogin';
 

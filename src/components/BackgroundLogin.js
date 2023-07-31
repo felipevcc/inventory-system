@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from '../img/logo.png';
-import wave from '../img/wave.png';
-import loginBg from '../img/loginbg.svg';
+import logo from '../assets/logo.png';
+import wave from '../assets/wave.png';
+import loginBg from '../assets/loginbg.svg';
 import '../styles/login.css';
 
 const BackgroundLogin = ({ children }) => {
