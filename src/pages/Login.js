@@ -59,6 +59,15 @@ const Login = () => {
         };
     }, []);
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    function handleUsernameChange(event) {
+        setUsername(event.target.value);
+    }
+    function handlePasswordChange(event) {
+        setPassword(event.target.value);
+    }
+
     // Show/hide password when the eye icon is clicked
     const [showPassword, setShowPassword] = useState(false);
     function togglePasswordVisibility() {
@@ -66,16 +75,26 @@ const Login = () => {
     }
 
     // Manage system login
-    //const [username, setUsername] = useState('');
-    //const [password, setPassword] = useState('');
     const navigate = useNavigate();
     function handleFormSubmit(event) {
         event.preventDefault();
         // Check login
+        const username_db = "felipevillamizarc@gmail.com";
+        const password_db = "1234";
 
-        // Delete history in localStorage
-        window.localStorage.clear();
-        navigate('/home');
+        if (username === username_db && password === password_db) {
+            // Delete history in localStorage
+            window.localStorage.clear();
+            navigate('/home');
+            return;
+        }
+        // Clear username and password fields
+        setUsername('');
+        setPassword('');
+
+        navigate('/');
+
+        alert("Las credenciales no coinciden");
     }
 
     return (
@@ -90,7 +109,7 @@ const Login = () => {
                         </div>
                         <div className="div">
                             <h5>Usuario</h5>
-                            <input type="text" className="input" />
+                            <input type="text" className="input" value={username} onChange={handleUsernameChange} />
                         </div>
                     </div>
                     <div className="input-div pass">
@@ -99,7 +118,7 @@ const Login = () => {
                         </div>
                         <div className="div">
                             <h5>Contraseña</h5>
-                            <input type={showPassword ? 'text' : 'password'} className="input" />
+                            <input type={showPassword ? 'text' : 'password'} className="input" value={password} onChange={handlePasswordChange} />
                             <div className="icon">
                                 <FontAwesomeIcon
                                     icon={showPassword ? faEyeSlash : faEye}

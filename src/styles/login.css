@@ -89,12 +89,12 @@
 	transition: .4s;
 }
 
-.login-container .input-div > div {
+.login-container .input-div > .div {
 	position: relative;
 	height: 45px;
 }
 
-.login-container .input-div > div > h5 {
+.login-container .input-div > .div > h5 {
 	position: absolute;
 	left: 10px;
 	top: 50%;
@@ -131,6 +131,7 @@
 .login-container .input-div.focus > div > h5 {
 	top: -5px;
 	font-size: 15px;
+	z-index: 1;
 }
 
 .login-container .input-div.focus > .icon > .i {
