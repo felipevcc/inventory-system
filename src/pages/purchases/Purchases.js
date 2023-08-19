@@ -50,7 +50,9 @@ const Purchases = () => {
                                 <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
                             </td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-purchase/${1}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -64,7 +66,9 @@ const Purchases = () => {
                                 <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
                             </td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-purchase/${2}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -78,7 +82,9 @@ const Purchases = () => {
                                 <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
                             </td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-purchase/${3}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>

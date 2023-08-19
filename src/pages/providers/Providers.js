@@ -44,7 +44,9 @@ const Providers = () => {
                             <td>+57 76712222 </td>
                             <td>servicioalcliente@lenimp.com</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-provider/${1}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -54,7 +56,9 @@ const Providers = () => {
                             <td>3187522969</td>
                             <td>serviciocliente.bicicletas@propartes.com</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-provider/${2}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -64,7 +68,9 @@ const Providers = () => {
                             <td>3206386489</td>
                             <td>info@esciclismo.com</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-provider/${3}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>

@@ -52,7 +52,9 @@ const Items = () => {
                             <td>560g</td>
                             <td>Lenimp</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-item/${11111}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -66,7 +68,9 @@ const Items = () => {
                             <td>280g</td>
                             <td>Propartes</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-item/${11112}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -80,7 +84,9 @@ const Items = () => {
                             <td>451g</td>
                             <td>Esciclismo</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-item/${11113}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>

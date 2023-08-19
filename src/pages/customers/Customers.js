@@ -50,7 +50,9 @@ const Customers = () => {
                             <td>Cundinamarca</td>
                             <td>Bogotá</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-customer/${1092836746}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -63,7 +65,9 @@ const Customers = () => {
                             <td>Valle</td>
                             <td>Cali</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-customer/${1108923874}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -76,7 +80,9 @@ const Customers = () => {
                             <td>Antioquia</td>
                             <td>Medellín</td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-customer/${1110368918}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>

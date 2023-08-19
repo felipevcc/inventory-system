@@ -50,7 +50,9 @@ const Sales = () => {
                                 <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
                             </td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-sale/${1}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -64,7 +66,9 @@ const Sales = () => {
                                 <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
                             </td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-sale/${2}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
@@ -78,7 +82,9 @@ const Sales = () => {
                                 <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
                             </td>
                             <td>
-                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                <Link to={`/edit-sale/${3}`}>
+                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                </Link>
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
