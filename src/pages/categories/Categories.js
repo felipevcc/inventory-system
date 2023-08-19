@@ -6,6 +6,7 @@ import './categories.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
     const handleSearch = (query) => {
@@ -19,10 +20,10 @@ const Categories = () => {
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
-                <button class="add-box">
+                <Link to="/new-category" class="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
                     <span class="text">Nueva categoría</span>
-                </button>
+                </Link>
             </div>
 
             <div className="table-container">
