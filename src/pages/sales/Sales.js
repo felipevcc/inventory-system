@@ -47,7 +47,9 @@ const Sales = () => {
                             <td>Felipe Villamizar</td>
                             <td>$129.900</td>
                             <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                <Link to={`/detail-sale/${1}`}>
+                                    <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                </Link>
                             </td>
                             <td>
                                 <Link to={`/edit-sale/${1}`}>
@@ -63,7 +65,9 @@ const Sales = () => {
                             <td>Felipe Villamizar</td>
                             <td>$57.900</td>
                             <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                <Link to={`/detail-sale/${2}`}>
+                                    <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                </Link>
                             </td>
                             <td>
                                 <Link to={`/edit-sale/${2}`}>
@@ -79,7 +83,9 @@ const Sales = () => {
                             <td>Felipe Villamizar</td>
                             <td>$33.900</td>
                             <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                <Link to={`/detail-sale/${3}`}>
+                                    <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                </Link>
                             </td>
                             <td>
                                 <Link to={`/edit-sale/${3}`}>

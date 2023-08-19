@@ -47,7 +47,9 @@ const Purchases = () => {
                             <td>Lenimp</td>
                             <td>Felipe Villamizar</td>
                             <td>
-                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                <Link to={`/detail-purchase/${1}`}>
+                                    <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                </Link>
                             </td>
                             <td>
                                 <Link to={`/edit-purchase/${1}`}>
@@ -63,7 +65,9 @@ const Purchases = () => {
                             <td>Propartes</td>
                             <td>Felipe Villamizar</td>
                             <td>
-                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                <Link to={`/detail-purchase/${2}`}>
+                                    <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                </Link>
                             </td>
                             <td>
                                 <Link to={`/edit-purchase/${2}`}>
@@ -79,7 +83,9 @@ const Purchases = () => {
                             <td>Esciclismo</td>
                             <td>Felipe Villamizar</td>
                             <td>
-                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                <Link to={`/detail-purchase/${3}`}>
+                                    <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                </Link>
                             </td>
                             <td>
                                 <Link to={`/edit-purchase/${3}`}>

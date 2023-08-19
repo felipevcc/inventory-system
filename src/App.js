@@ -19,6 +19,7 @@ import EditProvider from './pages/providers/edit-provider/EditProvider';
 import Purchases from './pages/purchases/Purchases';
 import NewPurchase from './pages/purchases/new-purchase/NewPurchase';
 import EditPurchase from './pages/purchases/edit-purchase/EditPurchase';
+import DetailPurchase from './pages/purchases/detail-purchase/DetailPurchase';
 
 import Customers from './pages/customers/Customers';
 import NewCustomer from './pages/customers/new-customer/NewCustomer';
@@ -27,6 +28,7 @@ import EditCustomer from './pages/customers/edit-customer/EditCustomer';
 import Sales from './pages/sales/Sales';
 import NewSale from './pages/sales/new-sale/NewSale';
 import EditSale from './pages/sales/edit-sale/EditSale';
+import DetailSale from './pages/sales/detail-sale/DetailSale';
 
 import Users from './pages/users/Users';
 import NewUser from './pages/users/new-user/NewUser';
@@ -77,6 +79,7 @@ const MainLayout = () => {
           <Route path="/purchases" element={<Purchases />} />
           <Route path="/new-purchase" element={<NewPurchase />} />
           <Route path="/edit-purchase/:id" element={<EditPurchase />} />
+          <Route path="/detail-purchase/:id" element={<DetailPurchase />} />
 
           <Route path="/customers" element={<Customers />} />
           <Route path="/new-customer" element={<NewCustomer />} />
@@ -85,6 +88,7 @@ const MainLayout = () => {
           <Route path="/sales" element={<Sales />} />
           <Route path="/new-sale" element={<NewSale />} />
           <Route path="/edit-sale/:id" element={<EditSale />} />
+          <Route path="/detail-sale/:id" element={<DetailSale />} />
 
           <Route path="/users" element={<Users />} />
           <Route path="/new-user" element={<NewUser />} />
