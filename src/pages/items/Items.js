@@ -2,26 +2,26 @@ import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import '../styles/customers.css';
-import '../styles/addbox.css';
-import SearchBox from '../components/SearchBox';
-import Pagination from '../components/Pagination';
+import './items.css';
+import '../../styles/addbox.css';
+import SearchBox from '../../components/search-box/SearchBox';
+import Pagination from '../../components/pagination/Pagination';
 
-const Customers = () => {
+const Items = () => {
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
     };
 
     return (
-        <div className="customers-container">
+        <div className="items-container">
 
-            <div className="text">Clientes</div>
+            <div className="text">Artículos</div>
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
                 <button class="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span class="text">Nueva cliente</span>
+                    <span class="text">Nuevo artículo</span>
                 </button>
             </div>
 
@@ -29,51 +29,55 @@ const Customers = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>CÉDULA</th>
+                            <th>ID</th>
                             <th>NOMBRE</th>
-                            <th>TELÉFONO</th>
-                            <th>EMAIL</th>
-                            <th>DIRECCIÓN</th>
-                            <th>DEPARTAMENTO</th>
-                            <th>CIUDAD</th>
+                            <th>MARCA</th>
+                            <th>STOCK</th>
+                            <th>PRECIO-COMPRA</th>
+                            <th>PRECIO-VENTA</th>
+                            <th>PESO</th>
+                            <th>PROVEEDOR</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1092836746</td>
-                            <td>Martín Perea</td>
-                            <td>3147283498</td>
-                            <td>martinperea05@hotmail.com</td>
-                            <td>Carrera 80B #55-32</td>
-                            <td>Cundinamarca</td>
-                            <td>Bogotá</td>
+                            <td>11111</td>
+                            <td>Llanta coraza 27.5x2.0</td>
+                            <td>Chaoyang</td>
+                            <td>8</td>
+                            <td>$30.000</td>
+                            <td>$47.900</td>
+                            <td>560g</td>
+                            <td>Lenimp</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
                         <tr>
-                            <td>1108923874</td>
-                            <td>Gustavo Rodriguez</td>
-                            <td>3208273464</td>
-                            <td>gustavorod@gmail.com</td>
-                            <td>Calle 13A #39-51</td>
-                            <td>Valle</td>
-                            <td>Cali</td>
+                            <td>11112</td>
+                            <td>Freno hidraulico M7100</td>
+                            <td>Shimano</td>
+                            <td>4</td>
+                            <td>$750.000</td>
+                            <td>$885.900</td>
+                            <td>280g</td>
+                            <td>Propartes</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
                         <tr>
-                            <td>1110368918</td>
-                            <td>David Villa</td>
-                            <td>3167623542</td>
-                            <td>davidvilla7@gmail.com</td>
-                            <td>Avenida 6N #24-38</td>
-                            <td>Antioquia</td>
-                            <td>Medellín</td>
+                            <td>11113</td>
+                            <td>Pacha 9Vel Rel 11/42</td>
+                            <td>Cassette</td>
+                            <td>5</td>
+                            <td>$69.900</td>
+                            <td>$81.900</td>
+                            <td>451g</td>
+                            <td>Esciclismo</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
@@ -89,4 +93,4 @@ const Customers = () => {
     );
 }
 
-export default Customers;
+export default Items;

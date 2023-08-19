@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Categories from './pages/Categories';
-import Items from './pages/Items';
-import Providers from './pages/Providers';
-import Purchases from './pages/Purchases';
-import Customers from './pages/Customers';
-import Sales from './pages/Sales';
-import Users from './pages/Users';
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
-import ForgotLogin, { AccessValidation } from './pages/ForgotLogin';
+import Login from './pages/login/Login';
+import Home from './pages/home/Home';
+import Categories from './pages/categories/Categories';
+import Items from './pages/items/Items';
+import Providers from './pages/providers/Providers';
+import Purchases from './pages/purchases/Purchases';
+import Customers from './pages/customers/Customers';
+import Sales from './pages/sales/Sales';
+import Users from './pages/users/Users';
+import Sidebar from './components/sidebar/Sidebar';
+import Navbar from './components/navbar/Navbar';
+import ForgotLogin from './pages/login/forgot-login/ForgotLogin';
+import AccessValidation from './pages/login/forgot-login/AccessValidation';
 
 function App() {
   return (

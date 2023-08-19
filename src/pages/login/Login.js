@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import avatar from '../assets/avatar.svg';
-import '../styles/login.css';
-import BackgroundLogin from '../components/BackgroundLogin';
+import avatar from '../../assets/avatar.svg';
+import './login.css';
+import LoginLayout from './Layout';
 
 const Login = () => {
 
@@ -98,7 +98,7 @@ const Login = () => {
     }
 
     return (
-        <BackgroundLogin>
+        <LoginLayout>
             <div className="login-content">
                 <form onSubmit={handleFormSubmit}>
                     <img src={avatar} alt="login-avatar" />
@@ -134,7 +134,7 @@ const Login = () => {
                     </button>
                 </form>
             </div>
-        </BackgroundLogin>
+        </LoginLayout>
     );
 }
 

@@ -1,39 +1,39 @@
 import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan, faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import '../styles/sales.css';
-import '../styles/addbox.css';
-import SearchBox from '../components/SearchBox';
-import Pagination from '../components/Pagination';
+import { faPlus, faPen, faTrashCan, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import './purchases.css';
+import '../../styles/addbox.css';
+import SearchBox from '../../components/search-box/SearchBox';
+import Pagination from '../../components/pagination/Pagination';
 
-const Sales = () => {
+const Purchases = () => {
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
     };
 
     return (
-        <div className="sales-container">
+        <div className="purchases-container">
 
-            <div className="text">Ventas</div>
+            <div className="text">Compras</div>
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
                 <button class="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span class="text">Nueva venta</span>
+                    <span class="text">Nueva compra</span>
                 </button>
             </div>
 
             <div className="table-container">
-            <table className="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>FECHA</th>
-                            <th>CLIENTE</th>
-                            <th>USUARIO</th>
                             <th>TOTAL</th>
+                            <th>PROVEEDOR</th>
+                            <th>USUARIO</th>
                             <th>DETALLES</th>
                             <th>ACCIONES</th>
                         </tr>
@@ -41,12 +41,12 @@ const Sales = () => {
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>28-05-2023</td>
-                            <td>Martín Perea</td>
+                            <td>27-05-2023</td>
+                            <td>$89.900</td>
+                            <td>Lenimp</td>
                             <td>Felipe Villamizar</td>
-                            <td>$129.900</td>
                             <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
                             </td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
@@ -55,12 +55,12 @@ const Sales = () => {
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>28-05-2023</td>
-                            <td>Gustavo Rodriguez</td>
+                            <td>27-05-2023</td>
+                            <td>$24.900</td>
+                            <td>Propartes</td>
                             <td>Felipe Villamizar</td>
-                            <td>$57.900</td>
                             <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
                             </td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
@@ -69,12 +69,12 @@ const Sales = () => {
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>25-05-2023</td>
-                            <td>David Villa</td>
+                            <td>23-05-2023</td>
+                            <td>$132.900</td>
+                            <td>Esciclismo</td>
                             <td>Felipe Villamizar</td>
-                            <td>$33.900</td>
                             <td>
-                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
                             </td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
@@ -91,4 +91,4 @@ const Sales = () => {
     );
 }
 
-export default Sales;
+export default Purchases;

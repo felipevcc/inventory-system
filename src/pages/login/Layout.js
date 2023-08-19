@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from '../assets/logo.png';
-import wave from '../assets/wave.png';
-import loginBg from '../assets/loginbg.svg';
-import '../styles/login.css';
+import logo from '../../assets/logo.png';
+import wave from '../../assets/wave.png';
+import loginBg from '../../assets/loginbg.svg';
+import './login.css';
 
-const BackgroundLogin = ({ children }) => {
+const LoginLayout = ({ children }) => {
     return (
         <div className="login-container">
             <link rel="icon" href={logo} />
@@ -19,4 +19,4 @@ const BackgroundLogin = ({ children }) => {
     );
 };
 
-export default BackgroundLogin;
+export default LoginLayout;

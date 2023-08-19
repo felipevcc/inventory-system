@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCaretDown, faUserGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import '../styles/navbar.css';
+import './navbar.css';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

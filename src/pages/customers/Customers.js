@@ -2,26 +2,26 @@ import React from 'react';
 //import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import '../styles/providers.css';
-import '../styles/addbox.css';
-import SearchBox from '../components/SearchBox';
-import Pagination from '../components/Pagination';
+import './customers.css';
+import '../../styles/addbox.css';
+import SearchBox from '../../components/search-box/SearchBox';
+import Pagination from '../../components/pagination/Pagination';
 
-const Providers = () => {
+const Customers = () => {
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
     };
 
     return (
-        <div className="providers-container">
+        <div className="customers-container">
 
-            <div className="text">Proveedores</div>
+            <div className="text">Clientes</div>
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
                 <button class="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span class="text">Nuevo proveedor</span>
+                    <span class="text">Nueva cliente</span>
                 </button>
             </div>
 
@@ -29,39 +29,51 @@ const Providers = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>CÉDULA</th>
                             <th>NOMBRE</th>
                             <th>TELÉFONO</th>
                             <th>EMAIL</th>
+                            <th>DIRECCIÓN</th>
+                            <th>DEPARTAMENTO</th>
+                            <th>CIUDAD</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Lenimp</td>
-                            <td>+57 76712222 </td>
-                            <td>servicioalcliente@lenimp.com</td>
+                            <td>1092836746</td>
+                            <td>Martín Perea</td>
+                            <td>3147283498</td>
+                            <td>martinperea05@hotmail.com</td>
+                            <td>Carrera 80B #55-32</td>
+                            <td>Cundinamarca</td>
+                            <td>Bogotá</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>Propartes</td>
-                            <td>3187522969</td>
-                            <td>serviciocliente.bicicletas@propartes.com</td>
+                            <td>1108923874</td>
+                            <td>Gustavo Rodriguez</td>
+                            <td>3208273464</td>
+                            <td>gustavorod@gmail.com</td>
+                            <td>Calle 13A #39-51</td>
+                            <td>Valle</td>
+                            <td>Cali</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
                             </td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>Esciclismo</td>
-                            <td>3206386489</td>
-                            <td>info@esciclismo.com</td>
+                            <td>1110368918</td>
+                            <td>David Villa</td>
+                            <td>3167623542</td>
+                            <td>davidvilla7@gmail.com</td>
+                            <td>Avenida 6N #24-38</td>
+                            <td>Antioquia</td>
+                            <td>Medellín</td>
                             <td>
                                 <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
@@ -77,4 +89,4 @@ const Providers = () => {
     );
 }
 
-export default Providers;
+export default Customers;

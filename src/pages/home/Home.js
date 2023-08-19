@@ -2,7 +2,7 @@ import React from 'react';
 //import React, { useEffect, useState } from 'react';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import '../styles/home.css';
+import './home.css';
 
 const Home = () => {
     return (
