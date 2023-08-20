@@ -88,6 +88,7 @@ const Sidebar = () => {
                         </li>
                     </ul>
                 </div>
+                {/* Only if the user is admin */}
                 <div className="bottom-content">
                     <ul>
                         <li className={`${selectedView === "users" ? "selected" : ""}`}>

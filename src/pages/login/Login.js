@@ -85,6 +85,7 @@ const Login = () => {
         if (username === username_db && password === password_db) {
             // Delete history in localStorage
             window.localStorage.clear();
+            // token
             navigate('/home');
             return;
         }

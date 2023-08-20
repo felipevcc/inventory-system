@@ -35,6 +35,7 @@ const Users = () => {
                             <th>USUARIO</th>
                             <th>TELÉFONO</th>
                             <th>EMAIL</th>
+                            <th>ADMIN</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -45,6 +46,7 @@ const Users = () => {
                             <td>pedropablo</td>
                             <td>3208561452</td>
                             <td>pedropablov@gmail.com</td>
+                            <td>Si</td>
                             <td>
                                 <Link to={`/edit-user/${1}`}>
                                     <FontAwesomeIcon icon={faPen} className="pen-icon" />
@@ -58,6 +60,7 @@ const Users = () => {
                             <td>felipevc</td>
                             <td>3148933577</td>
                             <td>felipevillamizarc@gmail.com</td>
+                            <td>Si</td>
                             <td>
                                 <Link to={`/edit-user/${2}`}>
                                     <FontAwesomeIcon icon={faPen} className="pen-icon" />
@@ -71,6 +74,7 @@ const Users = () => {
                             <td>natavilla</td>
                             <td>3167596261</td>
                             <td>natavilla06@gmail.com</td>
+                            <td>No</td>
                             <td>
                                 <Link to={`/edit-user/${3}`}>
                                     <FontAwesomeIcon icon={faPen} className="pen-icon" />

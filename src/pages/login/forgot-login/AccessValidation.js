@@ -49,6 +49,7 @@ const AccessValidation = () => {
 
       if (inputCode === AccessCode) {
           window.localStorage.clear();
+          // token
           navigate('/home');
           setTimeout(() => {
               alert("Cambia la contraseña en ajustes de usuario");
