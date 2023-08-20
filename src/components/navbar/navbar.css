@@ -6,7 +6,7 @@
     padding: 2px 14px;
     /*background-color: var(--sidebar-color);*/
     background-color: var(--navbar-color);
-    transition: var(--tran-05);
+    transition: var(--tran-03);
     color: var(--text-color);
     display: flex;
     align-items: center;
@@ -31,12 +31,12 @@
 .navbar-container .text .icon {
     margin-right: 10px;
     font-size: 20px;
-    transition: var(--tran-05);
+    transition: var(--tran-03);
 }
 
 .navbar-container .text .username {
     margin-right: 10px;
-    transition: var(--tran-05);
+    transition: var(--tran-03);
 }
 
 /* ===== OPTIONS ===== */
@@ -75,7 +75,7 @@
     align-items: center;
     text-decoration: none;
     color: var(--text-color);
-    transition: var(--tran-05);
+    transition: var(--tran-03);
 }
 
 .navbar-container .options ul li a:hover {
@@ -112,7 +112,7 @@
 }
 
 .navbar-container .arrow-icon {
-    transition: var(--tran-05);
+    transition: var(--tran-03);
     font-size: 20px;
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -73,7 +73,7 @@ const ForgotLogin = () => {
                         </div>
                         <div className="div">
                             <h5>Correo electrónico, teléfono o usuario</h5>
-                            <input type="text" className="input" />
+                            <input type="text" className="input" required />
                         </div>
                     </div>
                     <button type="submit" className="btn">

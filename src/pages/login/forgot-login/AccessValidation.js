@@ -76,7 +76,7 @@ const AccessValidation = () => {
                       </div>
                       <div className="div">
                           <h5>Código de acceso</h5>
-                          <input type="text" className="input" value={inputCode} onChange={handleInputChange} />
+                          <input type="text" minlength="4" maxlength="4" className="input" value={inputCode} onChange={handleInputChange} required />
                       </div>
                   </div>
                   <button type="submit" className="btn">

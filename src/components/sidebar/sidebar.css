@@ -7,7 +7,7 @@
     width: 250px;
     padding: 10px 14px;
     background: var(--sidebar-color);
-    transition: var(--tran-05);
+    transition: var(--tran-03);
 }
 
 .sidebar-container.close {
@@ -106,7 +106,7 @@ header .image-text .profession {
     font-size: 18px;
     cursor: pointer;
     color: var(--text-color);
-    transition: var(--tran-05);
+    transition: var(--tran-03);
 }
 
 .sidebar-container.close .toggle {
@@ -162,7 +162,7 @@ header .image-text .profession {
     width: 4px;
     margin-right: -4px;
     background-color: var(--primary-color);
-    transition: var(--tran-05);
+    transition: var(--tran-03);
     color: var(--primary-color);
 }
 

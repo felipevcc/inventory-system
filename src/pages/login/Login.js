@@ -109,7 +109,7 @@ const Login = () => {
                         </div>
                         <div className="div">
                             <h5>Usuario</h5>
-                            <input type="text" className="input" value={username} onChange={handleUsernameChange} />
+                            <input type="text" className="input" value={username} onChange={handleUsernameChange} required />
                         </div>
                     </div>
                     <div className="input-div pass">
@@ -118,7 +118,7 @@ const Login = () => {
                         </div>
                         <div className="div">
                             <h5>Contraseña</h5>
-                            <input type={showPassword ? 'text' : 'password'} className="input" value={password} onChange={handlePasswordChange} />
+                            <input type={showPassword ? 'text' : 'password'} className="input" value={password} onChange={handlePasswordChange} required />
                             <div className="icon">
                                 <FontAwesomeIcon
                                     icon={showPassword ? faEyeSlash : faEye}
