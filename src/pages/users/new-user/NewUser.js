@@ -37,7 +37,7 @@ const NewUser = () => {
 
                         <div className="form-item">
                             <label htmlFor="admin">Administrador</label>
-                            <select className="input">
+                            <select className="input" id="admin" required>
                                 <option value="true">Si</option>
                                 <option selected value="false">No</option>
                             </select>

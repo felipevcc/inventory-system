@@ -44,12 +44,22 @@ const NewItem = () => {
 
                         <div className="form-item">
                             <label htmlFor="provider">Proveedor</label>
-                            <input className="input" type="text" id="provider" maxlength="45" required />
+                            <select className="input" id="provider" required>
+                                <option selected value="" disabled>Selecciona una opción</option>
+                                <option value="1">Lenimp</option>
+                                <option value="2">Propartes</option>
+                                <option value="3">Esciclismo</option>
+                            </select>
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="category">Categoría</label>
-                            <input className="input" type="text" id="category" maxlength="45" required />
+                            <select className="input" id="category" required>
+                                <option selected value="" disabled>Selecciona una opción</option>
+                                <option value="1">Frenos</option>
+                                <option value="2">Llantas</option>
+                                <option value="3">Pachas</option>
+                            </select>
                         </div>
 
                     </div>
