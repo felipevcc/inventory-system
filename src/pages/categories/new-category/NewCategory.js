@@ -14,7 +14,7 @@ const NewCategory = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxlength="45" required />
+                            <input className="input" type="text" id="name" maxLength="45" required />
                         </div>
                     </div>
 

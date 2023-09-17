@@ -13,6 +13,15 @@ const Customers = () => {
         console.log("Busqueda:", query);
     };
 
+    const handleDelete = (id) => {
+        const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
+
+        if (confirmDelete) {
+            // Call to the api to delete the record by id, modify the state
+            console.log(`Registro con ID ${id} eliminado`);
+        }
+    };
+
     return (
         <div className="customers-container">
 
@@ -20,9 +29,9 @@ const Customers = () => {
 
             <div className="options">
                 <SearchBox onSearch={handleSearch} />
-                <Link to="/new-customer" class="add-box">
+                <Link to="/new-customer" className="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span class="text">Nuevo cliente</span>
+                    <span className="text">Nuevo cliente</span>
                 </Link>
             </div>
 
@@ -53,7 +62,7 @@ const Customers = () => {
                                 <Link to={`/edit-customer/${1092836746}`}>
                                     <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
+                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1092836746)} />
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +77,7 @@ const Customers = () => {
                                 <Link to={`/edit-customer/${1108923874}`}>
                                     <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
+                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1108923874)} />
                             </td>
                         </tr>
                         <tr>
@@ -83,7 +92,7 @@ const Customers = () => {
                                 <Link to={`/edit-customer/${1110368918}`}>
                                     <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                 </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" />
+                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1110368918)} />
                             </td>
                         </tr>
                     </tbody>

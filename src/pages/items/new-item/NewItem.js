@@ -12,7 +12,7 @@ const NewItem = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxlength="45" required />
+                            <input className="input" type="text" id="name" maxLength="45" required />
                         </div>
 
                         <div className="two-together">
@@ -22,13 +22,13 @@ const NewItem = () => {
                             </div>
                             <div className="form-item">
                                 <label htmlFor="weight">Peso</label>
-                                <input className="input" type="text" id="weight" maxlength="15" required />
+                                <input className="input" type="text" id="weight" maxLength="15" required />
                             </div>
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="brand">Marca</label>
-                            <input className="input" type="text" id="brand" maxlength="45" required />
+                            <input className="input" type="text" id="brand" maxLength="45" required />
                         </div>
 
                         <div className="two-together">
