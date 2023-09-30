@@ -9,7 +9,7 @@ public class BackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
-		System.out.println("Corriendo");
+		System.out.println("Running");
 	}
 
 }
