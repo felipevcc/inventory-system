@@ -30,4 +30,9 @@ public class CustomerController {
     ResponseEntity<List<Customer>> getAllCustomer() {
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
+
+    @GetMapping("/{id}")
+    ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+        return ResponseEntity.ok(customerService.getCustomerById(id));
+    }
 }
