@@ -19,14 +19,14 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping()
+    @PostMapping
     ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         // Manejar excepciones
         Customer createdCustomer = customerService.createCustomer(customer);
         return ResponseEntity.ok(createdCustomer);
     }
 
-    @GetMapping()
+    @GetMapping
     ResponseEntity<List<Customer>> getAllCustomer() {
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
