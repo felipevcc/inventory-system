@@ -31,3 +31,19 @@ BEGIN
 END
 //
 DELIMITER ;
+
+
+
+/* Insert purchase */
+DELIMITER //
+CREATE PROCEDURE Proc_insert_purchase(
+  IN Ip_total_value INT,
+  IN Ip_provider_id INT,
+  IN Ip_user_id INT
+)
+BEGIN
+  INSERT INTO purchase(total_value, provider_id, user_id)
+  VALUES(Ip_total_value, Ip_provider_id, Ip_user_id);
+END;
+//
+DELIMITER;
