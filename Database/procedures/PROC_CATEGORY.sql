@@ -3,7 +3,7 @@
 DELIMITER //
 CREATE PROCEDURE Proc_get_all_categories()
 BEGIN
-  SELECT * FROM category;
+  SELECT * FROM category ORDER BY category_id DESC;
 END
 //
 DELIMITER ;

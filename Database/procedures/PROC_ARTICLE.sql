@@ -3,7 +3,7 @@
 DELIMITER //
 CREATE PROCEDURE Proc_get_all_articles()
 BEGIN
-  SELECT * FROM article;
+  SELECT * FROM article ORDER BY article_id DESC;
 END
 //
 DELIMITER ;

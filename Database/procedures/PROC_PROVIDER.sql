@@ -4,8 +4,8 @@ DELIMITER //
 
 CREATE PROCEDURE Proc_get_all_providers()
 BEGIN
-  SELECT * FROM provider;
-END;
+  SELECT * FROM provider ORDER BY provider_id DESC;
+END
 //
 
 DELIMITER ;
@@ -19,7 +19,7 @@ DELIMITER //
 CREATE PROCEDURE Proc_get_provider_by_id(IN Ip_provider_id INT)
 BEGIN
   SELECT * FROM provider WHERE provider_id = Ip_provider_id;
-END;
+END
 //
 
 DELIMITER ;
@@ -38,7 +38,7 @@ CREATE PROCEDURE Proc_insert_provider(
 BEGIN
   INSERT INTO provider (name, phone_number, email)
   VALUES(Ip_name, Ip_phone_number, Ip_email);
-END;
+END
 //
 
 DELIMITER ;
@@ -59,7 +59,7 @@ BEGIN
   UPDATE provider
   SET name = Ip_name, phone_number = Ip_phone_number, email = Ip_email
   WHERE provider_id = Ip_provider_id;
-END;
+END
 //
 
 DELIMITER ;
@@ -73,7 +73,7 @@ DELIMITER //
 CREATE PROCEDURE Proc_delete_provider(IN Ip_provider_id INT)
 BEGIN
   DELETE FROM provider WHERE provider_id = Ip_provider_id;
-END;
+END
 //
 
 DELIMITER ;

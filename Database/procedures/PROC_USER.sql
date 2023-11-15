@@ -4,8 +4,8 @@ DELIMITER //
 
 CREATE PROCEDURE Proc_get_all_users()
 BEGIN
-    SELECT * FROM user;
-END;
+    SELECT * FROM user ORDER BY user_id DESC;
+END
 //
 
 DELIMITER ;
@@ -19,7 +19,7 @@ DELIMITER //
 CREATE PROCEDURE Proc_get_user_by_id(IN Ip_user_id INT)
 BEGIN
     SELECT * FROM user WHERE user_id = Ip_user_id;
-END;
+END
 //
 
 DELIMITER ;
@@ -41,7 +41,7 @@ CREATE PROCEDURE Proc_insert_user(
 BEGIN
     INSERT INTO user (name, username, password_hash, phone_number, email, admin)
     VALUES (Ip_name, Ip_username, Ip_password_hash, Ip_phone_number, Ip_email, Ip_admin);
-END;
+END
 //
 
 DELIMITER ;
@@ -65,7 +65,7 @@ BEGIN
     UPDATE user
     SET name = Ip_name, username = Ip_username, password_hash = Ip_password_hash, phone_number = Ip_phone_number, email = Ip_email, admin = Ip_admin
     WHERE user_id = Ip_user_id;
-END;
+END
 //
 
 DELIMITER ;
@@ -79,7 +79,7 @@ DELIMITER //
 CREATE PROCEDURE Proc_delete_user(IN Ip_user_id INT)
 BEGIN
     DELETE FROM user WHERE user_id = Ip_user_id;
-END;
+END
 //
 
 DELIMITER ;

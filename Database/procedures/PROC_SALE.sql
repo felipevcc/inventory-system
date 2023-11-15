@@ -3,7 +3,7 @@
 DELIMITER //
 CREATE PROCEDURE Proc_get_all_sales()
 BEGIN
-  SELECT * FROM sale;
+  SELECT * FROM sale ORDER BY sale_id DESC;
 END
 //
 DELIMITER ;
@@ -45,6 +45,24 @@ CREATE PROCEDURE Proc_insert_sale(
 BEGIN
   INSERT INTO sale(total_value, customer_id, user_id)
   VALUES(Ip_total_value, Ip_customer_id, Ip_user_id);
+END
+//
+DELIMITER ;
+
+
+
+/* Insert sale detail */
+
+DELIMITER //
+CREATE PROCEDURE Proc_insert_sale_detail(
+  IN Ip_sale_id INT,
+  IN Ip_article_id INT,
+  IN Ip_article_quantity INT,
+  IN Ip_price INT
+)
+BEGIN
+  INSERT INTO sale_detail(sale_id, article_id, article_quantity, price)
+  VALUES(Ip_sale_id, Ip_article_id, Ip_article_quantity, Ip_price);
 END
 //
 DELIMITER ;
