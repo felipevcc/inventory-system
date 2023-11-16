@@ -25,9 +25,13 @@ DELIMITER ;
 /* Insert category */
 
 DELIMITER //
-CREATE PROCEDURE Proc_insert_category(IN Ip_name VARCHAR(45))
+CREATE PROCEDURE Proc_insert_category(
+  IN Ip_name VARCHAR(45),
+  OUT Op_category_id INT
+)
 BEGIN
   INSERT INTO category (name) VALUES (Ip_name);
+  SET Op_category_id = LAST_INSERT_ID();
 END
 //
 DELIMITER ;

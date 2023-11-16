@@ -33,11 +33,13 @@ CREATE PROCEDURE Proc_insert_article(
   IN Ip_sale_price INT,
   IN Ip_weight VARCHAR(20),
   IN Ip_provider_id INT,
-  IN Ip_category_id INT
+  IN Ip_category_id INT,
+  OUT Op_article_id INT
 )
 BEGIN
   INSERT INTO article (name, brand, stock, purchase_price, sale_price, weight, provider_id, category_id)
   VALUES (Ip_name, Ip_brand, Ip_stock, Ip_purchase_price, Ip_sale_price, Ip_weight, Ip_provider_id, Ip_category_id);
+  SET Op_article_id = LAST_INSERT_ID();
 END
 //
 DELIMITER ;

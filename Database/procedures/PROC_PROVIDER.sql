@@ -33,11 +33,13 @@ DELIMITER //
 CREATE PROCEDURE Proc_insert_provider(
   IN Ip_name VARCHAR(45),
   IN Ip_phone_number VARCHAR(20),
-  IN Ip_email VARCHAR(255)
+  IN Ip_email VARCHAR(255),
+  OUT Op_provider_id INT
 )
 BEGIN
   INSERT INTO provider (name, phone_number, email)
   VALUES(Ip_name, Ip_phone_number, Ip_email);
+  SET Op_provider_id = LAST_INSERT_ID();
 END
 //
 

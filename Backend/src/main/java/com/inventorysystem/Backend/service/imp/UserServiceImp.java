@@ -1,7 +1,8 @@
-package com.inventorysystem.Backend.service;
+package com.inventorysystem.Backend.service.imp;
 
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.repository.UserRepository;
+import com.inventorysystem.Backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -40,11 +40,13 @@ DELIMITER //
 CREATE PROCEDURE Proc_insert_sale(
   IN Ip_total_value INT,
   IN Ip_customer_id INT,
-  IN Ip_user_id INT
+  IN Ip_user_id INT,
+  OUT Op_sale_id INT
 )
 BEGIN
   INSERT INTO sale(total_value, customer_id, user_id)
   VALUES(Ip_total_value, Ip_customer_id, Ip_user_id);
+  SET Op_sale_id = LAST_INSERT_ID();
 END
 //
 DELIMITER ;

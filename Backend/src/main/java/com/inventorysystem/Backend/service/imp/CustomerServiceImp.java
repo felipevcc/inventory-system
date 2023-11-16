@@ -1,7 +1,8 @@
-package com.inventorysystem.Backend.service;
+package com.inventorysystem.Backend.service.imp;
 
 import com.inventorysystem.Backend.model.Customer;
 import com.inventorysystem.Backend.repository.CustomerRepository;
+import com.inventorysystem.Backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
