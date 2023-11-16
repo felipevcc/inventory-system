@@ -22,11 +22,14 @@ public class Customer {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "document")
+    private String document;
 
     @Column(name = "address")
     private String address;

@@ -27,10 +27,11 @@ CREATE TABLE IF NOT EXISTS `provider` (
 
 -- Table: "customer"
 CREATE TABLE IF NOT EXISTS `customer` (
-  `customer_id` INT UNSIGNED NOT NULL PRIMARY KEY, -- cedula
+  `customer_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `phone_number` VARCHAR(20),
   `email` VARCHAR(255) UNIQUE,
+  `document` VARCHAR(45) NOT NULL UNIQUE,
   `address` VARCHAR(255),
   `state` VARCHAR(45),
   `city` VARCHAR(45),

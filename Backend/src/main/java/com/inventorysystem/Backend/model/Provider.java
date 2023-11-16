@@ -23,8 +23,8 @@ public class Provider {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;

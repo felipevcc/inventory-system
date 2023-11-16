@@ -65,4 +65,4 @@ BEGIN
   VALUES(Ip_purchase_id, Ip_article_id, Ip_article_quantity, Ip_price);
 END
 //
-DELIMITER;
+DELIMITER ;
