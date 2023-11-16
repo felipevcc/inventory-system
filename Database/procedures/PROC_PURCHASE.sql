@@ -22,18 +22,6 @@ DELIMITER ;
 
 
 
-/* Get all purchase details */
-
-DELIMITER //
-CREATE PROCEDURE Proc_get_all_purchase_details(IN Ip_purchase_id INT)
-BEGIN
-  SELECT * FROM purchase_detail where purchase_id = Ip_purchase_id;
-END
-//
-DELIMITER ;
-
-
-
 /* Insert purchase */
 
 DELIMITER //
@@ -50,6 +38,18 @@ BEGIN
 END
 //
 DELIMITER;
+
+
+
+/* Get all purchase details */
+
+DELIMITER //
+CREATE PROCEDURE Proc_get_all_purchase_details(IN Ip_purchase_id INT)
+BEGIN
+  SELECT * FROM purchase_detail where purchase_id = Ip_purchase_id;
+END
+//
+DELIMITER ;
 
 
 

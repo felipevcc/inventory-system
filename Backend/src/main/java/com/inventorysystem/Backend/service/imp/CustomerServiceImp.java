@@ -21,17 +21,8 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     @Transactional
-    public Customer createCustomer(Customer customer) {
-        Long newCustomerId = customerRepository.createCustomer(
-                customer.getName(),
-                customer.getPhoneNumber(),
-                customer.getEmail(),
-                customer.getDocument(),
-                customer.getAddress(),
-                customer.getState(),
-                customer.getCity()
-        );
-        return getCustomerById(newCustomerId);
+    public List<Customer> getAllCustomers() {
+        return customerRepository.getAllCustomers();
     }
 
     @Override
@@ -43,7 +34,16 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     @Transactional
-    public List<Customer> getAllCustomers() {
-        return customerRepository.getAllCustomers();
+    public Customer createCustomer(Customer customer) {
+        Long newCustomerId = customerRepository.createCustomer(
+                customer.getName(),
+                customer.getPhoneNumber(),
+                customer.getEmail(),
+                customer.getDocument(),
+                customer.getAddress(),
+                customer.getState(),
+                customer.getCity()
+        );
+        return getCustomerById(newCustomerId);
     }
 }

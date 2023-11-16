@@ -19,13 +19,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping
-    ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        // Manejar excepciones
-        Customer createdCustomer = customerService.createCustomer(customer);
-        return ResponseEntity.ok(createdCustomer);
-    }
-
     @GetMapping
     ResponseEntity<List<Customer>> getAllCustomer() {
         return ResponseEntity.ok(customerService.getAllCustomers());
@@ -34,5 +27,12 @@ public class CustomerController {
     @GetMapping("/{id}")
     ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
         return ResponseEntity.ok(customerService.getCustomerById(id));
+    }
+
+    @PostMapping
+    ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+        // Manejar excepciones
+        Customer createdCustomer = customerService.createCustomer(customer);
+        return ResponseEntity.ok(createdCustomer);
     }
 }
