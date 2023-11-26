@@ -15,23 +15,31 @@ public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
     public User userLogin(String userEmail, String userPassword) {
         return userRepository.getLoginUser(userEmail, userPassword);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.getAllUsers();
     }
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.getUserById(id);
     }
 
+    @Override
+    public User createUser(User user) {
+        // Password encryption
+        Long newUserId = userRepository.createUser(
+                user.getName(),
+                user.getUsername(),
+                user.getPasswordHash(),
+                user.getPhoneNumber(),
+                user.getEmail(),
+                user.getAdmin()
+        );
+        return userRepository.getUserById(newUserId);
+    }
 }

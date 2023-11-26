@@ -21,7 +21,7 @@ public class Sale {
     private Long saleId;
 
     @Column(name = "total_value")
-    private int totalValue;
+    private Integer totalValue;
 
     @Column(name = "created_at")
     @CreationTimestamp

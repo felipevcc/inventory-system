@@ -27,13 +27,13 @@ public class Article {
     private String brand;
 
     @Column(name = "stock")
-    private int stock;
+    private Integer stock;
 
     @Column(name = "purchase_price")
-    private int purchasePrice;
+    private Integer purchasePrice;
 
     @Column(name = "sale_price")
-    private int salePrice;
+    private Integer salePrice;
 
     @Column(name = "weight")
     private String weight;

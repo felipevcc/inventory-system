@@ -23,11 +23,11 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "nuser")
-    private String nuser;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "password_hash")
+    private String passwordHash;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -36,7 +36,7 @@ public class User {
     private String email;
 
     @Column(name = "admin")
-    private boolean admin;
+    private Boolean admin;
 
     @Column(name = "created_at")
     @CreationTimestamp

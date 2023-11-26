@@ -21,8 +21,8 @@ public class SaleDetail {
     private Article article;
 
     @Column(name = "article_quantity")
-    private int articleQuantity;
+    private Integer articleQuantity;
 
     @Column(name = "price")
-    private int price;
+    private Integer price;
 }
