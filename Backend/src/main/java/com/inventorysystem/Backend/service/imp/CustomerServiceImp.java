@@ -12,12 +12,8 @@ import java.util.List;
 @Service
 public class CustomerServiceImp implements CustomerService {
 
-    private final CustomerRepository customerRepository;
-
     @Autowired
-    public CustomerServiceImp(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    CustomerRepository customerRepository;
 
     @Override
     @Transactional

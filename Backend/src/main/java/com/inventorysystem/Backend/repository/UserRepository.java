@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT user FROM User user WHERE email = ?1 AND password = ?2")
-    public User getLoginUser(String userEmail, String userPassword);
+    /*@Query("SELECT user FROM User user WHERE email = ?1 AND password = ?2")
+    public User getLoginUser(String userEmail, String userPassword);*/
 
     @Procedure(procedureName = "Proc_get_all_users")
     List<User> getAllUsers();
@@ -44,4 +44,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Procedure(procedureName = "Proc_delete_user")
     void deleteUser(@Param("Ip_user_id") Long userId);
+
+    @Query("SELECT COUNT(*) FROM User user")
+    Long countUsers();
 }

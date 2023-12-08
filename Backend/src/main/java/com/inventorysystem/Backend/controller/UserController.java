@@ -1,8 +1,10 @@
 package com.inventorysystem.Backend.controller;
 
+import com.inventorysystem.Backend.dto.UsersPageDTO;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    UserService userService;
 
     @PostMapping
     ResponseEntity<User> createUser(@RequestBody User user) {
@@ -21,18 +23,21 @@ public class UserController {
         return ResponseEntity.ok(createdUser);
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     ResponseEntity<User> userLogin(
             @RequestParam("email") String email,
             @RequestParam("password") String password
     ) {
         User user = userService.userLogin(email, password);
         return ResponseEntity.ok(user);
-    }
+    }*/
 
     @GetMapping
-    ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    ResponseEntity<UsersPageDTO> getAllUsers(
+            @RequestParam("page") Integer page,
+            @RequestParam("pageSize") Integer pageSize
+    ) {
+        return ResponseEntity.ok(userService.getAllUsers(page, pageSize));
     }
 
     @GetMapping("/{id}")

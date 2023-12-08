@@ -9,16 +9,15 @@ import lombok.Setter;
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "sale_detail")
+@IdClass(SaleArticleId.class)
 public class SaleDetail {
     @Id
-    @ManyToOne
-    @JoinColumn(name = "sale_id")
-    private Sale sale;
+    @Column(name = "sale_id")
+    private Long saleId;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "article_id")
-    private Article article;
+    @Column(name = "article_id")
+    private Long articleId;
 
     @Column(name = "article_quantity")
     private Integer articleQuantity;

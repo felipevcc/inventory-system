@@ -12,7 +12,8 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    @Autowired
+    CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerService customerService) {
