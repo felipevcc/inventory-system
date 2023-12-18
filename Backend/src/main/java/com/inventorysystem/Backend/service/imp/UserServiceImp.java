@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,10 +27,23 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    /*@Override
-    public User userLogin(String userEmail, String userPassword) {
-        return userRepository.getLoginUser(userEmail, userPassword);
-    }*/
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDTO userLogin(String userEmail, String userPassword) {
+        User user = userRepository.findByEmail(userEmail);
+
+        if (user == null) {
+            return null;
+        }
+        Boolean successfulLogin = passwordEncoder.matches(userPassword, user.getPasswordHash());
+        if (!successfulLogin) {
+            return null;
+        }
+
+        return userMapper.userToDTO(user);
+    }
 
     /*@Override
     public List<User> getAllUsers() {
@@ -68,10 +82,12 @@ public class UserServiceImp implements UserService {
     @Override
     public UserDTO createUser(UserCreationDTO userData) {
         // Password encryption
+        String passwordHash = passwordEncoder.encode(userData.getPassword());
+
         Long newUserId = userRepository.createUser(
                 userData.getName(),
                 userData.getUsername(),
-                userData.getPassword(),
+                passwordHash,
                 userData.getPhoneNumber(),
                 userData.getEmail(),
                 userData.getAdmin()

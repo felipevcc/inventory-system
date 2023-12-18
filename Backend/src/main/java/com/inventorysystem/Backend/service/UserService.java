@@ -11,7 +11,7 @@ public interface UserService {
 
     UserDTO createUser(UserCreationDTO userData);
 
-    /*User userLogin(String userEmail, String userPassword);*/
+    UserDTO userLogin(String userEmail, String userPassword);
 
     UserDTO getUserById(Long id);
 

@@ -7,6 +7,7 @@ import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +26,17 @@ public class UserController {
         return ResponseEntity.ok(createdUser);
     }
 
-    /*@PostMapping("/login")
-    ResponseEntity<User> userLogin(
+    @PostMapping("/login")
+    ResponseEntity<UserDTO> userLogin(
             @RequestParam("email") String email,
             @RequestParam("password") String password
     ) {
-        User user = userService.userLogin(email, password);
+        UserDTO user = userService.userLogin(email, password);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return ResponseEntity.ok(user);
-    }*/
+    }
 
     @GetMapping
     ResponseEntity<UsersPageDTO> getAllUsers(
