@@ -1,5 +1,7 @@
 package com.inventorysystem.Backend.controller;
 
+import com.inventorysystem.Backend.dto.UserCreationDTO;
+import com.inventorysystem.Backend.dto.UserDTO;
 import com.inventorysystem.Backend.dto.UsersPageDTO;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.service.UserService;
@@ -18,8 +20,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    ResponseEntity<UserDTO> createUser(@RequestBody UserCreationDTO user) {
+        UserDTO createdUser = userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }
 
@@ -41,8 +43,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<User> getUserById(@PathVariable Long id) {
-        User customer = userService.getUserById(id);
-        return ResponseEntity.ok(customer);
+    ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 }

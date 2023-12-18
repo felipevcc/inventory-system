@@ -1,15 +1,16 @@
 package com.inventorysystem.Backend.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class UserDTO {
-    private Long userId;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserCreationDTO {
     private String name;
     private String username;
+    private String password;
     private String phoneNumber;
     private String email;
     private Boolean admin;

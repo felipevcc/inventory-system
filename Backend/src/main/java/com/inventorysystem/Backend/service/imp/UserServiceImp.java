@@ -1,5 +1,6 @@
 package com.inventorysystem.Backend.service.imp;
 
+import com.inventorysystem.Backend.dto.UserCreationDTO;
 import com.inventorysystem.Backend.dto.UserDTO;
 import com.inventorysystem.Backend.dto.UsersPageDTO;
 import com.inventorysystem.Backend.mapper.UserMapper;
@@ -59,21 +60,23 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.getUserById(id);
+    public UserDTO getUserById(Long id) {
+        User foundUser = userRepository.getUserById(id);
+        return userMapper.userToDTO(foundUser);
     }
 
     @Override
-    public User createUser(User user) {
+    public UserDTO createUser(UserCreationDTO userData) {
         // Password encryption
         Long newUserId = userRepository.createUser(
-                user.getName(),
-                user.getUsername(),
-                user.getPasswordHash(),
-                user.getPhoneNumber(),
-                user.getEmail(),
-                user.getAdmin()
+                userData.getName(),
+                userData.getUsername(),
+                userData.getPassword(),
+                userData.getPhoneNumber(),
+                userData.getEmail(),
+                userData.getAdmin()
         );
-        return userRepository.getUserById(newUserId);
+        User newUser = userRepository.getUserById(newUserId);
+        return userMapper.userToDTO(newUser);
     }
 }
