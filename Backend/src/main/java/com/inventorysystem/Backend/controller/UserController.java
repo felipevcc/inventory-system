@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping
     ResponseEntity<UserDTO> createUser(@RequestBody UserCreationDTO user) {
         UserDTO createdUser = userService.createUser(user);
-        return ResponseEntity.ok(createdUser);
+        return ResponseEntity.status(HttpStatus.OK).body(createdUser);
     }
 
     @PostMapping("/login")
@@ -35,7 +35,7 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.ok(user);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @GetMapping
@@ -43,12 +43,12 @@ public class UserController {
             @RequestParam("page") Integer page,
             @RequestParam("pageSize") Integer pageSize
     ) {
-        return ResponseEntity.ok(userService.getAllUsers(page, pageSize));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers(page, pageSize));
     }
 
     @GetMapping("/{id}")
     ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
