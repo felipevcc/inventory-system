@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +59,7 @@ public class UserServiceImp implements UserService {
         Long totalRecords = userRepository.countUsers();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("userId").descending());
         Page<User> userPage = userRepository.findAll(pageable);
 
         List<UserDTO> users = userPage.getContent().stream()
@@ -74,12 +76,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDTO getUserById(Long id) {
         User foundUser = userRepository.getUserById(id);
         return userMapper.userToDTO(foundUser);
     }
 
     @Override
+    @Transactional
     public UserDTO createUser(UserCreationDTO userData) {
         // Password encryption
         String passwordHash = passwordEncoder.encode(userData.getPassword());
