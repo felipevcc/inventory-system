@@ -14,6 +14,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
 
+    User findByUsername(String username);
+
     @Procedure(procedureName = "Proc_get_all_users")
     List<User> getAllUsers();
 
@@ -38,7 +40,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             @Param("Ip_password_hash") String passwordHash,
             @Param("Ip_phone_number") String phoneNumber,
             @Param("Ip_email") String email,
-            @Param("Ip_admin") String admin
+            @Param("Ip_admin") Boolean admin
     );
 
     @Procedure(procedureName = "Proc_delete_user")

@@ -2,6 +2,7 @@ package com.inventorysystem.Backend.controller;
 
 import com.inventorysystem.Backend.dto.UserCreationDTO;
 import com.inventorysystem.Backend.dto.UserDTO;
+import com.inventorysystem.Backend.dto.UserUpdateDTO;
 import com.inventorysystem.Backend.dto.UsersPageDTO;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.service.UserService;
@@ -33,7 +34,7 @@ public class UserController {
     ) {
         UserDTO user = userService.userLogin(email, password);
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
@@ -50,5 +51,17 @@ public class UserController {
     ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
         return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserUpdateDTO userData) {
+        UserDTO updatedUser = userService.updateUser(id, userData);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
+    }
+
+    @PutMapping("/{id}/{newPassword}")
+    ResponseEntity<UserDTO> updatePassword(@PathVariable Long id, @PathVariable String newPassword) {
+        UserDTO updatedUser = userService.updatePassword(id, newPassword);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 }
