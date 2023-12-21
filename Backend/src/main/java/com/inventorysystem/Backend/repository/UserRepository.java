@@ -1,6 +1,9 @@
 package com.inventorysystem.Backend.repository;
 
 import com.inventorysystem.Backend.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -48,4 +51,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT COUNT(*) FROM User user")
     Long countUsers();
+
+    Page<User> findAll(Specification<User> userSpecification, Pageable pageable);
 }

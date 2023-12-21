@@ -14,7 +14,7 @@ public interface UserService {
 
     UserDTO getUserById(Long id);
 
-    UsersPageDTO getAllUsers(Integer page, Integer pageSize);
+    UsersPageDTO getAllUsers(String criteria, Integer page, Integer pageSize);
 
     UserDTO createUser(UserCreationDTO userData);
 
