@@ -29,8 +29,8 @@ public class UserController {
 
     @PostMapping("/login")
     ResponseEntity<UserDTO> userLogin(
-            @RequestParam("email") String email,
-            @RequestParam("password") String password
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "password") String password
     ) {
         UserDTO user = userService.userLogin(email, password);
         if (user == null) {
@@ -41,10 +41,11 @@ public class UserController {
 
     @GetMapping
     ResponseEntity<UsersPageDTO> getAllUsers(
-            @RequestParam("page") Integer page,
-            @RequestParam("pageSize") Integer pageSize
+            @RequestParam(name = "searchCriteria", required = false) String criteria,
+            @RequestParam(name = "page") Integer page,
+            @RequestParam(name = "pageSize") Integer pageSize
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers(page, pageSize));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers(criteria, page, pageSize));
     }
 
     @GetMapping("/{id}")
