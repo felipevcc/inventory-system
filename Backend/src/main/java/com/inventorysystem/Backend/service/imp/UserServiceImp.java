@@ -7,6 +7,7 @@ import com.inventorysystem.Backend.dto.UsersPageDTO;
 import com.inventorysystem.Backend.mapper.UserMapper;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.repository.UserRepository;
+import com.inventorysystem.Backend.repository.specifications.UserSpecifications;
 import com.inventorysystem.Backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,14 +55,21 @@ public class UserServiceImp implements UserService {
     }*/
 
     @Override
-    public UsersPageDTO getAllUsers(Integer page, Integer pageSize) {
+    public UsersPageDTO getAllUsers(String criteria, Integer page, Integer pageSize) {
         UsersPageDTO pagedUsersResponse = new UsersPageDTO();
 
         Long totalRecords = userRepository.countUsers();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("userId").descending());
-        Page<User> userPage = userRepository.findAll(pageable);
+
+        Page<User> userPage;
+
+        if (criteria == null) {
+            userPage = userRepository.findAll(pageable);
+        } else {
+            userPage = userRepository.findAll(UserSpecifications.searchUsers(criteria), pageable);
+        }
 
         List<UserDTO> users = userPage.getContent().stream()
                 .map(user -> userMapper.userToDTO(user))
