@@ -49,11 +49,6 @@ public class UserServiceImp implements UserService {
         return userMapper.userToDTO(user);
     }
 
-    /*@Override
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
-    }*/
-
     @Override
     public UsersPageDTO getAllUsers(String criteria, Integer page, Integer pageSize) {
         UsersPageDTO pagedUsersResponse = new UsersPageDTO();
