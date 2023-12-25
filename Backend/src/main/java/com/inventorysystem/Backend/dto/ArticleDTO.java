@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArticleDTO {private Long articleId;
+public class ArticleDTO {
+    private Long articleId;
     private String name;
     private String brand;
     private Integer stock;
