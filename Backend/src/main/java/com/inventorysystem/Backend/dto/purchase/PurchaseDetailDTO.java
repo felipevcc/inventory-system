@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.purchase;
 
 import com.inventorysystem.Backend.model.Article;
 import com.inventorysystem.Backend.model.Purchase;

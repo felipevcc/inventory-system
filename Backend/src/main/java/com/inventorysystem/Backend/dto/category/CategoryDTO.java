@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryUpdateDTO {
+public class CategoryDTO {
+    private Long categoryId;
     private String name;
 }

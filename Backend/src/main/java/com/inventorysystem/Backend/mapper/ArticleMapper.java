@@ -1,6 +1,6 @@
 package com.inventorysystem.Backend.mapper;
 
-import com.inventorysystem.Backend.dto.ArticleDTO;
+import com.inventorysystem.Backend.dto.article.ArticleDTO;
 import com.inventorysystem.Backend.model.Article;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

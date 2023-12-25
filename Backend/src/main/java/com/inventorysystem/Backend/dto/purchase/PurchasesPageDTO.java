@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.purchase;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProvidersPageDTO {
+public class PurchasesPageDTO {
     private Integer page;
     private Integer pageSize;
     private Long totalRecords;
     private Integer totalPages;
-    private List<ProviderDTO> providers;
+    private List<PurchaseDTO> purchases;
 }

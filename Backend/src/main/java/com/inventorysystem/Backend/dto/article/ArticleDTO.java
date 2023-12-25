@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.article;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.inventorysystem.Backend.model.Category;
@@ -25,8 +25,6 @@ public class ArticleDTO {
     private Integer purchasePrice;
     private Integer salePrice;
     private String weight;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private Long providerId;
     private Long categoryId;
 }

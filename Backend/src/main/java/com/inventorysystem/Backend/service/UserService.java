@@ -1,12 +1,9 @@
 package com.inventorysystem.Backend.service;
 
-import com.inventorysystem.Backend.dto.UserCreationDTO;
-import com.inventorysystem.Backend.dto.UserDTO;
-import com.inventorysystem.Backend.dto.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.UsersPageDTO;
-import com.inventorysystem.Backend.model.User;
-
-import java.util.List;
+import com.inventorysystem.Backend.dto.user.UserCreationDTO;
+import com.inventorysystem.Backend.dto.user.UserDTO;
+import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
+import com.inventorysystem.Backend.dto.user.UsersPageDTO;
 
 public interface UserService {
 

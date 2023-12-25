@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoriesPageDTO {
+public class UsersPageDTO {
     private Integer page;
     private Integer pageSize;
     private Long totalRecords;
     private Integer totalPages;
-    private List<CategoryDTO> categories;
+    private List<UserDTO> users;
 }
