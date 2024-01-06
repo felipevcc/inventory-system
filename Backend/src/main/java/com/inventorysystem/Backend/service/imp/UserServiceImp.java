@@ -99,8 +99,7 @@ public class UserServiceImp implements UserService {
                 userData.getEmail(),
                 userData.getAdmin()
         );
-        User newUser = userRepository.getUserById(newUserId);
-        return userMapper.userToDTO(newUser);
+        return getUserById(newUserId);
     }
 
     @Override
@@ -124,7 +123,8 @@ public class UserServiceImp implements UserService {
         foundUser.setEmail(userData.getEmail());
 
         User sessionUser = userRepository.getUserById(userData.getSessionUserId());
-        if (sessionUser.getUserId() > 1 && sessionUser.getAdmin() == true) {
+        // sessionUser.getUserId() > 1??
+        if (foundUser.getUserId() > 1 && sessionUser.getAdmin() == true) {
             foundUser.setAdmin(userData.getAdmin());
         }
 
