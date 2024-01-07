@@ -1,5 +1,6 @@
 package com.inventorysystem.Backend.service;
 
+import com.inventorysystem.Backend.dto.customer.CustomerCreationDTO;
 import com.inventorysystem.Backend.dto.customer.CustomerDTO;
 import com.inventorysystem.Backend.dto.customer.CustomerUpdateDTO;
 import com.inventorysystem.Backend.dto.customer.CustomersPageDTO;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface CustomerService {
 
-    CustomerDTO createCustomer(Customer customer);
+    CustomerDTO createCustomer(CustomerCreationDTO customer);
 
     CustomersPageDTO getAllCustomers(String criteria, Integer page, Integer pageSize);
 

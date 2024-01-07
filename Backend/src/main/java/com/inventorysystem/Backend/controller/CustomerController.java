@@ -1,5 +1,6 @@
 package com.inventorysystem.Backend.controller;
 
+import com.inventorysystem.Backend.dto.customer.CustomerCreationDTO;
 import com.inventorysystem.Backend.dto.customer.CustomerDTO;
 import com.inventorysystem.Backend.dto.customer.CustomerUpdateDTO;
 import com.inventorysystem.Backend.dto.customer.CustomersPageDTO;
@@ -25,7 +26,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    ResponseEntity<CustomerDTO> createCustomer(@RequestBody Customer customer) {
+    ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerCreationDTO customer) {
         // Exceptions
         CustomerDTO createdCustomer = customerService.createCustomer(customer);
         return ResponseEntity.status(HttpStatus.OK).body(createdCustomer);

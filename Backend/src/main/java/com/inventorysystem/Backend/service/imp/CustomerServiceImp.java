@@ -1,5 +1,6 @@
 package com.inventorysystem.Backend.service.imp;
 
+import com.inventorysystem.Backend.dto.customer.CustomerCreationDTO;
 import com.inventorysystem.Backend.dto.customer.CustomerDTO;
 import com.inventorysystem.Backend.dto.customer.CustomerUpdateDTO;
 import com.inventorysystem.Backend.dto.customer.CustomersPageDTO;
@@ -31,7 +32,7 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerDTO createCustomer(Customer customer) {
+    public CustomerDTO createCustomer(CustomerCreationDTO customer) {
         Long newCustomerId = customerRepository.createCustomer(
                 customer.getName(),
                 customer.getPhoneNumber(),
