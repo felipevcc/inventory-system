@@ -59,7 +59,7 @@ public class UserServiceImp implements UserService {
 
         Page<User> userPage;
 
-        if (criteria == null) {
+        if (criteria == null || criteria.length() == 0) {
             userPage = userRepository.findAll(pageable);
         } else {
             userPage = userRepository.findAll(UserSpecifications.searchUsers(criteria), pageable);

@@ -52,7 +52,7 @@ public class ProviderServiceImp implements ProviderService {
 
         Page<Provider> providerPage;
 
-        if (criteria == null) {
+        if (criteria == null || criteria.length() == 0) {
             providerPage = providerRepository.findAll(pageable);
         } else {
             providerPage = providerRepository.findAll(ProviderSpecifications.searchProviders(criteria), pageable);

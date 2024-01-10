@@ -34,8 +34,8 @@ public class Purchase {
     private LocalDateTime updatedAt;
 
     @Column(name = "provider_id")
-    private Provider providerId;
+    private Long providerId;
 
     @Column(name = "user_id")
-    private User userId;
+    private Long userId;
 }

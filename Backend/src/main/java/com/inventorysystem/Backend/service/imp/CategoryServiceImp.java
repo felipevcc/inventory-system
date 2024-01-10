@@ -50,7 +50,7 @@ public class CategoryServiceImp implements CategoryService {
 
         Page<Category> categoryPage;
 
-        if (criteria == null) {
+        if (criteria == null || criteria.length() == 0) {
             categoryPage = categoryRepository.findAll(pageable);
         } else {
             categoryPage = categoryRepository.findAll(CategorySpecifications.searchCategories(criteria), pageable);

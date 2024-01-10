@@ -1,17 +1,21 @@
 package com.inventorysystem.Backend.dto.sale;
 
-import com.inventorysystem.Backend.model.Article;
-import com.inventorysystem.Backend.model.Sale;
-import lombok.AllArgsConstructor;
+import com.inventorysystem.Backend.dto.customer.CustomerDTO;
+import com.inventorysystem.Backend.dto.user.UserDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class SaleDetailDTO {
-    private Long saleId;
-    private Long articleId;
-    private Integer articleQuantity;
-    private Integer price;
+@EqualsAndHashCode(callSuper = true)
+public class SaleDetailDTO extends SaleDTO {
+    private List<SaleArticleDTO> saleArticles;
+
+    public SaleDetailDTO(Long saleId, Integer totalValue, String createdAt, CustomerDTO customer, UserDTO user, List<SaleArticleDTO> saleArticles) {
+        super(saleId, totalValue, createdAt, customer, user);
+        this.saleArticles = saleArticles;
+    }
 }

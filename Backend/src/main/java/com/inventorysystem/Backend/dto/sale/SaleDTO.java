@@ -1,6 +1,8 @@
 package com.inventorysystem.Backend.dto.sale;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.inventorysystem.Backend.dto.customer.CustomerDTO;
+import com.inventorysystem.Backend.dto.user.UserDTO;
 import com.inventorysystem.Backend.model.Customer;
 import com.inventorysystem.Backend.model.User;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,6 @@ public class SaleDTO {
     private Long saleId;
     private Integer totalValue;
     private String createdAt;
-    private Long customerId;
-    private Long userId;
+    private CustomerDTO customer;
+    private UserDTO user;
 }

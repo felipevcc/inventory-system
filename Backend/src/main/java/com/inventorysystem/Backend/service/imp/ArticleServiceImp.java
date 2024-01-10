@@ -57,7 +57,7 @@ public class ArticleServiceImp implements ArticleService {
 
         Page<Article> articlePage;
 
-        if (criteria == null) {
+        if (criteria == null || criteria.length() == 0) {
             articlePage = articleRepository.findAll(pageable);
         } else {
             articlePage = articleRepository.findAll(ArticleSpecifications.searchArticles(criteria), pageable);

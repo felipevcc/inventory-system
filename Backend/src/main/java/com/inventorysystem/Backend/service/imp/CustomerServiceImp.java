@@ -57,7 +57,7 @@ public class CustomerServiceImp implements CustomerService {
 
         Page<Customer> customerPage;
 
-        if (criteria == null) {
+        if (criteria == null || criteria.length() == 0) {
             customerPage = customerRepository.findAll(pageable);
         } else {
             customerPage = customerRepository.findAll(CustomerSpecifications.searchCustomers(criteria), pageable);

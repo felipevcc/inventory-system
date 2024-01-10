@@ -34,8 +34,8 @@ public class Sale {
     private LocalDateTime updatedAt;
 
     @Column(name = "customer_id")
-    private Customer customerId;
+    private Long customerId;
 
     @Column(name = "user_id")
-    private User userId;
+    private Long userId;
 }
