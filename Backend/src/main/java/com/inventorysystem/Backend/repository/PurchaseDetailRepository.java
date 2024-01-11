@@ -18,7 +18,7 @@ public interface PurchaseDetailRepository extends JpaRepository<PurchaseDetail, 
     void createPurchaseDetail(
             @Param("Ip_purchase_id") Long purchaseId,
             @Param("Ip_article_id") Long articleId,
-            @Param("Ip_article_quantity") Long articleQuantity,
+            @Param("Ip_article_quantity") Integer articleQuantity,
             @Param("Ip_price") Long price
     );
 }

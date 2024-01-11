@@ -1,18 +1,14 @@
 package com.inventorysystem.Backend.controller;
 
-import com.inventorysystem.Backend.dto.UserCreationDTO;
-import com.inventorysystem.Backend.dto.UserDTO;
-import com.inventorysystem.Backend.dto.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.UsersPageDTO;
-import com.inventorysystem.Backend.model.User;
+import com.inventorysystem.Backend.dto.user.UserCreationDTO;
+import com.inventorysystem.Backend.dto.user.UserDTO;
+import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
+import com.inventorysystem.Backend.dto.user.UsersPageDTO;
 import com.inventorysystem.Backend.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")

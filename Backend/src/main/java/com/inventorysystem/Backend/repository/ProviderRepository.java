@@ -1,7 +1,11 @@
 package com.inventorysystem.Backend.repository;
 
 import com.inventorysystem.Backend.model.Provider;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -10,6 +14,8 @@ import java.util.List;
 
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Long> {
+
+    Provider findByEmail(String email);
 
     @Procedure(procedureName = "Proc_get_all_providers")
     List<Provider> getAllProviders();
@@ -34,4 +40,9 @@ public interface ProviderRepository extends JpaRepository<Provider, Long> {
 
     @Procedure(procedureName = "Proc_delete_provider")
     void deleteProvider(@Param("Ip_provider_id") Long providerId);
+
+    @Query("SELECT COUNT(*) FROM Provider provider")
+    Long countProviders();
+
+    Page<Provider> findAll(Specification<Provider> providerSpecification, Pageable pageable);
 }

@@ -1,9 +1,9 @@
 package com.inventorysystem.Backend.service.imp;
 
-import com.inventorysystem.Backend.dto.UserCreationDTO;
-import com.inventorysystem.Backend.dto.UserDTO;
-import com.inventorysystem.Backend.dto.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.UsersPageDTO;
+import com.inventorysystem.Backend.dto.user.UserCreationDTO;
+import com.inventorysystem.Backend.dto.user.UserDTO;
+import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
+import com.inventorysystem.Backend.dto.user.UsersPageDTO;
 import com.inventorysystem.Backend.mapper.UserMapper;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.repository.UserRepository;
@@ -18,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,11 +48,6 @@ public class UserServiceImp implements UserService {
         return userMapper.userToDTO(user);
     }
 
-    /*@Override
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
-    }*/
-
     @Override
     public UsersPageDTO getAllUsers(String criteria, Integer page, Integer pageSize) {
         UsersPageDTO pagedUsersResponse = new UsersPageDTO();
@@ -65,7 +59,7 @@ public class UserServiceImp implements UserService {
 
         Page<User> userPage;
 
-        if (criteria == null) {
+        if (criteria == null || criteria.length() == 0) {
             userPage = userRepository.findAll(pageable);
         } else {
             userPage = userRepository.findAll(UserSpecifications.searchUsers(criteria), pageable);
@@ -105,8 +99,7 @@ public class UserServiceImp implements UserService {
                 userData.getEmail(),
                 userData.getAdmin()
         );
-        User newUser = userRepository.getUserById(newUserId);
-        return userMapper.userToDTO(newUser);
+        return getUserById(newUserId);
     }
 
     @Override
@@ -130,7 +123,8 @@ public class UserServiceImp implements UserService {
         foundUser.setEmail(userData.getEmail());
 
         User sessionUser = userRepository.getUserById(userData.getSessionUserId());
-        if (sessionUser.getUserId() > 1 && sessionUser.getAdmin() == true) {
+        // sessionUser.getUserId() > 1??
+        if (foundUser.getUserId() > 1 && sessionUser.getAdmin() == true) {
             foundUser.setAdmin(userData.getAdmin());
         }
 

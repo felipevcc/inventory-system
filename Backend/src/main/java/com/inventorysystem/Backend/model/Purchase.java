@@ -33,11 +33,9 @@ public class Purchase {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "provider_id")
-    private Provider provider;
+    @Column(name = "provider_id")
+    private Long providerId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
 }

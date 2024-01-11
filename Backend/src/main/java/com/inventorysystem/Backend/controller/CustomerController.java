@@ -1,5 +1,9 @@
 package com.inventorysystem.Backend.controller;
 
+import com.inventorysystem.Backend.dto.customer.CustomerCreationDTO;
+import com.inventorysystem.Backend.dto.customer.CustomerDTO;
+import com.inventorysystem.Backend.dto.customer.CustomerUpdateDTO;
+import com.inventorysystem.Backend.dto.customer.CustomersPageDTO;
 import com.inventorysystem.Backend.model.Customer;
 import com.inventorysystem.Backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +25,39 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @PostMapping
+    ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerCreationDTO customer) {
+        // Exceptions
+        CustomerDTO createdCustomer = customerService.createCustomer(customer);
+        return ResponseEntity.status(HttpStatus.OK).body(createdCustomer);
+    }
+
     @GetMapping
-    ResponseEntity<List<Customer>> getAllCustomer() {
-        return ResponseEntity.status(HttpStatus.OK).body(customerService.getAllCustomers());
+    ResponseEntity<CustomersPageDTO> getAllCustomers(
+            @RequestParam(name = "searchCriteria", required = false) String criteria,
+            @RequestParam(name = "page") Integer page,
+            @RequestParam(name = "pageSize") Integer pageSize
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getAllCustomers(criteria, page, pageSize));
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+    ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getCustomerById(id));
     }
 
-    @PostMapping
-    ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        // Manejar excepciones
-        Customer createdCustomer = customerService.createCustomer(customer);
-        return ResponseEntity.status(HttpStatus.OK).body(createdCustomer);
+    @GetMapping("/document/{document}")
+    ResponseEntity<CustomerDTO> getCustomerByDocument(@PathVariable String document) {
+        CustomerDTO foundCustomer = customerService.getCustomerByDocument(document);
+        if (foundCustomer == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(foundCustomer);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id, @RequestBody CustomerUpdateDTO customerData) {
+        CustomerDTO updatedCustomer = customerService.updateCustomer(id, customerData);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCustomer);
     }
 }

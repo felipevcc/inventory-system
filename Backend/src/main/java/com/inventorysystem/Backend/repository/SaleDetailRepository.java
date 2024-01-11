@@ -18,7 +18,7 @@ public interface SaleDetailRepository extends JpaRepository<SaleDetail, Long> {
     void createSaleDetail(
             @Param("Ip_sale_id") Long saleId,
             @Param("Ip_article_id") Long articleId,
-            @Param("Ip_article_quantity") Long articleQuantity,
+            @Param("Ip_article_quantity") Integer articleQuantity,
             @Param("Ip_price") Long price
     );
 }

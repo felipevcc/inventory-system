@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreationDTO {
-    private String name;
-    private String username;
-    private String password;
+public class CustomerUpdateDTO {
     private String phoneNumber;
     private String email;
-    private Boolean admin;
+    private String address;
+    private String state;
+    private String city;
 }

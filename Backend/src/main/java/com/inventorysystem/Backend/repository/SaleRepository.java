@@ -1,7 +1,10 @@
 package com.inventorysystem.Backend.repository;
 
 import com.inventorysystem.Backend.model.Sale;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -23,4 +26,14 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
             @Param("Ip_customer_id") Long customerId,
             @Param("Ip_user_id") Long userId
     );
+
+    @Query(nativeQuery = true, value = "SELECT sl.* FROM SALE as sl " +
+            "JOIN CUSTOMER cus ON sl.customer_id = cus.customer_id " +
+            "JOIN USER us ON sl.user_id = us.user_id " +
+            "WHERE CAST(sl.sale_id AS CHAR) = :searchTerm " +
+            "OR LOWER(cus.name) LIKE %:searchTerm% " +
+            "OR LOWER(cus.document) LIKE %:searchTerm% " +
+            "OR LOWER(us.name) LIKE %:searchTerm% " +
+            "OR LOWER(us.username) LIKE %:searchTerm%")
+    Page<Sale> findAllSales(@Param("searchTerm") String searchTerm, Pageable pageable);
 }

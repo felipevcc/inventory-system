@@ -48,11 +48,9 @@ public class Article {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "provider_id")
-    private Provider provider;
+    @Column(name = "provider_id")
+    private Long providerId;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(name = "category_id")
+    private Long categoryId;
 }

@@ -1,4 +1,4 @@
-package com.inventorysystem.Backend.dto;
+package com.inventorysystem.Backend.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
