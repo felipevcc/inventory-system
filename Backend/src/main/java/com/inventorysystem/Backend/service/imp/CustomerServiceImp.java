@@ -85,6 +85,17 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     @Transactional
+    public CustomerDTO getCustomerByDocument(String document) {
+        Customer foundCustomer = customerRepository.findByDocument(document);
+        if (foundCustomer == null) {
+            System.out.println("El cliente no está registrado");
+            return null;
+        }
+        return customerMapper.customerToDTO(foundCustomer);
+    }
+
+    @Override
+    @Transactional
     public CustomerDTO updateCustomer(Long customerId, CustomerUpdateDTO customerData) {
         Customer foundCustomer = customerRepository.getCustomerById(customerId);
 

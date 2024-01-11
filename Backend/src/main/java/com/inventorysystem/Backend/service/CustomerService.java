@@ -16,5 +16,7 @@ public interface CustomerService {
 
     CustomerDTO getCustomerById(Long id);
 
+    CustomerDTO getCustomerByDocument(String document);
+
     CustomerDTO updateCustomer(Long customerId, CustomerUpdateDTO customerData);
 }

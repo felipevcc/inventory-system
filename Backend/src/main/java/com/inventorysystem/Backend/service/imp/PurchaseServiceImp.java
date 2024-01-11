@@ -1,9 +1,6 @@
 package com.inventorysystem.Backend.service.imp;
 
-import com.inventorysystem.Backend.dto.purchase.PurchaseCreationDTO;
-import com.inventorysystem.Backend.dto.purchase.PurchaseDTO;
-import com.inventorysystem.Backend.dto.purchase.PurchaseDetailDTO;
-import com.inventorysystem.Backend.dto.purchase.PurchasesPageDTO;
+import com.inventorysystem.Backend.dto.purchase.*;
 import com.inventorysystem.Backend.mapper.PurchaseMapper;
 import com.inventorysystem.Backend.model.Article;
 import com.inventorysystem.Backend.model.Purchase;
@@ -42,21 +39,21 @@ public class PurchaseServiceImp implements PurchaseService {
     @Override
     @Transactional
     public PurchaseDetailDTO createPurchase(PurchaseCreationDTO purchase) {
-        if (purchase.getArticlesIds().isEmpty()) {
+        if (purchase.getArticles().isEmpty()) {
             System.out.println("Se requiere al menos un artículo en la compra");
             return null;
         }
 
-        List<Long> validArticles = new ArrayList<>();
+        List<PurchaseCreationArticleDTO> validArticles = new ArrayList<>();
         Long totalPurchasePrice = 0L;
-        for (Long articleId:purchase.getArticlesIds()) {
-            if (!articleRepository.existsById(articleId) || validArticles.contains(articleId)) {
+        for (PurchaseCreationArticleDTO article : purchase.getArticles()) {
+            if (!articleRepository.existsById(article.getArticleId()) || article.getArticleQuantity() < 1) {
                 continue;
             }
             // Add valid id
-            validArticles.add(articleId);
+            validArticles.add(article);
             // Add price to the total value of the purchase
-            Article foundArticle = articleRepository.getArticleById(articleId);
+            Article foundArticle = articleRepository.getArticleById(article.getArticleId());
             totalPurchasePrice += foundArticle.getPurchasePrice();
         }
 
@@ -70,6 +67,22 @@ public class PurchaseServiceImp implements PurchaseService {
                 purchase.getProviderId(),
                 purchase.getSessionUserId()
         );
+
+        for (PurchaseCreationArticleDTO article : validArticles) {
+            Article foundArticle = articleRepository.getArticleById(article.getArticleId());
+            Long totalValue = (long) (foundArticle.getPurchasePrice() * article.getArticleQuantity());
+            // Create article detail
+            purchaseDetailRepository.createPurchaseDetail(
+                    newPurchaseId,
+                    foundArticle.getArticleId(),
+                    article.getArticleQuantity(),
+                    totalValue
+            );
+            // Update article stock
+            Integer stock = foundArticle.getStock() + article.getArticleQuantity();
+            foundArticle.setStock(stock);
+            articleRepository.save(foundArticle);
+        }
         return getPurchaseById(newPurchaseId);
     }
 

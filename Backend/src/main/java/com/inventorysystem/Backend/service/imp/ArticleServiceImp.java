@@ -47,19 +47,29 @@ public class ArticleServiceImp implements ArticleService {
 
     @Override
     @Transactional
-    public ArticlesPageDTO getAllArticles(String criteria, Integer page, Integer pageSize) {
+    public ArticlesPageDTO getAllArticles(Long providerId, String criteria, Integer page, Integer pageSize) {
         ArticlesPageDTO pagedArticlesResponse = new ArticlesPageDTO();
 
         Long totalRecords = articleRepository.countArticles();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
-        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("articleId").descending());
-
         Page<Article> articlePage;
 
-        if (criteria == null || criteria.length() == 0) {
+        if (providerId == null && (criteria == null || criteria.length() == 0)) {
+            System.out.println("1");
+            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("articleId").descending());
             articlePage = articleRepository.findAll(pageable);
+        } else if (providerId != null && (criteria == null || criteria.length() == 0)) {
+            System.out.println("2");
+            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("article_id").descending());
+            articlePage = articleRepository.findAllArticlesByProvider(providerId, pageable);
+        } else if (providerId != null && criteria != null && criteria.length() > 0) {
+            System.out.println("3");
+            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("article_id").descending());
+            articlePage = articleRepository.findAllArticlesByProviderAndTerm(providerId, criteria, pageable);
         } else {
+            System.out.println("4");
+            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("articleId").descending());
             articlePage = articleRepository.findAll(ArticleSpecifications.searchArticles(criteria), pageable);
         }
 

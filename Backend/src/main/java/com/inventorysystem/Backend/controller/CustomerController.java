@@ -46,6 +46,15 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getCustomerById(id));
     }
 
+    @GetMapping("/document/{document}")
+    ResponseEntity<CustomerDTO> getCustomerByDocument(@PathVariable String document) {
+        CustomerDTO foundCustomer = customerService.getCustomerByDocument(document);
+        if (foundCustomer == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(foundCustomer);
+    }
+
     @PutMapping("/{id}")
     ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id, @RequestBody CustomerUpdateDTO customerData) {
         CustomerDTO updatedCustomer = customerService.updateCustomer(id, customerData);

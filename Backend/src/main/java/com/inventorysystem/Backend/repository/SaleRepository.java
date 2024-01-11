@@ -30,10 +30,10 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
     @Query(nativeQuery = true, value = "SELECT sl.* FROM SALE as sl " +
             "JOIN CUSTOMER cus ON sl.customer_id = cus.customer_id " +
             "JOIN USER us ON sl.user_id = us.user_id " +
-            "WHERE CAST(sl.sale_id AS CHAR) = ':searchTerm' " +
-            "OR LOWER(cus.name) LIKE '%:searchTerm%' " +
-            "OR LOWER(cus.document) LIKE '%:searchTerm%' " +
-            "OR LOWER(us.name) LIKE '%:searchTerm%' " +
-            "OR LOWER(us.username) LIKE '%:searchTerm%'")
+            "WHERE CAST(sl.sale_id AS CHAR) = :searchTerm " +
+            "OR LOWER(cus.name) LIKE %:searchTerm% " +
+            "OR LOWER(cus.document) LIKE %:searchTerm% " +
+            "OR LOWER(us.name) LIKE %:searchTerm% " +
+            "OR LOWER(us.username) LIKE %:searchTerm%")
     Page<Sale> findAllSales(@Param("searchTerm") String searchTerm, Pageable pageable);
 }

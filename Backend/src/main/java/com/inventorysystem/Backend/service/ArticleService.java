@@ -9,7 +9,7 @@ public interface ArticleService {
 
     ArticleDTO createArticle(ArticleCreationDTO article);
 
-    ArticlesPageDTO getAllArticles(String criteria, Integer page, Integer pageSize);
+    ArticlesPageDTO getAllArticles(Long providerId, String criteria, Integer page, Integer pageSize);
 
     ArticleDTO getArticleById(Long id);
 

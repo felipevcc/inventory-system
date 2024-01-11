@@ -25,11 +25,12 @@ public class ArticleController {
 
     @GetMapping
     ResponseEntity<ArticlesPageDTO> getAllArticles(
+            @RequestParam(name = "providerId", required = false) Long providerId,
             @RequestParam(name = "searchCriteria", required = false) String criteria,
             @RequestParam(name = "page") Integer page,
             @RequestParam(name = "pageSize") Integer pageSize
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(articleService.getAllArticles(criteria, page, pageSize));
+        return ResponseEntity.status(HttpStatus.OK).body(articleService.getAllArticles(providerId, criteria, page, pageSize));
     }
 
     @GetMapping("/{id}")

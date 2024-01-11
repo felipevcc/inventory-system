@@ -17,6 +17,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Customer findByEmail(String email);
 
+    Customer findByDocument(String document);
+
     @Procedure(procedureName = "Proc_get_all_customers")
     List<Customer> getAllCustomers();
 

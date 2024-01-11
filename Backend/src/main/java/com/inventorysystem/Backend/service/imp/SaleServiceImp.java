@@ -1,9 +1,6 @@
 package com.inventorysystem.Backend.service.imp;
 
-import com.inventorysystem.Backend.dto.sale.SaleCreationDTO;
-import com.inventorysystem.Backend.dto.sale.SaleDTO;
-import com.inventorysystem.Backend.dto.sale.SaleDetailDTO;
-import com.inventorysystem.Backend.dto.sale.SalesPageDTO;
+import com.inventorysystem.Backend.dto.sale.*;
 import com.inventorysystem.Backend.mapper.SaleMapper;
 import com.inventorysystem.Backend.model.Article;
 import com.inventorysystem.Backend.model.Sale;
@@ -42,21 +39,21 @@ public class SaleServiceImp implements SaleService {
     @Override
     @Transactional
     public SaleDetailDTO createSale(SaleCreationDTO sale) {
-        if (sale.getArticlesIds().isEmpty()) {
+        if (sale.getArticles().isEmpty()) {
             System.out.println("Se requiere al menos un artículo en la venta");
             return null;
         }
 
-        List<Long> validArticles = new ArrayList<>();
+        List<SaleCreationArticleDTO> validArticles = new ArrayList<>();
         Long totalSalePrice = 0L;
-        for (Long articleId:sale.getArticlesIds()) {
-            if (!articleRepository.existsById(articleId) || validArticles.contains(articleId)) {
+        for (SaleCreationArticleDTO article : sale.getArticles()) {
+            if (!articleRepository.existsById(article.getArticleId()) || article.getArticleQuantity() < 1) {
                 continue;
             }
             // Add valid id
-            validArticles.add(articleId);
+            validArticles.add(article);
             // Add price to the total value of the sale
-            Article foundArticle = articleRepository.getArticleById(articleId);
+            Article foundArticle = articleRepository.getArticleById(article.getArticleId());
             totalSalePrice += foundArticle.getSalePrice();
         }
 
@@ -70,6 +67,27 @@ public class SaleServiceImp implements SaleService {
                 sale.getCustomerId(),
                 sale.getSessionUserId()
         );
+
+        for (SaleCreationArticleDTO article : validArticles) {
+            Article foundArticle = articleRepository.getArticleById(article.getArticleId());
+            Long totalValue = (long) (foundArticle.getSalePrice() * article.getArticleQuantity());
+            // Create article detail
+            saleDetailRepository.createSaleDetail(
+                    newSaleId,
+                    foundArticle.getArticleId(),
+                    article.getArticleQuantity(),
+                    totalValue
+            );
+            // Update article stock
+            Integer stock = foundArticle.getStock();
+            if (foundArticle.getStock() <= article.getArticleQuantity()) {
+                stock = 0;
+            } else {
+                stock -= article.getArticleQuantity();
+            }
+            foundArticle.setStock(stock);
+            articleRepository.save(foundArticle);
+        }
         return getSaleById(newSaleId);
     }
 

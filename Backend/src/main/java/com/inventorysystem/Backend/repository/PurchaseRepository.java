@@ -30,9 +30,9 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     @Query(nativeQuery = true, value = "SELECT purch.* FROM PURCHASE purch " +
             "JOIN PROVIDER prov ON purch.provider_id = prov.provider_id " +
             "JOIN USER us ON purch.user_id = us.user_id " +
-            "WHERE CAST(purch.purchase_id AS CHAR) = ':searchTerm' " +
-            "OR LOWER(prov.name) LIKE '%:searchTerm%' " +
-            "OR LOWER(us.name) LIKE '%:searchTerm%' " +
-            "OR LOWER(us.username) LIKE '%:searchTerm%'")
+            "WHERE CAST(purch.purchase_id AS CHAR) = :searchTerm " +
+            "OR LOWER(prov.name) LIKE %:searchTerm% " +
+            "OR LOWER(us.name) LIKE %:searchTerm% " +
+            "OR LOWER(us.username) LIKE %:searchTerm%")
     Page<Purchase> findAllPurchases(@Param("searchTerm") String searchTerm, Pageable pageable);
 }
