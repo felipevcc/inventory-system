@@ -5,6 +5,7 @@ import { faUser, faCaretDown, faUserGear, faRightFromBracket } from '@fortawesom
 import './navbar.css';
 
 const Navbar = () => {
+    const [user, setUser] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const handleToggleOptions = () => {
         setIsOpen(!isOpen);
@@ -20,7 +21,14 @@ const Navbar = () => {
 
     const textRef = useRef(null);
     const optionsRef = useRef(null);
+
     useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser);
+            setUser(parsedUser);
+        }
+
         const handleClickOutside = (event) => {
             if (
                 (textRef.current && !textRef.current.contains(event.target)) &&
@@ -40,7 +48,7 @@ const Navbar = () => {
         <div className={`navbar-container ${isOpen ? 'open' : ''}`}>
             <div className="text" onClick={handleToggleOptions} ref={textRef}>
                 <FontAwesomeIcon icon={faUser} className="icon" />
-                <span className="username">Felipe Villamizar</span>
+                <span className="username">{user ? user.name : ''}</span>
                 <FontAwesomeIcon
                     icon={faCaretDown}
                     className={`arrow-icon ${isOpen ? 'open' : ''}`}

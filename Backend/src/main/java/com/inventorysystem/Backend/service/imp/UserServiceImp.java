@@ -1,9 +1,6 @@
 package com.inventorysystem.Backend.service.imp;
 
-import com.inventorysystem.Backend.dto.user.UserCreationDTO;
-import com.inventorysystem.Backend.dto.user.UserDTO;
-import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.user.UsersPageDTO;
+import com.inventorysystem.Backend.dto.user.*;
 import com.inventorysystem.Backend.mapper.UserMapper;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.repository.UserRepository;
@@ -34,17 +31,15 @@ public class UserServiceImp implements UserService {
     BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public UserDTO userLogin(String userEmail, String userPassword) {
-        User user = userRepository.findByEmail(userEmail);
-
+    public UserDTO userLogin(LoginDTO loginData) {
+        User user = userRepository.findByEmail(loginData.getEmail());
         if (user == null) {
             return null;
         }
-        Boolean successfulLogin = passwordEncoder.matches(userPassword, user.getPasswordHash());
+        Boolean successfulLogin = passwordEncoder.matches(loginData.getPassword(), user.getPasswordHash());
         if (!successfulLogin) {
             return null;
         }
-
         return userMapper.userToDTO(user);
     }
 
