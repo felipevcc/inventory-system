@@ -99,6 +99,7 @@ const Login = () => {
                 // token
                 const user = await response.json();
                 localStorage.setItem('user', JSON.stringify(user));
+                console.log(user);
                 navigate('/home');
                 return;
             }

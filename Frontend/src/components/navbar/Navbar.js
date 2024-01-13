@@ -16,6 +16,7 @@ const Navbar = () => {
     function handleLogout (event) {
         event.preventDefault();
         // Actions to logout
+        localStorage.clear();
         navigate('/login');
     };
 
