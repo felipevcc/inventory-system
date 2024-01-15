@@ -39,7 +39,7 @@ const NewUser = () => {
                             <label htmlFor="admin">Administrador</label>
                             <select className="input" id="admin" required>
                                 <option value="true">Si</option>
-                                <option selected value="false">No</option>
+                                <option selected defaultValue="false">No</option>
                             </select>
                         </div>
 

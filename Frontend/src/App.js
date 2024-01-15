@@ -59,14 +59,15 @@ function App() {
 
 const MainLayout = () => {
   let isAuthenticated = false;
+  let isAdmin = false;
+  let user = localStorage.getItem("user");
   try {
-    let user = localStorage.getItem("user");
-    console.log(isAuthenticated);
     user = JSON.parse(user);
     if (user) {
       isAuthenticated = true;
-      console.log("oe");
-      console.log(isAuthenticated);
+      if (user.admin === true) {
+        isAdmin = true;
+      }
     }
   } catch (error) {
     isAuthenticated = false;
@@ -148,10 +149,18 @@ const MainLayout = () => {
           } />
 
           <Route path="/users" element={
-            isAuthenticated ? <Users /> : <Navigate to="/login" />
+            isAuthenticated ? (
+              isAdmin ? <Users /> : <Navigate to="/home" />
+            ) : (
+              <Navigate to="/login" />
+            )
           } />
           <Route path="/new-user" element={
-            isAuthenticated ? <NewUser /> : <Navigate to="/login" />
+            isAuthenticated ? (
+              isAdmin ? <NewUser /> : <Navigate to="/home" />
+            ) : (
+              <Navigate to="/login" />
+            )
           } />
           <Route path="/edit-user/:id" element={
             isAuthenticated ? <EditUser /> : <Navigate to="/login" />
