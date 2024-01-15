@@ -46,7 +46,7 @@ public class CategoryServiceImp implements CategoryService {
         Long totalRecords = categoryRepository.countCategories();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
-        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("categoryId").descending());
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("categoryId").descending());
 
         Page<Category> categoryPage;
 
@@ -60,7 +60,7 @@ public class CategoryServiceImp implements CategoryService {
                 .map(category -> categoryMapper.categoryToDTO(category))
                 .collect(Collectors.toList());
 
-        pagedCategoriesResponse.setPage(categoryPage.getNumber());
+        pagedCategoriesResponse.setPage(categoryPage.getNumber() + 1);
         pagedCategoriesResponse.setPageSize(categoryPage.getSize());
         pagedCategoriesResponse.setTotalRecords(categoryPage.getTotalElements());
         pagedCategoriesResponse.setTotalPages(categoryPage.getTotalPages());

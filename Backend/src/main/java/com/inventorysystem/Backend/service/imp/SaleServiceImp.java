@@ -99,10 +99,10 @@ public class SaleServiceImp implements SaleService {
         Page<Sale> salePage;
 
         if (criteria == null || criteria.length() == 0) {
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("saleId").descending());
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("saleId").descending());
             salePage = saleRepository.findAll(pageable);
         } else {
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("sale_id").descending()); // sale_id because it is a native query
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("sale_id").descending()); // sale_id because it is a native query
             salePage = saleRepository.findAllSales(criteria, pageable);
         }
 
@@ -110,7 +110,7 @@ public class SaleServiceImp implements SaleService {
                 .map(sale -> saleMapper.saleToDTO(sale))
                 .collect(Collectors.toList());
 
-        pagedSalesResponse.setPage(salePage.getNumber());
+        pagedSalesResponse.setPage(salePage.getNumber() + 1);
         pagedSalesResponse.setPageSize(salePage.getSize());
         pagedSalesResponse.setTotalRecords(salePage.getTotalElements());
         pagedSalesResponse.setTotalPages(salePage.getTotalPages());

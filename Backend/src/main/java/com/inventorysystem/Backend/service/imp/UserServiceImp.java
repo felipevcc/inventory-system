@@ -50,7 +50,7 @@ public class UserServiceImp implements UserService {
         Long totalRecords = userRepository.countUsers();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
-        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("userId").descending());
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("userId").descending());
 
         Page<User> userPage;
 
@@ -64,7 +64,7 @@ public class UserServiceImp implements UserService {
                 .map(user -> userMapper.userToDTO(user))
                 .collect(Collectors.toList());
 
-        pagedUsersResponse.setPage(userPage.getNumber());
+        pagedUsersResponse.setPage(userPage.getNumber() + 1);
         pagedUsersResponse.setPageSize(userPage.getSize());
         pagedUsersResponse.setTotalRecords(userPage.getTotalElements());
         pagedUsersResponse.setTotalPages(userPage.getTotalPages());
