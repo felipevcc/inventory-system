@@ -1,9 +1,19 @@
-import React from 'react';
-//import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../../../styles/new-form.css'
 import './new-category.css'
+import userVerification from '../../../userVerification';
+import { useNavigate } from 'react-router-dom';
 
 const NewCategory = () => {
+    const navigate = useNavigate();
+
+    // Permission validation
+    useEffect(() => {
+        if (!userVerification().isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        }
+    }, [navigate]);
 
     return (
         <div className="newCategory-container">

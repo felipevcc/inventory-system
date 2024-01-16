@@ -59,7 +59,7 @@ const Navbar = () => {
                 <div className="options" ref={optionsRef}>
                     <ul>
                         <li>
-                            <Link to={`/edit-user/${1}`}>
+                            <Link to={`/edit-user/${user ? user.userId : 0}`}>
                                 <FontAwesomeIcon icon={faUserGear}  className="icon" />
                                 <span className="nav-text">Perfil</span>
                             </Link>

@@ -1,14 +1,24 @@
-import React from 'react';
-//import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import './purchases.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import userVerification from '../../userVerification';
 
 const Purchases = () => {
+    const navigate = useNavigate();
+
+    // Permission validation
+    useEffect(() => {
+        if (!userVerification().isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        }
+    }, [navigate]);
+
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
     };

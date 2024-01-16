@@ -21,9 +21,13 @@ const Sidebar = () => {
     const handleSelectedView = (view) => {
         setSelectedView(view);
     };
+
     useEffect(() => {
-        localStorage.setItem('selectedView', selectedView); // Guardar la opción seleccionada en el almacenamiento local
         setUser(JSON.parse(localStorage.getItem('user')));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('selectedView', selectedView); // Save the selected option to local storage
     }, [selectedView]);
 
     return (
