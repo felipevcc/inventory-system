@@ -19,7 +19,6 @@ const EditUser = () => {
         // Administrator role verification or same user updating himself
         let isAllowed = false;
         try {
-            userVer.user = JSON.parse(userVer.user);
             if (userVer.user && (userVer.user.admin === true || id === userVer.user.userId.toString())) {
                 isAllowed = true;
             }

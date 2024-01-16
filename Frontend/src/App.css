@@ -165,47 +165,6 @@
     color: rgb(255, 60, 0);
 }
 
-
-/* ===== Pagination ===== */
-
-.main-content .pagination-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 60px;
-    width: 100%;
-}
-
-.main-content .pagination-container .pagination-button {
-    border: none;
-    background: none;
-    font-size: 18px;
-    color: var(--navbar-color);
-    cursor: pointer;
-    margin: 0 5px;
-    width: 25px;
-    height: 28px;
-    transition: all 0.4s ease;
-    border-radius: 50%;
-}
-
-.main-content .pagination-container .page-number {
-    margin: 0 10px;
-    padding: 5px;
-    background-color: var(--navbar-color);
-    color: #fff;
-    width: 60px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.main-content .pagination-container .pagination-button:hover {
-    color: white;
-    background-color: var(--navbar-color);
-}
-
-
 /* ===== Components when sidebar is closed ===== */
 .sidebar-container.close~.navbar-container {
     left: 88px;
