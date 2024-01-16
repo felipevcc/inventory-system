@@ -4,10 +4,13 @@ import { faAngleDoubleLeft, faAngleLeft, faAngleRight, faAngleDoubleRight } from
 import './pagination.css';
 
 const Pagination = ({paginator, onChangePage}) => {
+    if (!paginator) {
+        return null;
+    }
 
     const onMaxLeft = () => {
         onChangePage(1);
-      };
+    };
     
     const onLeft = () => {
         onChangePage(Math.max(paginator.page - 1, 1));

@@ -29,7 +29,7 @@ const Users = () => {
     }, [navigate]);
 
     useEffect(() => {
-        console.log('Efecto ejecutado con query:', query, 'y page:', page);
+        //console.log('Efecto ejecutado con query:', query, 'y page:', page);
         const data = new FormData();
         if (query.length > 0) {
             data.append('searchCriteria', query);
@@ -48,7 +48,7 @@ const Users = () => {
     }, [query, page]);
 
     useEffect(() => {
-        console.log(paginator);
+        //console.log(paginator);
     }, [paginator]);
 
     const handleSearch = (query) => {
@@ -96,48 +96,22 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Pedro Pablo</td>
-                            <td>pedropablo</td>
-                            <td>3208561452</td>
-                            <td>pedropablov@gmail.com</td>
-                            <td>Si</td>
-                            <td>
-                                <Link to={`/edit-user/${1}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Felipe Villamizar</td>
-                            <td>felipevc</td>
-                            <td>3148933577</td>
-                            <td>felipevillamizarc@gmail.com</td>
-                            <td>Si</td>
-                            <td>
-                                <Link to={`/edit-user/${2}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(2)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Natalia Villa</td>
-                            <td>natavilla</td>
-                            <td>3167596261</td>
-                            <td>natavilla06@gmail.com</td>
-                            <td>No</td>
-                            <td>
-                                <Link to={`/edit-user/${3}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(3)} />
-                            </td>
-                        </tr>
+                        {paginator.users && paginator.users.map(user => (
+                            <tr key={user.userId}>
+                                <td>{user.userId}</td>
+                                <td>{user.name}</td>
+                                <td>{user.username}</td>
+                                <td>{user.phoneNumber}</td>
+                                <td>{user.email}</td>
+                                <td>{user.admin ? 'Si' : 'No'}</td>
+                                <td>
+                                    <Link to={`/edit-user/${user.userId}`}>
+                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                    </Link>
+                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(user.userId)} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
