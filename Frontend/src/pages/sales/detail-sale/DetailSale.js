@@ -5,11 +5,12 @@ import userVerification from '../../../utils/userVerification';
 const DetailSale = () => {
     const navigate = useNavigate();
 
-    // Permission validation
     useEffect(() => {
+        // Permission validation
         if (!userVerification().isAuthenticated) {
             localStorage.clear();
             navigate('/login');
+            return;
         }
     }, [navigate]);
 

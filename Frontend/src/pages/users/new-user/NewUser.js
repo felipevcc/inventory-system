@@ -5,14 +5,16 @@ import userVerification from '../../../utils/userVerification';
 const NewUser = () => {
     const navigate = useNavigate();
 
-    // Permission validation
     useEffect(() => {
+        // Permission validation
         const userVer = userVerification();
         if (!userVer.isAuthenticated) {
             localStorage.clear();
             navigate('/login');
+            return;
         } else if (!userVer.isAdmin) {
             navigate('/home');
+            return;
         }
     }, [navigate]);
 

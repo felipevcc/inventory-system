@@ -15,20 +15,22 @@ const Users = () => {
     const pageSize = 1;
 
     const [paginator, setPaginator] = useState({});
-    
-    // Permission validation
+
     const navigate = useNavigate();
+
     useEffect(() => {
+        // Permission validation
         const userVer = userVerification();
         if (!userVer.isAuthenticated) {
             localStorage.clear();
             navigate('/login');
+            return;
         } else if (!userVer.isAdmin) {
             navigate('/home');
+            return;
         }
-    }, [navigate]);
 
-    useEffect(() => {
+        // Query paginated data
         //console.log('Efecto ejecutado con query:', query, 'y page:', page);
         const data = new FormData();
         if (query.length > 0) {
@@ -45,7 +47,7 @@ const Users = () => {
                 .then(data => setPaginator(data))
                 .catch(error => console.log(error))
         })();
-    }, [query, page]);
+    }, [navigate, query, page]);
 
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
