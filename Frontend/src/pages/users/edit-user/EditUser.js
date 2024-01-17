@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import userVerification from '../../../userVerification';
+import userVerification from '../../../utils/userVerification';
 
 const EditUser = () => {
     const { id } = useParams();

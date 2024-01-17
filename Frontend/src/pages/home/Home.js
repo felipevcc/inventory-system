@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import './home.css';
-import userVerification from '../../userVerification';
 import { useNavigate } from 'react-router-dom';
+import userVerification from '../../utils/userVerification';
 
 const Home = () => {
     const navigate = useNavigate();

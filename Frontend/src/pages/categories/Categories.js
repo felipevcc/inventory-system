@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './categories.css';
@@ -6,9 +6,16 @@ import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
-import userVerification from '../../userVerification';
+import userVerification from '../../utils/userVerification';
+import { API } from '../../env';
 
 const Categories = () => {
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+
+    const [paginator, setPaginator] = useState({});
+
     const navigate = useNavigate();
 
     // Permission validation
@@ -19,9 +26,32 @@ const Categories = () => {
         }
     }, [navigate]);
 
+    useEffect(() => {
+        const data = new FormData();
+        if (query.length > 0) {
+            data.append('searchCriteria', query);
+        }
+        data.append('page', page);
+        data.append('pageSize', pageSize);
+
+        const url = new URL(`${API}/api/v1/category`);
+        url.search = new URLSearchParams(data).toString();
+        (async () => {
+            await fetch(url)
+                .then(response => response.json())
+                .then(data => setPaginator(data))
+                .catch(error => console.log(error))
+        })();
+    }, [query, page]);
+
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
-    };
+        setQuery(query);
+    }
+
+    const handlePage = (page) => {
+        setPage(page);
+    }
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
@@ -30,7 +60,7 @@ const Categories = () => {
             // Call to the api to delete the record by id, modify the state
             console.log(`Registro con ID ${id} eliminado`);
         }
-    };
+    }
 
     return (
         <div className="categories-container">
@@ -55,40 +85,22 @@ const Categories = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Frenos</td>
-                            <td>
-                                <Link to={`/edit-category/${1}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Llantas</td>
-                            <td>
-                                <Link to={`/edit-category/${2}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(2)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Pachas</td>
-                            <td>
-                                <Link to={`/edit-category/${3}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(3)} />
-                            </td>
-                        </tr>
+                        {paginator.categories && paginator.categories.map(category => (
+                            <tr key={category.categoryId}>
+                                <td>{category.categoryId}</td>
+                                <td>{category.name}</td>
+                                <td>
+                                    <Link to={`/edit-category/${category.categoryId}`}>
+                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                    </Link>
+                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(category.categoryId)} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
-                <Pagination />
+                <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
 
 

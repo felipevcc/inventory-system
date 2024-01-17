@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import '../../../styles/new-form.css'
 import './new-category.css'
-import userVerification from '../../../userVerification';
 import { useNavigate } from 'react-router-dom';
+import userVerification from '../../../utils/userVerification';
 
 const NewCategory = () => {
     const navigate = useNavigate();

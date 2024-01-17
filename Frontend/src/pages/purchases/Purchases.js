@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import './purchases.css';
@@ -6,9 +6,17 @@ import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
-import userVerification from '../../userVerification';
+import userVerification from '../../utils/userVerification';
+import { API } from '../../env';
+import formatDate from '../../utils/formatDate';
 
 const Purchases = () => {
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+
+    const [paginator, setPaginator] = useState({});
+
     const navigate = useNavigate();
 
     // Permission validation
@@ -19,9 +27,32 @@ const Purchases = () => {
         }
     }, [navigate]);
 
+    useEffect(() => {
+        const data = new FormData();
+        if (query.length > 0) {
+            data.append('searchCriteria', query);
+        }
+        data.append('page', page);
+        data.append('pageSize', pageSize);
+
+        const url = new URL(`${API}/api/v1/purchase`);
+        url.search = new URLSearchParams(data).toString();
+        (async () => {
+            await fetch(url)
+                .then(response => response.json())
+                .then(data => setPaginator(data))
+                .catch(error => console.log(error))
+        })();
+    }, [query, page]);
+
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
-    };
+        setQuery(query);
+    }
+
+    const handlePage = (page) => {
+        setPage(page);
+    }
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
@@ -30,7 +61,7 @@ const Purchases = () => {
             // Call to the api to delete the record by id, modify the state
             console.log(`Registro con ID ${id} eliminado`);
         }
-    };
+    }
 
     return (
         <div className="purchases-container">
@@ -59,64 +90,30 @@ const Purchases = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>27-05-2023</td>
-                            <td>$89.900</td>
-                            <td>Lenimp</td>
-                            <td>Felipe Villamizar</td>
-                            <td>
-                                <Link to={`/detail-purchase/${1}`}>
-                                    <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                                </Link>
-                            </td>
-                            <td>
-                                <Link to={`/edit-purchase/${1}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>27-05-2023</td>
-                            <td>$24.900</td>
-                            <td>Propartes</td>
-                            <td>Felipe Villamizar</td>
-                            <td>
-                                <Link to={`/detail-purchase/${2}`}>
-                                    <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                                </Link>
-                            </td>
-                            <td>
-                                <Link to={`/edit-purchase/${2}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(2)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>23-05-2023</td>
-                            <td>$132.900</td>
-                            <td>Esciclismo</td>
-                            <td>Felipe Villamizar</td>
-                            <td>
-                                <Link to={`/detail-purchase/${3}`}>
-                                    <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                                </Link>
-                            </td>
-                            <td>
-                                <Link to={`/edit-purchase/${3}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(3)} />
-                            </td>
-                        </tr>
+                        {paginator.purchases && paginator.purchases.map(purchase => (
+                            <tr key={purchase.purchaseId}>
+                                <td>{purchase.purchaseId}</td>
+                                <td>{formatDate(purchase.createdAt)}</td>
+                                <td>{purchase.totalValue}</td>
+                                <td>{purchase.provider.name}</td>
+                                <td>{purchase.user.name}</td>
+                                <td>
+                                    <Link to={`/detail-purchase/${purchase.purchaseId}`}>
+                                        <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                    </Link>
+                                </td>
+                                <td>
+                                    <Link to={`/edit-purchase/${purchase.purchaseId}`}>
+                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                    </Link>
+                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(purchase.purchaseId)} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
-                <Pagination />
+                <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './items.css';
@@ -6,9 +6,16 @@ import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
-import userVerification from '../../userVerification';
+import userVerification from '../../utils/userVerification';
+import { API } from '../../env';
 
 const Items = () => {
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+
+    const [paginator, setPaginator] = useState({});
+
     const navigate = useNavigate();
 
     // Permission validation
@@ -19,9 +26,32 @@ const Items = () => {
         }
     }, [navigate]);
 
+    useEffect(() => {
+        const data = new FormData();
+        if (query.length > 0) {
+            data.append('searchCriteria', query);
+        }
+        data.append('page', page);
+        data.append('pageSize', pageSize);
+
+        const url = new URL(`${API}/api/v1/article`);
+        url.search = new URLSearchParams(data).toString();
+        (async () => {
+            await fetch(url)
+                .then(response => response.json())
+                .then(data => setPaginator(data))
+                .catch(error => console.log(error))
+        })();
+    }, [query, page]);
+
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
-    };
+        setQuery(query);
+    }
+
+    const handlePage = (page) => {
+        setPage(page);
+    }
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
@@ -30,7 +60,7 @@ const Items = () => {
             // Call to the api to delete the record by id, modify the state
             console.log(`Registro con ID ${id} eliminado`);
         }
-    };
+    }
 
     return (
         <div className="items-container">
@@ -52,6 +82,7 @@ const Items = () => {
                             <th>ID</th>
                             <th>NOMBRE</th>
                             <th>MARCA</th>
+                            <th>CATEGORIA</th>
                             <th>STOCK</th>
                             <th>PRECIO-COMPRA</th>
                             <th>PRECIO-VENTA</th>
@@ -61,58 +92,29 @@ const Items = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>11111</td>
-                            <td>Llanta coraza 27.5x2.0</td>
-                            <td>Chaoyang</td>
-                            <td>8</td>
-                            <td>$30.000</td>
-                            <td>$47.900</td>
-                            <td>560g</td>
-                            <td>Lenimp</td>
-                            <td>
-                                <Link to={`/edit-item/${11111}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(11111)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11112</td>
-                            <td>Freno hidraulico M7100</td>
-                            <td>Shimano</td>
-                            <td>4</td>
-                            <td>$750.000</td>
-                            <td>$885.900</td>
-                            <td>280g</td>
-                            <td>Propartes</td>
-                            <td>
-                                <Link to={`/edit-item/${11112}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(11112)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11113</td>
-                            <td>Pacha 9Vel Rel 11/42</td>
-                            <td>Cassette</td>
-                            <td>5</td>
-                            <td>$69.900</td>
-                            <td>$81.900</td>
-                            <td>451g</td>
-                            <td>Esciclismo</td>
-                            <td>
-                                <Link to={`/edit-item/${11113}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(11113)} />
-                            </td>
-                        </tr>
+                        {paginator.articles && paginator.articles.map(article => (
+                            <tr key={article.articleId}>
+                                <td>{article.articleId}</td>
+                                <td>{article.name}</td>
+                                <td>{article.brand}</td>
+                                <td>{article.category.name}</td>
+                                <td>{article.stock}</td>
+                                <td>{article.purchasePrice}</td>
+                                <td>{article.salePrice}</td>
+                                <td>{article.weight}</td>
+                                <td>{article.provider.name}</td>
+                                <td>
+                                    <Link to={`/edit-item/${article.articleId}`}>
+                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                    </Link>
+                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(article.articleId)} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
-                <Pagination />
+                <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
 
         </div>

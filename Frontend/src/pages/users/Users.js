@@ -7,7 +7,7 @@ import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
 import { API } from '../../env';
-import userVerification from '../../userVerification';
+import userVerification from '../../utils/userVerification';
 
 const Users = () => {
     const [query, setQuery] = useState('');
@@ -47,14 +47,10 @@ const Users = () => {
         })();
     }, [query, page]);
 
-    useEffect(() => {
-        //console.log(paginator);
-    }, [paginator]);
-
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
         setQuery(query);
-    };
+    }
 
     const handlePage = (page) => {
         setPage(page);
@@ -67,7 +63,7 @@ const Users = () => {
             // Call to the api to delete the record by id, modify the state
             console.log(`Registro con ID ${id} eliminado`);
         }
-    };
+    }
 
     return (
         <div className="users-container">

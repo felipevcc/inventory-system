@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './customers.css';
@@ -6,9 +6,16 @@ import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
-import userVerification from '../../userVerification';
+import userVerification from '../../utils/userVerification';
+import { API } from '../../env';
 
 const Customers = () => {
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+
+    const [paginator, setPaginator] = useState({});
+
     const navigate = useNavigate();
 
     // Permission validation
@@ -19,9 +26,32 @@ const Customers = () => {
         }
     }, [navigate]);
 
+    useEffect(() => {
+        const data = new FormData();
+        if (query.length > 0) {
+            data.append('searchCriteria', query);
+        }
+        data.append('page', page);
+        data.append('pageSize', pageSize);
+
+        const url = new URL(`${API}/api/v1/customer`);
+        url.search = new URLSearchParams(data).toString();
+        (async () => {
+            await fetch(url)
+                .then(response => response.json())
+                .then(data => setPaginator(data))
+                .catch(error => console.log(error))
+        })();
+    }, [query, page]);
+
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
-    };
+        setQuery(query);
+    }
+    
+    const handlePage = (page) => {
+        setPage(page);
+    }
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
@@ -30,7 +60,7 @@ const Customers = () => {
             // Call to the api to delete the record by id, modify the state
             console.log(`Registro con ID ${id} eliminado`);
         }
-    };
+    }
 
     return (
         <div className="customers-container">
@@ -49,10 +79,11 @@ const Customers = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>CÉDULA</th>
+                            <th>ID</th>
                             <th>NOMBRE</th>
                             <th>TELÉFONO</th>
                             <th>EMAIL</th>
+                            <th>CÉDULA</th>
                             <th>DIRECCIÓN</th>
                             <th>DEPARTAMENTO</th>
                             <th>CIUDAD</th>
@@ -60,55 +91,28 @@ const Customers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1092836746</td>
-                            <td>Martín Perea</td>
-                            <td>3147283498</td>
-                            <td>martinperea05@hotmail.com</td>
-                            <td>Carrera 80B #55-32</td>
-                            <td>Cundinamarca</td>
-                            <td>Bogotá</td>
-                            <td>
-                                <Link to={`/edit-customer/${1092836746}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1092836746)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1108923874</td>
-                            <td>Gustavo Rodriguez</td>
-                            <td>3208273464</td>
-                            <td>gustavorod@gmail.com</td>
-                            <td>Calle 13A #39-51</td>
-                            <td>Valle</td>
-                            <td>Cali</td>
-                            <td>
-                                <Link to={`/edit-customer/${1108923874}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1108923874)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1110368918</td>
-                            <td>David Villa</td>
-                            <td>3167623542</td>
-                            <td>davidvilla7@gmail.com</td>
-                            <td>Avenida 6N #24-38</td>
-                            <td>Antioquia</td>
-                            <td>Medellín</td>
-                            <td>
-                                <Link to={`/edit-customer/${1110368918}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1110368918)} />
-                            </td>
-                        </tr>
+                        {paginator.customers && paginator.customers.map(customer => (
+                            <tr key={customer.customerId}>
+                                <td>{customer.customerId}</td>
+                                <td>{customer.name}</td>
+                                <td>{customer.phoneNumber}</td>
+                                <td>{customer.email}</td>
+                                <td>{customer.document}</td>
+                                <td>{customer.address}</td>
+                                <td>{customer.state}</td>
+                                <td>{customer.city}</td>
+                                <td>
+                                    <Link to={`/edit-customer/${customer.customerId}`}>
+                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                    </Link>
+                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(customer.customerId)} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
-                <Pagination />
+                <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
 
         </div>

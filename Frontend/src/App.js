@@ -39,7 +39,7 @@ import Navbar from './components/navbar/Navbar';
 import ForgotLogin from './pages/login/forgot-login/ForgotLogin';
 import AccessValidation from './pages/login/forgot-login/AccessValidation';
 
-import userVerification from './userVerification';
+import userVerification from './utils/userVerification';
 
 function App() {
     return (
