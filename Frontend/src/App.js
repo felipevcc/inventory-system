@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';
@@ -39,136 +39,126 @@ import Navbar from './components/navbar/Navbar';
 import ForgotLogin from './pages/login/forgot-login/ForgotLogin';
 import AccessValidation from './pages/login/forgot-login/AccessValidation';
 
+import userVerification from './utils/userVerification';
+
 function App() {
-  return (
-    <Router>
-      <div className="app-container">
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-login" element={<ForgotLogin />} />
-          <Route path="/access-validation" element={<AccessValidation />} />
-          <Route path="/*" element={
-            <MainLayout />
-          } />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="app-container">
+                <Routes>
+                    <Route path="/" element={<Navigate to="/login" replace />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/forgot-login" element={<ForgotLogin />} />
+                    <Route path="/access-validation" element={<AccessValidation />} />
+                    <Route path="/*" element={
+                        <MainLayout />
+                    } />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 const MainLayout = () => {
-  let isAuthenticated = false;
-  let isAdmin = false;
-  let user = localStorage.getItem("user");
-  try {
-    user = JSON.parse(user);
-    if (user) {
-      isAuthenticated = true;
-      if (user.admin === true) {
-        isAdmin = true;
-      }
-    }
-  } catch (error) {
-    isAuthenticated = false;
-  }
-  return (
-    <>
-      <Sidebar />
-      <Navbar />
-      <div className="main-content">
-        <Routes>
-          <Route path="/home" element={
-            isAuthenticated ? <Home /> : <Navigate to="/login" />
-          } />
+    const navigate = useNavigate();
 
-          <Route path="/categories" element={
-            isAuthenticated ? <Categories /> : <Navigate to="/login" />
-          } />
-          <Route path="/new-category" element={
-            isAuthenticated ? <NewCategory /> : <Navigate to="/login" />
-          } />
-          <Route path="/edit-category/:id" element={
-            isAuthenticated ? <EditCategory /> : <Navigate to="/login" />
-          } />
+    // Permission validation
+    useEffect(() => {
+        if (!userVerification().isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        }
+    }, [navigate]);
 
-          <Route path="/items" element={
-            isAuthenticated ? <Items /> : <Navigate to="/login" />
-          } />
-          <Route path="/new-item" element={
-            isAuthenticated ? <NewItem /> : <Navigate to="/login" />
-          } />
-          <Route path="/edit-item/:id" element={
-            isAuthenticated ? <EditItem /> : <Navigate to="/login" />
-          } />
+    return (
+        <>
+            <Sidebar />
+            <Navbar />
+            <div className="main-content">
+                <Routes>
+                    <Route path="/home" element={
+                        <Home />
+                    } />
 
-          <Route path="/providers" element={
-            isAuthenticated ? <Providers /> : <Navigate to="/login" />
-          } />
-          <Route path="/new-provider" element={
-            isAuthenticated ? <NewProvider /> : <Navigate to="/login" />
-          } />
-          <Route path="/edit-provider/:id" element={
-            isAuthenticated ? <EditProvider /> : <Navigate to="/login" />
-          } />
+                    <Route path="/categories" element={
+                        <Categories />
+                    } />
+                    <Route path="/new-category" element={
+                        <NewCategory />
+                    } />
+                    <Route path="/edit-category/:id" element={
+                        <EditCategory />
+                    } />
 
-          <Route path="/purchases" element={
-            isAuthenticated ? <Purchases /> : <Navigate to="/login" />
-          } />
-          <Route path="/new-purchase" element={
-            isAuthenticated ? <NewPurchase /> : <Navigate to="/login" />
-          } />
-          <Route path="/edit-purchase/:id" element={
-            isAuthenticated ? <EditPurchase /> : <Navigate to="/login" />
-          } />
-          <Route path="/detail-purchase/:id" element={
-            isAuthenticated ? <DetailPurchase /> : <Navigate to="/login" />
-          } />
+                    <Route path="/items" element={
+                        <Items />
+                    } />
+                    <Route path="/new-item" element={
+                        <NewItem />
+                    } />
+                    <Route path="/edit-item/:id" element={
+                        <EditItem />
+                    } />
 
-          <Route path="/customers" element={
-            isAuthenticated ? <Customers /> : <Navigate to="/login" />
-          } />
-          <Route path="/new-customer" element={
-            isAuthenticated ? <NewCustomer /> : <Navigate to="/login" />
-          } />
-          <Route path="/edit-customer/:id" element={
-            isAuthenticated ? <EditCustomer /> : <Navigate to="/login" />
-          } />
+                    <Route path="/providers" element={
+                        <Providers />
+                    } />
+                    <Route path="/new-provider" element={
+                        <NewProvider />
+                    } />
+                    <Route path="/edit-provider/:id" element={
+                        <EditProvider />
+                    } />
 
-          <Route path="/sales" element={
-            isAuthenticated ? <Sales /> : <Navigate to="/login" />
-          } />
-          <Route path="/new-sale" element={
-            isAuthenticated ? <NewSale /> : <Navigate to="/login" />
-          } />
-          <Route path="/edit-sale/:id" element={
-            isAuthenticated ? <EditSale /> : <Navigate to="/login" />
-          } />
-          <Route path="/detail-sale/:id" element={
-            isAuthenticated ? <DetailSale /> : <Navigate to="/login" />
-          } />
+                    <Route path="/purchases" element={
+                        <Purchases />
+                    } />
+                    <Route path="/new-purchase" element={
+                        <NewPurchase />
+                    } />
+                    <Route path="/edit-purchase/:id" element={
+                        <EditPurchase />
+                    } />
+                    <Route path="/detail-purchase/:id" element={
+                        <DetailPurchase />
+                    } />
 
-          <Route path="/users" element={
-            isAuthenticated ? (
-              isAdmin ? <Users /> : <Navigate to="/home" />
-            ) : (
-              <Navigate to="/login" />
-            )
-          } />
-          <Route path="/new-user" element={
-            isAuthenticated ? (
-              isAdmin ? <NewUser /> : <Navigate to="/home" />
-            ) : (
-              <Navigate to="/login" />
-            )
-          } />
-          <Route path="/edit-user/:id" element={
-            isAuthenticated ? <EditUser /> : <Navigate to="/login" />
-          } />
-        </Routes>
-      </div>
-    </>
-  );
+                    <Route path="/customers" element={
+                        <Customers />
+                    } />
+                    <Route path="/new-customer" element={
+                        <NewCustomer />
+                    } />
+                    <Route path="/edit-customer/:id" element={
+                        <EditCustomer />
+                    } />
+
+                    <Route path="/sales" element={
+                        <Sales />
+                    } />
+                    <Route path="/new-sale" element={
+                        <NewSale />
+                    } />
+                    <Route path="/edit-sale/:id" element={
+                        <EditSale />
+                    } />
+                    <Route path="/detail-sale/:id" element={
+                        <DetailSale />
+                    } />
+
+                    <Route path="/users" element={
+                        <Users />
+                    } />
+                    <Route path="/new-user" element={
+                        <NewUser />
+                    } />
+                    <Route path="/edit-user/:id" element={
+                        <EditUser />
+                    } />
+                </Routes>
+            </div>
+        </>
+    );
 }
 
 export default App;

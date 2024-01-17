@@ -57,19 +57,19 @@ public class ArticleServiceImp implements ArticleService {
 
         if (providerId == null && (criteria == null || criteria.length() == 0)) {
             System.out.println("1");
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("articleId").descending());
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("articleId").descending());
             articlePage = articleRepository.findAll(pageable);
         } else if (providerId != null && (criteria == null || criteria.length() == 0)) {
             System.out.println("2");
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("article_id").descending());
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("article_id").descending());
             articlePage = articleRepository.findAllArticlesByProvider(providerId, pageable);
         } else if (providerId != null && criteria != null && criteria.length() > 0) {
             System.out.println("3");
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("article_id").descending());
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("article_id").descending());
             articlePage = articleRepository.findAllArticlesByProviderAndTerm(providerId, criteria, pageable);
         } else {
             System.out.println("4");
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("articleId").descending());
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("articleId").descending());
             articlePage = articleRepository.findAll(ArticleSpecifications.searchArticles(criteria), pageable);
         }
 
@@ -77,7 +77,7 @@ public class ArticleServiceImp implements ArticleService {
                 .map(article -> articleMapper.articleToDTO(article))
                 .collect(Collectors.toList());
 
-        pagedArticlesResponse.setPage(articlePage.getNumber());
+        pagedArticlesResponse.setPage(articlePage.getNumber() + 1);
         pagedArticlesResponse.setPageSize(articlePage.getSize());
         pagedArticlesResponse.setTotalRecords(articlePage.getTotalElements());
         pagedArticlesResponse.setTotalPages(articlePage.getTotalPages());

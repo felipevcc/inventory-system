@@ -10,7 +10,6 @@ import { API } from '../../env';
 const Login = () => {
 
     useEffect(() => {
-
         // Delete history in localStorage
         localStorage.clear();
 

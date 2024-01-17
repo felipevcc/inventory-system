@@ -1,16 +1,25 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import userVerification from '../../../utils/userVerification';
 
 const EditUser = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    // Permission validation
     useEffect(() => {
-        let user = localStorage.getItem("user");
+        const userVer = userVerification();
+
+        // Authentication verification
+        if (!userVer.isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        }
+
+        // Administrator role verification or same user updating himself
         let isAllowed = false;
         try {
-            user = JSON.parse(user);
-            if (user && (user.admin === true || id === user.id)) {
+            if (userVer.user && (userVer.user.admin === true || id === userVer.user.userId.toString())) {
                 isAllowed = true;
             }
         } catch (error) {

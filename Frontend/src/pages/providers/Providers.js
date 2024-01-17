@@ -1,17 +1,57 @@
-import React from 'react';
-//import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './providers.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
 import Pagination from '../../components/pagination/Pagination';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import userVerification from '../../utils/userVerification';
+import { API } from '../../env';
 
 const Providers = () => {
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
+    const pageSize = 5;
+
+    const [paginator, setPaginator] = useState({});
+
+    const navigate = useNavigate();
+
+    // Permission validation
+    useEffect(() => {
+        if (!userVerification().isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        }
+    }, [navigate]);
+
+    useEffect(() => {
+        const data = new FormData();
+        if (query.length > 0) {
+            data.append('searchCriteria', query);
+        }
+        data.append('page', page);
+        data.append('pageSize', pageSize);
+
+        const url = new URL(`${API}/api/v1/provider`);
+        url.search = new URLSearchParams(data).toString();
+        (async () => {
+            await fetch(url)
+                .then(response => response.json())
+                .then(data => setPaginator(data))
+                .catch(error => console.log(error))
+        })();
+    }, [query, page]);
+
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
-    };
+        setQuery(query);
+    }
+
+    const handlePage = (page) => {
+        setPage(page);
+    }
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
@@ -20,7 +60,7 @@ const Providers = () => {
             // Call to the api to delete the record by id, modify the state
             console.log(`Registro con ID ${id} eliminado`);
         }
-    };
+    }
 
     return (
         <div className="providers-container">
@@ -47,46 +87,24 @@ const Providers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lenimp</td>
-                            <td>+57 76712222 </td>
-                            <td>servicioalcliente@lenimp.com</td>
-                            <td>
-                                <Link to={`/edit-provider/${1}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(1)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Propartes</td>
-                            <td>3187522969</td>
-                            <td>serviciocliente.bicicletas@propartes.com</td>
-                            <td>
-                                <Link to={`/edit-provider/${2}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(2)} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Esciclismo</td>
-                            <td>3206386489</td>
-                            <td>info@esciclismo.com</td>
-                            <td>
-                                <Link to={`/edit-provider/${3}`}>
-                                    <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                </Link>
-                                <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(3)} />
-                            </td>
-                        </tr>
+                        {paginator.providers && paginator.providers.map(provider => (
+                            <tr key={provider.providerId}>
+                                <td>{provider.providerId}</td>
+                                <td>{provider.name}</td>
+                                <td>{provider.phoneNumber}</td>
+                                <td>{provider.email}</td>
+                                <td>
+                                    <Link to={`/edit-provider/${provider.providerId}`}>
+                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                    </Link>
+                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(provider.providerId)} />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
-                <Pagination />
+                <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
 
         </div>
