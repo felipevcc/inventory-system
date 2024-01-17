@@ -1,13 +1,10 @@
 package com.inventorysystem.Backend.service;
 
-import com.inventorysystem.Backend.dto.user.UserCreationDTO;
-import com.inventorysystem.Backend.dto.user.UserDTO;
-import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.user.UsersPageDTO;
+import com.inventorysystem.Backend.dto.user.*;
 
 public interface UserService {
 
-    UserDTO userLogin(String userEmail, String userPassword);
+    UserDTO userLogin(LoginDTO loginData);
 
     UserDTO getUserById(Long id);
 

@@ -5,13 +5,13 @@ import { faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-i
 import avatar from '../../assets/avatar.svg';
 import './login.css';
 import LoginLayout from './Layout';
+import { API } from '../../env';
 
 const Login = () => {
 
     useEffect(() => {
-
         // Delete history in localStorage
-        window.localStorage.clear();
+        localStorage.clear();
 
         // Management of the focus on the inputs
         const inputs = document.querySelectorAll('.input');
@@ -76,26 +76,44 @@ const Login = () => {
 
     // Manage system login
     const navigate = useNavigate();
-    function handleFormSubmit(event) {
+    async function handleFormSubmit(event) {
         event.preventDefault();
-        // Check login
-        const username_db = "felipevillamizarc@gmail.com";
-        const password_db = "1234";
+        try {
+            // Check login
+            const loginData = {
+                email: username,
+                password: password
+            }
+            const response = await fetch(`${API}/api/v1/user/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData),
+            });
 
-        if (username === username_db && password === password_db) {
-            // Delete history in localStorage
-            window.localStorage.clear();
-            // token
-            navigate('/home');
-            return;
+            if (response.ok) {
+                // Delete history in localStorage
+                localStorage.clear();
+                // token
+                const user = await response.json();
+                localStorage.setItem('user', JSON.stringify(user));
+                navigate('/home');
+                return;
+            }
+            // Clear username and password fields
+            setUsername('');
+            setPassword('');
+
+            navigate('/');
+            alert("Las credenciales no coinciden");
+        } catch (error) {
+            console.log(error);
+            // Clear username and password fields
+            setUsername('');
+            setPassword('');
+            navigate('/');
         }
-        // Clear username and password fields
-        setUsername('');
-        setPassword('');
-
-        navigate('/');
-
-        alert("Las credenciales no coinciden");
     }
 
     return (
@@ -129,7 +147,7 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
-                    <Link to="/forgot-login">¿Olvidaste tu contraseña?</Link>
+                    {/* <Link to="/forgot-login">¿Olvidaste tu contraseña?</Link> */}
                     <button type="submit" className="btn">
                         Entrar
                     </button>

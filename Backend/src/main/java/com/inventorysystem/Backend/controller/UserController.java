@@ -1,9 +1,6 @@
 package com.inventorysystem.Backend.controller;
 
-import com.inventorysystem.Backend.dto.user.UserCreationDTO;
-import com.inventorysystem.Backend.dto.user.UserDTO;
-import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.user.UsersPageDTO;
+import com.inventorysystem.Backend.dto.user.*;
 import com.inventorysystem.Backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -24,11 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    ResponseEntity<UserDTO> userLogin(
-            @RequestParam(name = "email") String email,
-            @RequestParam(name = "password") String password
-    ) {
-        UserDTO user = userService.userLogin(email, password);
+    ResponseEntity<UserDTO> userLogin(@RequestBody LoginDTO loginData) {
+        UserDTO user = userService.userLogin(loginData);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

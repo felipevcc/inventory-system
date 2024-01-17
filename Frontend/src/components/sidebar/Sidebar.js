@@ -7,6 +7,8 @@ import './sidebar.css';
 
 const Sidebar = () => {
 
+    const [user, setUser] = useState(null);
+
     // Minimize or show sidebar
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const toggleSidebar = () => {
@@ -19,8 +21,13 @@ const Sidebar = () => {
     const handleSelectedView = (view) => {
         setSelectedView(view);
     };
+
     useEffect(() => {
-        localStorage.setItem('selectedView', selectedView); // Guardar la opción seleccionada en el almacenamiento local
+        setUser(JSON.parse(localStorage.getItem('user')));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('selectedView', selectedView); // Save the selected option to local storage
     }, [selectedView]);
 
     return (
@@ -89,16 +96,18 @@ const Sidebar = () => {
                     </ul>
                 </div>
                 {/* Only if the user is admin */}
-                <div className="bottom-content">
-                    <ul>
-                        <li className={`${selectedView === "users" ? "selected" : ""}`}>
-                            <Link to="/users" onClick={() => handleSelectedView("users")}>
-                                <FontAwesomeIcon icon={faUsersGear} className="icon" />
-                                <span className="text nav-text">Usuarios</span>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
+                { user && user.admin === true && (
+                    <div className="bottom-content">
+                        <ul>
+                            <li className={`${selectedView === "users" ? "selected" : ""}`}>
+                                <Link to="/users" onClick={() => handleSelectedView("users")}>
+                                    <FontAwesomeIcon icon={faUsersGear} className="icon" />
+                                    <span className="text nav-text">Usuarios</span>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                )}
             </div>
         </nav>
     );

@@ -1,9 +1,6 @@
 package com.inventorysystem.Backend.service.imp;
 
-import com.inventorysystem.Backend.dto.user.UserCreationDTO;
-import com.inventorysystem.Backend.dto.user.UserDTO;
-import com.inventorysystem.Backend.dto.user.UserUpdateDTO;
-import com.inventorysystem.Backend.dto.user.UsersPageDTO;
+import com.inventorysystem.Backend.dto.user.*;
 import com.inventorysystem.Backend.mapper.UserMapper;
 import com.inventorysystem.Backend.model.User;
 import com.inventorysystem.Backend.repository.UserRepository;
@@ -34,17 +31,15 @@ public class UserServiceImp implements UserService {
     BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public UserDTO userLogin(String userEmail, String userPassword) {
-        User user = userRepository.findByEmail(userEmail);
-
+    public UserDTO userLogin(LoginDTO loginData) {
+        User user = userRepository.findByEmail(loginData.getEmail());
         if (user == null) {
             return null;
         }
-        Boolean successfulLogin = passwordEncoder.matches(userPassword, user.getPasswordHash());
+        Boolean successfulLogin = passwordEncoder.matches(loginData.getPassword(), user.getPasswordHash());
         if (!successfulLogin) {
             return null;
         }
-
         return userMapper.userToDTO(user);
     }
 
@@ -55,7 +50,7 @@ public class UserServiceImp implements UserService {
         Long totalRecords = userRepository.countUsers();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
-        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("userId").descending());
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("userId").descending());
 
         Page<User> userPage;
 
@@ -69,7 +64,7 @@ public class UserServiceImp implements UserService {
                 .map(user -> userMapper.userToDTO(user))
                 .collect(Collectors.toList());
 
-        pagedUsersResponse.setPage(userPage.getNumber());
+        pagedUsersResponse.setPage(userPage.getNumber() + 1);
         pagedUsersResponse.setPageSize(userPage.getSize());
         pagedUsersResponse.setTotalRecords(userPage.getTotalElements());
         pagedUsersResponse.setTotalPages(userPage.getTotalPages());

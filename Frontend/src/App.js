@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';
@@ -39,64 +39,126 @@ import Navbar from './components/navbar/Navbar';
 import ForgotLogin from './pages/login/forgot-login/ForgotLogin';
 import AccessValidation from './pages/login/forgot-login/AccessValidation';
 
+import userVerification from './utils/userVerification';
+
 function App() {
-  return (
-    <Router>
-      <div className="app-container">
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-login" element={<ForgotLogin />} />
-          <Route path="/access-validation" element={<AccessValidation />} />
-          <Route path="/*" element={<MainLayout />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="app-container">
+                <Routes>
+                    <Route path="/" element={<Navigate to="/login" replace />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/forgot-login" element={<ForgotLogin />} />
+                    <Route path="/access-validation" element={<AccessValidation />} />
+                    <Route path="/*" element={
+                        <MainLayout />
+                    } />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 const MainLayout = () => {
-  return (
-    <>
-      <Sidebar />
-      <Navbar />
-      <div className="main-content">
-        <Routes>
-          <Route path="/home" element={<Home />} />
+    const navigate = useNavigate();
 
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/new-category" element={<NewCategory />} />
-          <Route path="/edit-category/:id" element={<EditCategory />} />
+    // Permission validation
+    useEffect(() => {
+        if (!userVerification().isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        }
+    }, [navigate]);
 
-          <Route path="/items" element={<Items />} />
-          <Route path="/new-item" element={<NewItem />} />
-          <Route path="/edit-item/:id" element={<EditItem />} />
+    return (
+        <>
+            <Sidebar />
+            <Navbar />
+            <div className="main-content">
+                <Routes>
+                    <Route path="/home" element={
+                        <Home />
+                    } />
 
-          <Route path="/providers" element={<Providers />} />
-          <Route path="/new-provider" element={<NewProvider />} />
-          <Route path="/edit-provider/:id" element={<EditProvider />} />
+                    <Route path="/categories" element={
+                        <Categories />
+                    } />
+                    <Route path="/new-category" element={
+                        <NewCategory />
+                    } />
+                    <Route path="/edit-category/:id" element={
+                        <EditCategory />
+                    } />
 
-          <Route path="/purchases" element={<Purchases />} />
-          <Route path="/new-purchase" element={<NewPurchase />} />
-          <Route path="/edit-purchase/:id" element={<EditPurchase />} />
-          <Route path="/detail-purchase/:id" element={<DetailPurchase />} />
+                    <Route path="/items" element={
+                        <Items />
+                    } />
+                    <Route path="/new-item" element={
+                        <NewItem />
+                    } />
+                    <Route path="/edit-item/:id" element={
+                        <EditItem />
+                    } />
 
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/new-customer" element={<NewCustomer />} />
-          <Route path="/edit-customer/:id" element={<EditCustomer />} />
+                    <Route path="/providers" element={
+                        <Providers />
+                    } />
+                    <Route path="/new-provider" element={
+                        <NewProvider />
+                    } />
+                    <Route path="/edit-provider/:id" element={
+                        <EditProvider />
+                    } />
 
-          <Route path="/sales" element={<Sales />} />
-          <Route path="/new-sale" element={<NewSale />} />
-          <Route path="/edit-sale/:id" element={<EditSale />} />
-          <Route path="/detail-sale/:id" element={<DetailSale />} />
+                    <Route path="/purchases" element={
+                        <Purchases />
+                    } />
+                    <Route path="/new-purchase" element={
+                        <NewPurchase />
+                    } />
+                    <Route path="/edit-purchase/:id" element={
+                        <EditPurchase />
+                    } />
+                    <Route path="/detail-purchase/:id" element={
+                        <DetailPurchase />
+                    } />
 
-          <Route path="/users" element={<Users />} />
-          <Route path="/new-user" element={<NewUser />} />
-          <Route path="/edit-user/:id" element={<EditUser />} />
-        </Routes>
-      </div>
-    </>
-  );
+                    <Route path="/customers" element={
+                        <Customers />
+                    } />
+                    <Route path="/new-customer" element={
+                        <NewCustomer />
+                    } />
+                    <Route path="/edit-customer/:id" element={
+                        <EditCustomer />
+                    } />
+
+                    <Route path="/sales" element={
+                        <Sales />
+                    } />
+                    <Route path="/new-sale" element={
+                        <NewSale />
+                    } />
+                    <Route path="/edit-sale/:id" element={
+                        <EditSale />
+                    } />
+                    <Route path="/detail-sale/:id" element={
+                        <DetailSale />
+                    } />
+
+                    <Route path="/users" element={
+                        <Users />
+                    } />
+                    <Route path="/new-user" element={
+                        <NewUser />
+                    } />
+                    <Route path="/edit-user/:id" element={
+                        <EditUser />
+                    } />
+                </Routes>
+            </div>
+        </>
+    );
 }
 
 export default App;

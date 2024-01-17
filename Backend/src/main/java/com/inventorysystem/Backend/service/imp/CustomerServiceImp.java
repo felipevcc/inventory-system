@@ -53,7 +53,7 @@ public class CustomerServiceImp implements CustomerService {
         Long totalRecords = customerRepository.countCustomers();
         Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
 
-        Pageable pageable = PageRequest.of(page, pageSize, Sort.by("customerId").descending());
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("customerId").descending());
 
         Page<Customer> customerPage;
 
@@ -67,7 +67,7 @@ public class CustomerServiceImp implements CustomerService {
                 .map(customer -> customerMapper.customerToDTO(customer))
                 .collect(Collectors.toList());
 
-        pagedCustomersResponse.setPage(customerPage.getNumber());
+        pagedCustomersResponse.setPage(customerPage.getNumber() + 1);
         pagedCustomersResponse.setPageSize(customerPage.getSize());
         pagedCustomersResponse.setTotalRecords(customerPage.getTotalElements());
         pagedCustomersResponse.setTotalPages(customerPage.getTotalPages());

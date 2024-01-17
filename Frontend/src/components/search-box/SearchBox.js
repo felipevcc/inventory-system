@@ -4,7 +4,6 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './searchbox.css';
 
 const SearchBox = ({ onSearch }) => {
-
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleInputChange = (event) => {

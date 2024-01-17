@@ -94,10 +94,10 @@ public class PurchaseServiceImp implements PurchaseService {
         Page<Purchase> purchasePage;
 
         if (criteria == null || criteria.length() == 0) {
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("purchaseId").descending());
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("purchaseId").descending());
             purchasePage = purchaseRepository.findAll(pageable);
         } else {
-            Pageable pageable = PageRequest.of(page, pageSize, Sort.by("purchase_id").descending()); // purchase_id because it is a native query
+            Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("purchase_id").descending()); // purchase_id because it is a native query
             purchasePage = purchaseRepository.findAllPurchases(criteria, pageable);
         }
 
@@ -105,7 +105,7 @@ public class PurchaseServiceImp implements PurchaseService {
                 .map(purchase -> purchaseMapper.purchaseToDTO(purchase))
                 .collect(Collectors.toList());
 
-        pagedPurchasesResponse.setPage(purchasePage.getNumber());
+        pagedPurchasesResponse.setPage(purchasePage.getNumber() + 1);
         pagedPurchasesResponse.setPageSize(purchasePage.getSize());
         pagedPurchasesResponse.setTotalRecords(purchasePage.getTotalElements());
         pagedPurchasesResponse.setTotalPages(purchasePage.getTotalPages());

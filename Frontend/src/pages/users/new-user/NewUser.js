@@ -1,7 +1,20 @@
-import React from 'react';
-//import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import userVerification from '../../../utils/userVerification';
 
 const NewUser = () => {
+    const navigate = useNavigate();
+
+    // Permission validation
+    useEffect(() => {
+        const userVer = userVerification();
+        if (!userVer.isAuthenticated) {
+            localStorage.clear();
+            navigate('/login');
+        } else if (!userVer.isAdmin) {
+            navigate('/home');
+        }
+    }, [navigate]);
 
     return (
         <div className="newUser-container">
@@ -39,7 +52,7 @@ const NewUser = () => {
                             <label htmlFor="admin">Administrador</label>
                             <select className="input" id="admin" required>
                                 <option value="true">Si</option>
-                                <option selected value="false">No</option>
+                                <option selected defaultValue="false">No</option>
                             </select>
                         </div>
 
