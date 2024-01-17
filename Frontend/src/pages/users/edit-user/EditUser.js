@@ -6,14 +6,15 @@ const EditUser = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    // Permission validation
     useEffect(() => {
+        // Permission validation
         const userVer = userVerification();
 
         // Authentication verification
         if (!userVer.isAuthenticated) {
             localStorage.clear();
             navigate('/login');
+            return;
         }
 
         // Administrator role verification or same user updating himself
@@ -27,6 +28,7 @@ const EditUser = () => {
         }
         if (!isAllowed) {
             navigate('/home');
+            return;
         }
     }, [id, navigate]);
 

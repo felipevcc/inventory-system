@@ -19,15 +19,15 @@ const Sales = () => {
 
     const navigate = useNavigate();
 
-    // Permission validation
     useEffect(() => {
+        // Permission validation
         if (!userVerification().isAuthenticated) {
             localStorage.clear();
             navigate('/login');
+            return;
         }
-    }, [navigate]);
 
-    useEffect(() => {
+        // Query paginated data
         const data = new FormData();
         if (query.length > 0) {
             data.append('searchCriteria', query);
@@ -43,7 +43,7 @@ const Sales = () => {
                 .then(data => setPaginator(data))
                 .catch(error => console.log(error))
         })();
-    }, [query, page]);
+    }, [navigate, query, page]);
 
     const handleSearch = (query) => {
         console.log("Busqueda:", query);
