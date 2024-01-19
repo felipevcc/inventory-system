@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../styles/new-form.css'
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
+import { API } from '../../../env';
+import SearchSelect from '../../../components/search-select/SearchSelect';
 
 const NewItem = () => {
     const navigate = useNavigate();
@@ -14,6 +16,58 @@ const NewItem = () => {
             return;
         }
     }, [navigate]);
+
+    const [formData, setFormData] = useState({
+        name: '',
+        brand: '',
+        stock: 0,
+        purchasePrice: 0,
+        salePrice: 0,
+        weight: '',
+        providerId: 0,
+        categoryId: 0
+    });
+
+    const handleChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.id]: event.target.value
+        });
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`${API}/api/v1/article`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                alert('Artículo creado exitosamente');
+                navigate('/items');
+                return;
+            }
+            alert("El artículo no pudo ser creado, verifique los datos");
+        } catch (error) {
+            console.log(error);
+            alert("Error al crear el artículo");
+        }
+    }
+
+    const [selectedProvider, setSelectedProvider] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const handleProviderSelect = (provider) => {
+        setSelectedProvider(provider);
+    };
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+    };
 
     return (
         <div className="newItem-container">
@@ -53,6 +107,20 @@ const NewItem = () => {
                             </div>
                         </div>
 
+                        <SearchSelect
+                            label="Proveedor"
+                            placeholder="Buscar proveedor..."
+                            onSelected={handleProviderSelect}
+                            apiUrl={`${API}/api/v1/provider`}
+                            optionsAttr="providers"
+                        />
+                        <SearchSelect
+                            label="Categoría"
+                            placeholder="Buscar categoría..."
+                            onSelected={handleCategorySelect}
+                            apiUrl={`${API}/api/v1/category`}
+                            optionsAttr="categories"
+                        />
                         <div className="form-item">
                             <label htmlFor="provider">Proveedor</label>
                             <select className="input" id="provider" required>
