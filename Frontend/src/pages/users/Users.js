@@ -12,7 +12,7 @@ import userVerification from '../../utils/userVerification';
 const Users = () => {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
-    const pageSize = 1;
+    const pageSize = 5;
 
     const [paginator, setPaginator] = useState({});
 

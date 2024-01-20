@@ -56,19 +56,15 @@ public class ArticleServiceImp implements ArticleService {
         Page<Article> articlePage;
 
         if (providerId == null && (criteria == null || criteria.length() == 0)) {
-            System.out.println("1");
             Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("articleId").descending());
             articlePage = articleRepository.findAll(pageable);
         } else if (providerId != null && (criteria == null || criteria.length() == 0)) {
-            System.out.println("2");
             Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("article_id").descending());
             articlePage = articleRepository.findAllArticlesByProvider(providerId, pageable);
         } else if (providerId != null && criteria != null && criteria.length() > 0) {
-            System.out.println("3");
             Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("article_id").descending());
             articlePage = articleRepository.findAllArticlesByProviderAndTerm(providerId, criteria, pageable);
         } else {
-            System.out.println("4");
             Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("articleId").descending());
             articlePage = articleRepository.findAll(ArticleSpecifications.searchArticles(criteria), pageable);
         }
