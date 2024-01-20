@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
-import MyCombobox from '../../../components/combobox/Combobox.js';
 
 const NewItem = () => {
     const navigate = useNavigate();
@@ -63,6 +62,7 @@ const NewItem = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleProviderSelect = (provider) => {
+        console.log(provider);
         setSelectedProvider(provider);
     };
 
@@ -114,34 +114,17 @@ const NewItem = () => {
                             onSelected={handleProviderSelect}
                             apiUrl={`${API}/api/v1/provider`}
                             optionsAttr="providers"
+                            isRequired={true}
                         />
+
                         <SearchSelect
                             label="Categoría"
                             placeholder="Buscar categoría..."
                             onSelected={handleCategorySelect}
                             apiUrl={`${API}/api/v1/category`}
                             optionsAttr="categories"
+                            isRequired={true}
                         />
-                        <MyCombobox />
-                        <div className="form-item">
-                            <label htmlFor="provider">Proveedor</label>
-                            <select className="input" id="provider" required>
-                                <option selected value="" disabled>Selecciona una opción</option>
-                                <option value="1">Lenimp</option>
-                                <option value="2">Propartes</option>
-                                <option value="3">Esciclismo</option>
-                            </select>
-                        </div>
-
-                        <div className="form-item">
-                            <label htmlFor="category">Categoría</label>
-                            <select className="input" id="category" required>
-                                <option selected value="" disabled>Selecciona una opción</option>
-                                <option value="1">Frenos</option>
-                                <option value="2">Llantas</option>
-                                <option value="3">Pachas</option>
-                            </select>
-                        </div>
 
                     </div>
 
