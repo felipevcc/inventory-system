@@ -41,7 +41,7 @@ const NewCategory = () => {
 
             if (response.ok) {
                 alert('Categoría creada exitosamente');
-                navigate('/users');
+                navigate('/categories');
                 return;
             }
             alert("La categoría no pudo ser creada, verifique los datos");
