@@ -65,43 +65,99 @@ const NewCustomer = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxLength="45" required value={formData.name} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="text"
+                                id="name"
+                                maxLength="45"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
-                            <label htmlFor="id">Cédula</label>
-                            <input className="input" type="number" id="document" required value={formData.document} onChange={handleChange} />
+                            <label htmlFor="document">Cédula</label>
+                            <input
+                                className="input"
+                                type="number"
+                                id="document"
+                                maxLength="45"
+                                value={formData.document}
+                                onChange={handleChange}
+                                required 
+                            />
                         </div>
 
                         <div className="form-item">
-                            <label htmlFor="tel">Teléfono</label>
-                            <input className="input" type="text" id="phoneNumber" maxLength="20" required value={formData.phoneNumber} onChange={handleChange} />
+                            <label htmlFor="phoneNumber">Teléfono</label>
+                            <input
+                                className="input"
+                                type="text"
+                                id="phoneNumber"
+                                maxLength="20"
+                                value={formData.phoneNumber}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="email">Correo</label>
-                            <input className="input" type="email" id="email" maxLength="100" required value={formData.email} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="email"
+                                id="email"
+                                maxLength="100"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="two-together">
                             <div className="form-item">
                                 <label htmlFor="state">Departamento</label>
-                                <input className="input" type="text" id="state" maxLength="45" required value={formData.state} onChange={handleChange} />
+                                <input
+                                    className="input"
+                                    type="text"
+                                    id="state"
+                                    maxLength="45"
+                                    value={formData.state}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="city">Ciudad</label>
-                                <input className="input" type="text" id="city" maxLength="45" required value={formData.city} onChange={handleChange} />
+                                <input
+                                    className="input"
+                                    type="text"
+                                    id="city"
+                                    maxLength="45"
+                                    value={formData.city}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="address">Dirección</label>
-                            <input className="input" type="text" id="address" maxLength="100" required value={formData.address} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="text"
+                                id="address"
+                                maxLength="100"
+                                value={formData.address}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
 
                     <div className="button-container">
-                        <button type="submit" className="btn">
+                        <button className="btn" type="submit">
                             Crear
                         </button>
                     </div>

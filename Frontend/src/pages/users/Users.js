@@ -101,7 +101,7 @@ const Users = () => {
                                 <td>{user.username}</td>
                                 <td>{user.phoneNumber}</td>
                                 <td>{user.email}</td>
-                                <td>{user.admin ? 'Si' : 'No'}</td>
+                                <td>{user.admin ? 'Sí' : 'No'}</td>
                                 <td>
                                     <Link to={`/edit-user/${user.userId}`}>
                                         <FontAwesomeIcon icon={faPen} className="pen-icon" />

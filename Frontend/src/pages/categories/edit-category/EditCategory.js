@@ -71,12 +71,21 @@ const EditCategory = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className='input' type="text" id="name" maxLength="45" required value={formData.name} onChange={handleChange} />
+                            <input
+                                className='input'
+                                type="text"
+                                id="name"
+                                maxLength="45"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
+
                     <div className="button-container">
-                        <button type="submit" className='btn'>
-                            Editar
+                        <button className="btn" type="submit">
+                            Actualizar
                         </button>
                     </div>
                 </form>
