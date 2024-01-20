@@ -58,53 +58,55 @@ const NewItem = () => {
         }
     }
 
-    const [selectedProvider, setSelectedProvider] = useState(null);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
     const handleProviderSelect = (provider) => {
-        console.log(provider);
-        setSelectedProvider(provider);
-    };
+        setFormData({
+            ...formData,
+            providerId: provider.providerId
+        });
+    }
 
     const handleCategorySelect = (category) => {
-        setSelectedCategory(category);
-    };
+        setFormData({
+            ...formData,
+            categoryId: category.categoryId
+        });
+    }
 
     return (
         <div className="newItem-container">
             <div className="text">Nuevo Artículo</div>
             <div className="form-container">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxLength="45" required />
+                            <input className="input" type="text" id="name" maxLength="45" required value={formData.name} onChange={handleChange} />
                         </div>
 
                         <div className="two-together">
                             <div className="form-item">
                                 <label htmlFor="stock">Stock</label>
-                                <input className="input" type="number" min="0" id="stock" required />
+                                <input className="input" type="number" min="0" id="stock" required value={formData.stock} onChange={handleChange} />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="weight">Peso</label>
-                                <input className="input" type="text" id="weight" maxLength="15" required />
+                                <input className="input" type="text" id="weight" maxLength="15" required value={formData.weight} onChange={handleChange} />
                             </div>
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="brand">Marca</label>
-                            <input className="input" type="text" id="brand" maxLength="45" required />
+                            <input className="input" type="text" id="brand" maxLength="45" required value={formData.brand} onChange={handleChange} />
                         </div>
 
                         <div className="two-together">
                             <div className="form-item">
                                 <label htmlFor="purchasePrice">Precio compra</label>
-                                <input className="input" type="number" id="purchasePrice" required />
+                                <input className="input" type="number" id="purchasePrice" required value={formData.purchasePrice} onChange={handleChange} />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="salePrice">Precio venta</label>
-                                <input className="input" type="number" id="salePrice" required />
+                                <input className="input" type="number" id="salePrice" required value={formData.salePrice} onChange={handleChange} />
                             </div>
                         </div>
 

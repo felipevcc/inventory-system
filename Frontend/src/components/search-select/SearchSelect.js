@@ -30,11 +30,12 @@ const SearchSelect = ({ label, placeholder, onSelected, apiUrl, optionsAttr, isR
         setSearchQuery(event.target.value);
     }
 
-    useEffect(() => {
-        if (selectedOption != null) {
-            onSelected(selectedOption);
+    const handleSelectChange = (option) => {
+        if (option) {
+            setSelectedOption(option);
+            onSelected(option);
         }
-    }, [selectedOption, onSelected]);
+    }
 
     const getIdKey = (option) => {
         const idKey = Object.keys(option).find(key => key.endsWith('Id'));
@@ -44,7 +45,7 @@ const SearchSelect = ({ label, placeholder, onSelected, apiUrl, optionsAttr, isR
     return (
         <div className="form-item search-select-container relative mt-1 w-full max-h-72 custom-max-content-height">
             <label>{label}</label>
-            <Combobox value={selectedOption} onChange={setSelectedOption}>
+            <Combobox value={selectedOption} onChange={(option) => option && handleSelectChange(option)}>
                 <div className="search-select-inputs relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm max-h-60">
                     <Combobox.Input
                         className="input w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
