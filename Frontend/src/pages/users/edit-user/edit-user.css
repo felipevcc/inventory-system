@@ -1,0 +1,72 @@
+.editUser-container {
+    position: relative;
+}
+
+.editUser-container .editing-options {
+    display: flex;
+    justify-content: center;
+}
+
+.editUser-container .editing-options .option {
+    background-color: var(--primary-color);
+    color: white;
+    border: 3px solid var(--primary-color);
+    padding: 3px;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: 280px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    box-shadow: 0px 0px 30px rgb(100, 100, 100);
+    margin: 30px;
+}
+
+.editing-options .option .text {
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-left: -40px;
+    margin-right: -40px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.editing-options .option:hover {
+    color: #fff;
+    border: 3px solid var(--sidebar-color);
+    transition: all 0.5s ease;
+}
+
+.editing-options .option:hover .text {
+    font-size: 1.3em;
+    transition: all 0.5s ease;
+}
+
+.editing-options .option::after {
+    content: "";
+    background-color: #ee7355;
+    position: absolute;
+    z-index: -1;
+    padding: 16px 20px;
+    display: block;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-35deg) scale(0, 1);
+    transition: all 0.5s ease;
+}
+
+.editing-options .option:hover::after {
+    transition: all 0.5s ease-out;
+    transform: skewX(-25deg) scale(1, 1);
+}

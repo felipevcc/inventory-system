@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
+import '../../../styles/new-edit-form.css'
 
 const EditProvider = () => {
     const { id } = useParams();

@@ -1,30 +1,63 @@
 import React, { useEffect, useState } from 'react';
-import '../../../styles/new-edit-form.css'
-import { useNavigate } from 'react-router-dom';
-import userVerification from '../../../utils/userVerification';
-import { API } from '../../../env';
+import { useParams, useNavigate } from 'react-router-dom';
+import userVerification from '../../../../utils/userVerification';
+import { API } from '../../../../env';
+import '../../../../styles/new-edit-form.css'
 
-const NewCustomer = () => {
+const EditUserData = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        name: '',
+        username: '',
+        phoneNumber: '',
+        email: '',
+        admin: false,
+        sessionUserId: 0
+    });
 
     useEffect(() => {
         // Permission validation
-        if (!userVerification().isAuthenticated) {
+        const userVer = userVerification();
+
+        // Authentication verification
+        if (!userVer.isAuthenticated) {
             localStorage.clear();
             navigate('/login');
             return;
         }
-    }, [navigate]);
 
-    const [formData, setFormData] = useState({
-        name: '',
-        phoneNumber: '',
-        email: '',
-        document: '',
-        address: '',
-        state: '',
-        city: ''
-    });
+        // Administrator role verification or same user updating himself
+        let isAllowed = false;
+        try {
+            if (userVer.user && (userVer.user.admin === true || id === userVer.user.userId.toString())) {
+                isAllowed = true;
+            }
+        } catch (error) {
+            isAllowed = false;
+        }
+        if (!isAllowed) {
+            navigate('/home');
+            return;
+        }
+
+        // Query data
+        (async () => {
+            const url = new URL(`${API}/api/v1/user/${id}`);
+            await fetch(url)
+                .then(response => response.json())
+                .then(data => setFormData({
+                    name: data.name,
+                    username: data.username,
+                    phoneNumber: data.phoneNumber,
+                    email: data.email,
+                    admin: data.admin,
+                    sessionUserId: userVer.user.userId
+                }))
+                .catch(error => console.log(error))
+        })();
+    }, [id, navigate]);
 
     const handleChange = (event) => {
         setFormData({
@@ -36,8 +69,8 @@ const NewCustomer = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`${API}/api/v1/customer`, {
-                method: 'POST',
+            const response = await fetch(`${API}/api/v1/user/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -45,21 +78,21 @@ const NewCustomer = () => {
             });
 
             if (response.ok) {
-                alert('Cliente creado exitosamente');
-                navigate('/customers');
+                alert('Usuario actualizado exitosamente');
+                navigate(`/edit-user/${id}`);
                 return;
             }
-            alert("El cliente no pudo ser creado, verifique los datos");
+            alert("El usuario no pudo ser actualizado, verifique los datos");
         } catch (error) {
             console.log(error);
-            alert("Error al crear el cliente");
+            alert("Error al actualizar el usuario");
         }
     }
 
     return (
-        <div className="newCustomer-container">
+        <div className="editUserData-container">
 
-            <div className="text">Nuevo Cliente</div>
+            <div className="text">Editar Usuario</div>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <div className="grid-form">
@@ -77,15 +110,15 @@ const NewCustomer = () => {
                         </div>
 
                         <div className="form-item">
-                            <label htmlFor="document">Cédula</label>
+                            <label htmlFor="username">Usuario</label>
                             <input
                                 className="input"
-                                type="number"
-                                id="document"
-                                maxLength="45"
-                                value={formData.document}
+                                type="text"
+                                id="username"
+                                maxLength="20"
+                                value={formData.username}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                         </div>
 
@@ -115,50 +148,26 @@ const NewCustomer = () => {
                             />
                         </div>
 
-                        <div className="two-together">
+                        {userVerification().isAdmin && (
                             <div className="form-item">
-                                <label htmlFor="state">Departamento</label>
-                                <input
+                                <label htmlFor="admin">Administrador</label>
+                                <select
                                     className="input"
-                                    type="text"
-                                    id="state"
-                                    maxLength="45"
-                                    value={formData.state}
+                                    id="admin"
+                                    value={formData.admin}
                                     onChange={handleChange}
                                     required
-                                />
+                                >
+                                    <option value={true}>Sí</option>
+                                    <option value={false}>No</option>
+                                </select>
                             </div>
-                            <div className="form-item">
-                                <label htmlFor="city">Ciudad</label>
-                                <input
-                                    className="input"
-                                    type="text"
-                                    id="city"
-                                    maxLength="45"
-                                    value={formData.city}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-item">
-                            <label htmlFor="address">Dirección</label>
-                            <input
-                                className="input"
-                                type="text"
-                                id="address"
-                                maxLength="100"
-                                value={formData.address}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                        )}
                     </div>
 
                     <div className="button-container">
                         <button className="btn" type="submit">
-                            Crear
+                            Actualizar
                         </button>
                     </div>
                 </form>
@@ -167,4 +176,4 @@ const NewCustomer = () => {
     );
 }
 
-export default NewCustomer;
+export default EditUserData;

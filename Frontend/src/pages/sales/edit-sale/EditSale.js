@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
+import '../../../styles/new-edit-form.css'
 
 const EditSale = () => {
     const navigate = useNavigate();
