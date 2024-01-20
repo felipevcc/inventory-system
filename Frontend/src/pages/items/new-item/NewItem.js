@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
+import MyCombobox from '../../../components/combobox/Combobox.js';
 
 const NewItem = () => {
     const navigate = useNavigate();
@@ -121,6 +122,7 @@ const NewItem = () => {
                             apiUrl={`${API}/api/v1/category`}
                             optionsAttr="categories"
                         />
+                        <MyCombobox />
                         <div className="form-item">
                             <label htmlFor="provider">Proveedor</label>
                             <select className="input" id="provider" required>
