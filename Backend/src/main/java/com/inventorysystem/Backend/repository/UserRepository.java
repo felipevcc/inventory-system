@@ -52,5 +52,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT COUNT(*) FROM User user")
     Long countUsers();
 
+    Long countByAdminIsTrue();
+
     Page<User> findAll(Specification<User> userSpecification, Pageable pageable);
 }

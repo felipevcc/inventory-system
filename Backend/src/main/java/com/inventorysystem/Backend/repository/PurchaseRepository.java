@@ -35,4 +35,30 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
             "OR LOWER(us.name) LIKE %:searchTerm% " +
             "OR LOWER(us.username) LIKE %:searchTerm%")
     Page<Purchase> findAllPurchases(@Param("searchTerm") String searchTerm, Pageable pageable);
+
+    @Query("SELECT COUNT(*) FROM Purchase purchase")
+    Long countPurchases();
+
+    // Data summary queries
+    @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
+        "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
+    Long totalPurchasesInLastWeek();
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
+            "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
+    Long purchaseMoneyInLastWeek();
+
+    @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
+            "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
+    Long totalPurchasesInLastMonth();
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
+            "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
+    Long purchaseMoneyInLastMonth();
+
+    @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
+            "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
+    Long totalPurchasesInLastYear();
+
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
+            "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
+    Long purchaseMoneyInLastYear();
 }

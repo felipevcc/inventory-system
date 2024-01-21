@@ -63,4 +63,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     Long countArticles();
 
     Page<Article> findAll(Specification<Article> articleSpecification, Pageable pageable);
+
+    @Query("SELECT SUM(stock) FROM Article article")
+    Long getTotalStock();
 }
