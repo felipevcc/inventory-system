@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../../styles/new-form.css'
+import '../../../styles/new-edit-form.css'
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
@@ -80,33 +80,81 @@ const NewItem = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxLength="45" required value={formData.name} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="text"
+                                id="name"
+                                maxLength="45"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="two-together">
                             <div className="form-item">
                                 <label htmlFor="stock">Stock</label>
-                                <input className="input" type="number" min="0" id="stock" required value={formData.stock} onChange={handleChange} />
+                                <input 
+                                    className="input"
+                                    type="number"
+                                    id="stock"
+                                    min="0"
+                                    value={formData.stock}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="weight">Peso</label>
-                                <input className="input" type="text" id="weight" maxLength="15" required value={formData.weight} onChange={handleChange} />
+                                <input
+                                    className="input"
+                                    type="text"
+                                    id="weight"
+                                    maxLength="15"
+                                    value={formData.weight}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="brand">Marca</label>
-                            <input className="input" type="text" id="brand" maxLength="45" required value={formData.brand} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="text"
+                                id="brand"
+                                maxLength="45"
+                                value={formData.brand}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="two-together">
                             <div className="form-item">
                                 <label htmlFor="purchasePrice">Precio compra</label>
-                                <input className="input" type="number" id="purchasePrice" required value={formData.purchasePrice} onChange={handleChange} />
+                                <input
+                                    className="input"
+                                    type="number"
+                                    id="purchasePrice"
+                                    min="0"
+                                    value={formData.purchasePrice}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="salePrice">Precio venta</label>
-                                <input className="input" type="number" id="salePrice" required value={formData.salePrice} onChange={handleChange} />
+                                <input
+                                    className="input"
+                                    type="number"
+                                    id="salePrice"
+                                    min="0"
+                                    value={formData.salePrice}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </div>
                         </div>
 
@@ -127,11 +175,10 @@ const NewItem = () => {
                             optionsAttr="categories"
                             isRequired={true}
                         />
-
                     </div>
 
                     <div className="button-container">
-                        <button type="submit" className="btn">
+                        <button className="btn" type="submit">
                             Crear
                         </button>
                     </div>

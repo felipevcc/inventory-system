@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
+import '../../../styles/new-edit-form.css';
+import './edit-user.css';
 
 const EditUser = () => {
     const { id } = useParams();
@@ -36,6 +38,17 @@ const EditUser = () => {
         <div className="editUser-container">
 
             <div className="text">Editar Usuario</div>
+            <div className='editing-options'>
+                <div className="grid-form">
+                    <Link to={`/edit-user-data/${id}`} className='option'>
+                        <span className="text">Editar datos</span>
+                    </Link>
+
+                    <Link to={`/edit-user-pass/${id}`} className='option'>
+                        <span className="text">Editar contraseña</span>
+                    </Link>
+                </div>
+            </div>
 
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
+import '../../../styles/new-edit-form.css'
 
 const NewUser = () => {
     const navigate = useNavigate();
@@ -67,41 +68,86 @@ const NewUser = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxLength="45" required value={formData.name} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="text"
+                                id="name"
+                                maxLength="45"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
-                            <label htmlFor="nuser">Usuario</label>
-                            <input className="input" type="text" maxLength="20" id="username" required value={formData.username} onChange={handleChange} />
+                            <label htmlFor="username">Usuario</label>
+                            <input
+                                className="input"
+                                type="text"
+                                id="username"
+                                maxLength="20"
+                                value={formData.username}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
-                            <label htmlFor="pass">Password</label>
-                            <input className="input" type="password" id="password" maxLength="15" required value={formData.password} onChange={handleChange} />
+                            <label htmlFor="password">Contraseña</label>
+                            <input
+                                className="input"
+                                type="password"
+                                id="password"
+                                maxLength="15"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
-                            <label htmlFor="tel">Teléfono</label>
-                            <input className="input" type="text" id="phoneNumber" maxLength="20" required value={formData.phoneNumber} onChange={handleChange} />
+                            <label htmlFor="phoneNumber">Teléfono</label>
+                            <input
+                                className="input"
+                                type="text"
+                                id="phoneNumber"
+                                maxLength="20"
+                                value={formData.phoneNumber}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="email">Correo</label>
-                            <input className="input" type="email" id="email" maxLength="100" required value={formData.email} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="email"
+                                id="email"
+                                maxLength="100"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
 
                         <div className="form-item">
                             <label htmlFor="admin">Administrador</label>
-                            <select className="input" id="admin" required value={formData.admin} onChange={handleChange}>
-                                <option value={true}>Si</option>
+                            <select
+                                className="input"
+                                id="admin"
+                                value={formData.admin}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value={true}>Sí</option>
                                 <option value={false}>No</option>
                             </select>
                         </div>
-
                     </div>
 
                     <div className="button-container">
-                        <button type="submit" className="btn">
+                        <button className="btn" type="submit">
                             Crear
                         </button>
                     </div>

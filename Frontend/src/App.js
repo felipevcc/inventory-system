@@ -33,6 +33,8 @@ import DetailSale from './pages/sales/detail-sale/DetailSale';
 import Users from './pages/users/Users';
 import NewUser from './pages/users/new-user/NewUser';
 import EditUser from './pages/users/edit-user/EditUser';
+import EditUserData from './pages/users/edit-user/editing-options/EditUserData';
+import EditUserPassword from './pages/users/edit-user/editing-options/EditUserPassword';
 
 import Sidebar from './components/sidebar/Sidebar';
 import Navbar from './components/navbar/Navbar';
@@ -154,6 +156,12 @@ const MainLayout = () => {
                     } />
                     <Route path="/edit-user/:id" element={
                         <EditUser />
+                    } />
+                    <Route path="/edit-user-data/:id" element={
+                        <EditUserData />
+                    } />
+                    <Route path="/edit-user-pass/:id" element={
+                        <EditUserPassword />
                     } />
                 </Routes>
             </div>

@@ -55,7 +55,7 @@
   margin-top: 90px;
 }
 
-.button-container button {
+.button-container .btn {
   background-color: var(--primary-color);
   color: white;
   border: 3px solid var(--primary-color);
@@ -76,12 +76,12 @@
   margin-bottom: 50px;
 }
 
-.button-container button:hover {
+.button-container .btn:hover {
   box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
   transition: all 0.5s ease;
 }
 
-.button-container button::after {
+.button-container .btn::after {
   content: "";
   background-color: #ee7355;
   position: absolute;
@@ -96,7 +96,7 @@
   transition: all 0.5s ease;
 }
 
-.button-container button:hover::after {
+.button-container .btn:hover::after {
   transition: all 0.5s ease-out;
   transform: skewX(-45deg) scale(1, 1);
 }

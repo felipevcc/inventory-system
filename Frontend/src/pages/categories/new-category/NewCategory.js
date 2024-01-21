@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../../styles/new-form.css'
+import '../../../styles/new-edit-form.css'
 import './new-category.css'
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
@@ -41,7 +41,7 @@ const NewCategory = () => {
 
             if (response.ok) {
                 alert('Categoría creada exitosamente');
-                navigate('/users');
+                navigate('/categories');
                 return;
             }
             alert("La categoría no pudo ser creada, verifique los datos");
@@ -60,12 +60,20 @@ const NewCategory = () => {
                     <div className="grid-form">
                         <div className="form-item">
                             <label htmlFor="name">Nombre</label>
-                            <input className="input" type="text" id="name" maxLength="45" required value={formData.name} onChange={handleChange} />
+                            <input
+                                className="input"
+                                type="text"
+                                id="name"
+                                maxLength="45"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
 
                     <div className="button-container">
-                        <button type="submit" className="btn">
+                        <button className="btn" type="submit">
                             Crear
                         </button>
                     </div>

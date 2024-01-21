@@ -3,7 +3,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import './searchselect.css';
 
-const SearchSelect = ({ label, placeholder, onSelected, apiUrl, optionsAttr, isRequired = false }) => {
+const SearchSelect = ({ label, placeholder, onSelected, apiUrl, optionsAttr, initialSelectedOption = null, isRequired = false }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [options, setOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -12,6 +12,9 @@ const SearchSelect = ({ label, placeholder, onSelected, apiUrl, optionsAttr, isR
         const data = new FormData();
         if (searchQuery.length > 0) {
             data.append('searchCriteria', searchQuery);
+        } else if (initialSelectedOption && searchQuery.length === 0 && options.length === 0) {
+            const searchTerm = initialSelectedOption.email || initialSelectedOption.name;
+            data.append('searchCriteria', searchTerm);
         }
         data.append('page', 1);
         data.append('pageSize', 6);
@@ -24,7 +27,12 @@ const SearchSelect = ({ label, placeholder, onSelected, apiUrl, optionsAttr, isR
                 .then(data => setOptions(data[optionsAttr] || []))
                 .catch(error => console.log(error))
         })();
-    }, [searchQuery, apiUrl, optionsAttr]);
+        if (initialSelectedOption && options.length === 0) {
+            setSelectedOption(initialSelectedOption);
+            onSelected(initialSelectedOption);
+        }
+        // eslint-disable-next-line
+    }, [searchQuery, apiUrl, optionsAttr, initialSelectedOption]);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
