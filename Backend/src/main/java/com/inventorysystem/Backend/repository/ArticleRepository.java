@@ -59,9 +59,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Procedure(procedureName = "Proc_delete_article")
     void deleteArticle(@Param("Ip_article_id") Long articleId);
 
-    @Query("SELECT COUNT(*) FROM Article article")
-    Long countArticles();
-
     Page<Article> findAll(Specification<Article> articleSpecification, Pageable pageable);
 
     @Query("SELECT SUM(stock) FROM Article article")

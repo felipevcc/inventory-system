@@ -50,9 +50,6 @@ public class CustomerServiceImp implements CustomerService {
     public CustomersPageDTO getAllCustomers(String criteria, Integer page, Integer pageSize) {
         CustomersPageDTO pagedCustomersResponse = new CustomersPageDTO();
 
-        Long totalRecords = customerRepository.countCustomers();
-        Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
-
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("customerId").descending());
 
         Page<Customer> customerPage;

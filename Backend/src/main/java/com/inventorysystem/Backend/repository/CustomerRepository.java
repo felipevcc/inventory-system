@@ -51,8 +51,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Procedure(name = "Proc_delete_customer")
     void deleteCustomer(@Param("Ip_customer_id") Long customerId);
 
-    @Query("SELECT COUNT(*) FROM Customer customer")
-    Long countCustomers();
-
     Page<Customer> findAll(Specification<Customer> customerSpecification, Pageable pageable);
 }

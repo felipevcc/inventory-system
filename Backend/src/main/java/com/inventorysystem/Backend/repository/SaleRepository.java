@@ -37,9 +37,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
             "OR LOWER(us.username) LIKE %:searchTerm%")
     Page<Sale> findAllSales(@Param("searchTerm") String searchTerm, Pageable pageable);
 
-    @Query("SELECT COUNT(*) FROM Sale sale")
-    Long countSales();
-
     // Data summary queries
     @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")

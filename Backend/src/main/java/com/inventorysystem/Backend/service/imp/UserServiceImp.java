@@ -47,9 +47,6 @@ public class UserServiceImp implements UserService {
     public UsersPageDTO getAllUsers(String criteria, Integer page, Integer pageSize) {
         UsersPageDTO pagedUsersResponse = new UsersPageDTO();
 
-        Long totalRecords = userRepository.countUsers();
-        Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
-
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("userId").descending());
 
         Page<User> userPage;

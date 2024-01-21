@@ -36,9 +36,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
             "OR LOWER(us.username) LIKE %:searchTerm%")
     Page<Purchase> findAllPurchases(@Param("searchTerm") String searchTerm, Pageable pageable);
 
-    @Query("SELECT COUNT(*) FROM Purchase purchase")
-    Long countPurchases();
-
     // Data summary queries
     @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
         "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")

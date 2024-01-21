@@ -43,9 +43,6 @@ public class CategoryServiceImp implements CategoryService {
     public CategoriesPageDTO getAllCategories(String criteria, Integer page, Integer pageSize) {
         CategoriesPageDTO pagedCategoriesResponse = new CategoriesPageDTO();
 
-        Long totalRecords = categoryRepository.countCategories();
-        Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
-
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("categoryId").descending());
 
         Page<Category> categoryPage;
