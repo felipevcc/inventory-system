@@ -67,14 +67,17 @@ public class DataServiceImp implements DataService {
         PurchaseSummaryDTO purchaseSummary = new PurchaseSummaryDTO();
         purchaseSummary.setTotalPurchases(purchaseRepository.count());
 
-        purchaseSummary.setTotalPurchasesInLastWeek(purchaseRepository.getTotalPurchasesInLastWeek());
-        purchaseSummary.setPurchaseMoneyInLastWeek(purchaseRepository.getPurchaseMoneyInLastWeek());
+        Long totalPurchasesInLastWeek = purchaseRepository.getTotalPurchasesInLastWeek();
+        purchaseSummary.setTotalPurchasesInLastWeek(totalPurchasesInLastWeek);
+        purchaseSummary.setPurchaseMoneyInLastWeek(totalPurchasesInLastWeek > 0 ? purchaseRepository.getPurchaseMoneyInLastWeek() : 0);
 
-        purchaseSummary.setTotalPurchasesInLastMonth(purchaseRepository.getTotalPurchasesInLastMonth());
-        purchaseSummary.setPurchaseMoneyInLastMonth(purchaseRepository.getPurchaseMoneyInLastMonth());
+        Long totalPurchasesInLastMonth = purchaseRepository.getTotalPurchasesInLastMonth();
+        purchaseSummary.setTotalPurchasesInLastMonth(totalPurchasesInLastMonth);
+        purchaseSummary.setPurchaseMoneyInLastMonth(totalPurchasesInLastMonth > 0 ?purchaseRepository.getPurchaseMoneyInLastMonth() : 0);
 
-        purchaseSummary.setTotalPurchasesInLastYear(purchaseRepository.getTotalPurchasesInLastYear());
-        purchaseSummary.setPurchaseMoneyInLastYear(purchaseRepository.getPurchaseMoneyInLastYear());
+        Long totalPurchasesInLastYear = purchaseRepository.getTotalPurchasesInLastYear();
+        purchaseSummary.setTotalPurchasesInLastYear(totalPurchasesInLastYear);
+        purchaseSummary.setPurchaseMoneyInLastYear(totalPurchasesInLastYear > 0 ? purchaseRepository.getPurchaseMoneyInLastYear() : 0);
         return purchaseSummary;
     }
 
@@ -88,14 +91,17 @@ public class DataServiceImp implements DataService {
         SaleSummaryDTO saleSummary = new SaleSummaryDTO();
         saleSummary.setTotalSales(saleRepository.count());
 
-        saleSummary.setTotalSalesInLastWeek(saleRepository.getTotalSalesInLastWeek());
-        saleSummary.setSaleMoneyInLastWeek(saleRepository.getSaleMoneyInLastWeek());
+        Long totalSalesInLastWeek = saleRepository.getTotalSalesInLastWeek();
+        saleSummary.setTotalSalesInLastWeek(totalSalesInLastWeek);
+        saleSummary.setSaleMoneyInLastWeek(totalSalesInLastWeek > 0 ? saleRepository.getSaleMoneyInLastWeek() : 0);
 
-        saleSummary.setTotalSalesInLastMonth(saleRepository.getTotalSalesInLastMonth());
-        saleSummary.setSaleMoneyInLastMonth(saleRepository.getSaleMoneyInLastMonth());
+        Long totalSalesInLastMonth = saleRepository.getTotalSalesInLastMonth();
+        saleSummary.setTotalSalesInLastMonth(totalSalesInLastMonth);
+        saleSummary.setSaleMoneyInLastMonth(totalSalesInLastMonth > 0 ? saleRepository.getSaleMoneyInLastMonth() : 0);
 
-        saleSummary.setTotalSalesInLastYear(saleRepository.getTotalSalesInLastYear());
-        saleSummary.setSaleMoneyInLastYear(saleRepository.getSaleMoneyInLastYear());
+        Long totalSalesInLastYear = saleRepository.getTotalSalesInLastYear();
+        saleSummary.setTotalSalesInLastYear(totalSalesInLastYear);
+        saleSummary.setSaleMoneyInLastYear(totalSalesInLastYear > 0 ? saleRepository.getSaleMoneyInLastYear() : 0);
         return saleSummary;
     }
 

@@ -37,21 +37,21 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     Page<Purchase> findAllPurchases(@Param("searchTerm") String searchTerm, Pageable pageable);
 
     // Data summary queries
-    @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM PURCHASE " +
         "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getTotalPurchasesInLastWeek();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getPurchaseMoneyInLastWeek();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM PURCHASE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getTotalPurchasesInLastMonth();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getPurchaseMoneyInLastMonth();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM PURCHASE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
     Long getTotalPurchasesInLastYear();
 

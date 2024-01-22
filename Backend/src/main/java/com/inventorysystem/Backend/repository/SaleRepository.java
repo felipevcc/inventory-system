@@ -38,21 +38,21 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
     Page<Sale> findAllSales(@Param("searchTerm") String searchTerm, Pageable pageable);
 
     // Data summary queries
-    @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getTotalSalesInLastWeek();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getSaleMoneyInLastWeek();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getTotalSalesInLastMonth();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getSaleMoneyInLastMonth();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
     Long getTotalSalesInLastYear();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
