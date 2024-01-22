@@ -51,6 +51,13 @@ const ItemSelection = ({ onSelectionChange = null }) => {
         setPage(page);
     }
 
+    const handleCheckboxChange = (article, isChecked) => {
+        console.log(article, isChecked);
+        /* if (onSelectionChange) {
+            onSelectionChange(article, isChecked);
+        } */
+    };
+
     return (
         <div className="item-selection-container">
             <div className="top-articles">
@@ -85,11 +92,12 @@ const ItemSelection = ({ onSelectionChange = null }) => {
                                 <td>{article.purchasePrice}</td>
                                 <td>{article.salePrice}</td>
                                 <td>{article.provider.name}</td>
-                                {/* <td>
-                                    <Link to={`/edit-item/${article.articleId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td> */}
+                                <td>
+                                    <label className="checkbox-container">
+                                        <input type="checkbox" onChange={(event) => handleCheckboxChange(article, event.target.checked)} />
+                                        <span className="checkmark"></span>
+                                    </label>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
