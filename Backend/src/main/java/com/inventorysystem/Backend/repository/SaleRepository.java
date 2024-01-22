@@ -40,22 +40,22 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
     // Data summary queries
     @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
-    Long totalSalesInLastWeek();
+    Long getTotalSalesInLastWeek();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
-    Long saleMoneyInLastWeek();
+    Long getSaleMoneyInLastWeek();
 
     @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
-    Long totalSalesInLastMonth();
+    Long getTotalSalesInLastMonth();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
-    Long saleMoneyInLastMonth();
+    Long getSaleMoneyInLastMonth();
 
     @Query(nativeQuery = true, value = "SELECT * FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
-    Long totalSalesInLastYear();
+    Long getTotalSalesInLastYear();
     @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
-    Long saleMoneyInLastYear();
+    Long getSaleMoneyInLastYear();
 }
