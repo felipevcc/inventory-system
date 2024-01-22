@@ -45,7 +45,6 @@ const Categories = () => {
     }, [navigate, query, page]);
 
     const handleSearch = (query) => {
-        console.log("Busqueda:", query);
         setQuery(query);
     }
 

@@ -1,0 +1,26 @@
+.item-selection-container .top-articles {
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.item-selection-container .top-articles label {
+    color: var(--primary-color-light);
+    font-weight: 500;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.item-selection-container .top-articles .options {
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.item-selection-container .table-container {
+    top: 30px;
+}
+
+.item-selection-container .table-container .pagination-container {
+    margin-top: 40px;
+}

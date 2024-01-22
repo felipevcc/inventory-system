@@ -44,8 +44,7 @@ const Customers = () => {
         })();
     }, [navigate, query, page]);
 
-    const handleSearch = (query) => {
-        console.log("Busqueda:", query);
+    const handleSearch = (query) => { 
         setQuery(query);
     }
     

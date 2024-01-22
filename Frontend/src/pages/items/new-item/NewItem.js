@@ -35,6 +35,20 @@ const NewItem = () => {
         });
     }
 
+    const handleProviderSelect = (provider) => {
+        setFormData({
+            ...formData,
+            providerId: provider.providerId
+        });
+    }
+
+    const handleCategorySelect = (category) => {
+        setFormData({
+            ...formData,
+            categoryId: category.categoryId
+        });
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -56,20 +70,6 @@ const NewItem = () => {
             console.log(error);
             alert("Error al crear el artículo");
         }
-    }
-
-    const handleProviderSelect = (provider) => {
-        setFormData({
-            ...formData,
-            providerId: provider.providerId
-        });
-    }
-
-    const handleCategorySelect = (category) => {
-        setFormData({
-            ...formData,
-            categoryId: category.categoryId
-        });
     }
 
     return (

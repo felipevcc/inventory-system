@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import './items.css';
-import '../../styles/addbox.css';
-import SearchBox from '../../components/search-box/SearchBox';
-import Pagination from '../../components/pagination/Pagination';
-import { Link, useNavigate } from 'react-router-dom';
-import userVerification from '../../utils/userVerification';
+import { useNavigate } from 'react-router-dom';
+import './itemselection.css';
+import SearchBox from '../search-box/SearchBox';
+import Pagination from '../pagination/Pagination';
 import { API } from '../../env';
+import userVerification from '../../utils/userVerification';
 
-const Items = () => {
+const ItemSelection = ({ onSelectionChange = null }) => {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
@@ -17,6 +14,8 @@ const Items = () => {
     const [paginator, setPaginator] = useState({});
 
     const navigate = useNavigate();
+
+    const [articles, setArticles] = useState([]);
 
     useEffect(() => {
         // Permission validation
@@ -52,28 +51,14 @@ const Items = () => {
         setPage(page);
     }
 
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
-
-        if (confirmDelete) {
-            // Call to the api to delete the record by id, modify the state
-            console.log(`Registro con ID ${id} eliminado`);
-        }
-    }
-
     return (
-        <div className="items-container">
-
-            <div className="text">Artículos</div>
-
-            <div className="options">
-                <SearchBox onSearch={handleSearch} />
-                <Link to="/new-item" className="add-box">
-                    <FontAwesomeIcon icon={faPlus} className="icon" />
-                    <span className="text">Nuevo artículo</span>
-                </Link>
+        <div className="item-selection-container">
+            <div className="top-articles">
+                <label>Artículos</label>
+                <div className="options">
+                    <SearchBox onSearch={handleSearch} />
+                </div>
             </div>
-
             <div className="table-container">
                 <table className="table">
                     <thead>
@@ -85,9 +70,8 @@ const Items = () => {
                             <th>STOCK</th>
                             <th>PRECIO-COMPRA</th>
                             <th>PRECIO-VENTA</th>
-                            <th>PESO</th>
                             <th>PROVEEDOR</th>
-                            <th>ACCIONES</th>
+                            <th>SELECCIONAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,24 +84,20 @@ const Items = () => {
                                 <td>{article.stock}</td>
                                 <td>{article.purchasePrice}</td>
                                 <td>{article.salePrice}</td>
-                                <td>{article.weight}</td>
                                 <td>{article.provider.name}</td>
-                                <td>
+                                {/* <td>
                                     <Link to={`/edit-item/${article.articleId}`}>
                                         <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                     </Link>
-                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(article.articleId)} />
-                                </td>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>
                 </table>
-
                 <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
-
         </div>
     );
 }
 
-export default Items;
+export default ItemSelection;
