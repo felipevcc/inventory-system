@@ -52,10 +52,13 @@ const ItemSelection = ({ onSelectionChange = null }) => {
     }
 
     const handleCheckboxChange = (article, isChecked) => {
-        console.log(article, isChecked);
-        /* if (onSelectionChange) {
-            onSelectionChange(article, isChecked);
-        } */
+        if (isChecked) {
+            setArticles([...articles, article]);
+            onSelectionChange([...articles, article]);
+        } else {
+            setArticles(articles.filter(a => a.articleId !== article.articleId));
+            onSelectionChange(articles.filter(a => a.articleId !== article.articleId));
+        }
     };
 
     return (
@@ -94,7 +97,11 @@ const ItemSelection = ({ onSelectionChange = null }) => {
                                 <td>{article.provider.name}</td>
                                 <td>
                                     <label className="checkbox-container">
-                                        <input type="checkbox" onChange={(event) => handleCheckboxChange(article, event.target.checked)} />
+                                        <input
+                                            type="checkbox"
+                                            checked={!!articles.find(a => a.articleId === article.articleId)}
+                                            onChange={(event) => handleCheckboxChange(article, event.target.checked)}
+                                        />
                                         <span className="checkmark"></span>
                                     </label>
                                 </td>

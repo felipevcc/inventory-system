@@ -18,17 +18,30 @@ const NewSale = () => {
 
     useEffect(() => {
         // Permission validation
-        if (!userVerification().isAuthenticated) {
+        const userVer = userVerification();
+        if (!userVer.isAuthenticated) {
             localStorage.clear();
             navigate('/login');
             return;
         }
+        setFormData({
+            ...formData,
+            sessionUserId: userVer.userId
+        });
+        // eslint-disable-next-line
     }, [navigate]);
 
     const handleCustomerSelect = (customer) => {
         setFormData({
             ...formData,
             customerId: customer.customerId
+        });
+    }
+
+    const onSelectionChange = (articles) => {
+        setFormData({
+            ...formData,
+            articles: articles
         });
     }
 
@@ -72,7 +85,7 @@ const NewSale = () => {
                         />
                     </div>
 
-                    <ItemSelection />
+                    <ItemSelection onSelectionChange={onSelectionChange} />
 
                     <div className="button-container">
                         <button className="btn" type="button" onClick={handleSubmit}>
