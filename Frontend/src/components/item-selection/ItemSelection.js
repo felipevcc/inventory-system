@@ -5,6 +5,8 @@ import SearchBox from '../search-box/SearchBox';
 import Pagination from '../pagination/Pagination';
 import { API } from '../../env';
 import userVerification from '../../utils/userVerification';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const ItemSelection = ({ onSelectionChange = null }) => {
     const [query, setQuery] = useState('');
@@ -53,18 +55,38 @@ const ItemSelection = ({ onSelectionChange = null }) => {
 
     const handleCheckboxChange = (article, isChecked) => {
         if (isChecked) {
+            article.quantity = 1;
             setArticles([...articles, article]);
             onSelectionChange([...articles, article]);
         } else {
             setArticles(articles.filter(a => a.articleId !== article.articleId));
             onSelectionChange(articles.filter(a => a.articleId !== article.articleId));
         }
-    };
+    }
+
+    const handleQuantityChange = (article, newQuantity) => {
+        if (newQuantity.length === 0) {
+            newQuantity = 1;
+        } else {
+            newQuantity = parseInt(newQuantity, 10);
+        }
+        const updatedArticles = articles.map(
+            a => a.articleId === article.articleId ? { ...a, quantity: newQuantity } : a
+        );
+        setArticles(updatedArticles);
+        onSelectionChange(updatedArticles);
+    }
+
+    const calculateTotal = () => {
+        return articles.reduce((total, article) => {
+            return total + article.quantity * article.salePrice;
+        }, 0);
+    }
 
     return (
         <div className="item-selection-container">
             <div className="top-articles">
-                <label>Artículos</label>
+                <label>Seleccionar artículos</label>
                 <div className="options">
                     <SearchBox onSearch={handleSearch} />
                 </div>
@@ -92,8 +114,8 @@ const ItemSelection = ({ onSelectionChange = null }) => {
                                 <td>{article.brand}</td>
                                 <td>{article.category.name}</td>
                                 <td>{article.stock}</td>
-                                <td>{article.purchasePrice}</td>
-                                <td>{article.salePrice}</td>
+                                <td>${article.purchasePrice} COP</td>
+                                <td>${article.salePrice} COP</td>
                                 <td>{article.provider.name}</td>
                                 <td>
                                     <label className="checkbox-container">
@@ -111,6 +133,63 @@ const ItemSelection = ({ onSelectionChange = null }) => {
                 </table>
                 <Pagination paginator={paginator} onChangePage={handlePage} />
             </div>
+
+            {articles.length > 0 && (
+                <div className="saleSummary">
+                    <div className="top-sale">
+                        <hr></hr>
+                        <label>Resumen de la venta</label>
+                    </div>
+                    <div className="table-container">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NOMBRE</th>
+                                    <th>MARCA</th>
+                                    <th>STOCK</th>
+                                    <th>CANTIDAD</th>
+                                    <th>PRECIO</th>
+                                    <th>SUBTOTAL</th>
+                                    <th>REMOVER</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {articles && articles.map(article => (
+                                    <tr key={article.articleId}>
+                                        <td>{article.articleId}</td>
+                                        <td>{article.name}</td>
+                                        <td>{article.brand}</td>
+                                        <td>{article.stock}</td>
+                                        <td>
+                                            <input
+                                                className="input"
+                                                type="number"
+                                                id="stock"
+                                                min="1"
+                                                value={article.quantity}
+                                                onChange={(event) => handleQuantityChange(article, event.target.value)}
+                                                required
+                                            />
+                                        </td>
+                                        <td>${article.salePrice} COP</td>
+                                        <td>${article.salePrice * article.quantity} COP</td>
+                                        <td>
+                                            <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleCheckboxChange(article, false)} />
+                                        </td>
+                                    </tr>
+                                ))}
+                                <tr>
+                                    <td colSpan="5"></td>
+                                    <td className="total">TOTAL</td>
+                                    <td className="total">${calculateTotal()} COP</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

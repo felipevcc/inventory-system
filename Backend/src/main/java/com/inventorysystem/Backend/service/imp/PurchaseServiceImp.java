@@ -54,7 +54,7 @@ public class PurchaseServiceImp implements PurchaseService {
             validArticles.add(article);
             // Add price to the total value of the purchase
             Article foundArticle = articleRepository.getArticleById(article.getArticleId());
-            totalPurchasePrice += foundArticle.getPurchasePrice();
+            totalPurchasePrice += foundArticle.getPurchasePrice() * article.getArticleQuantity();
         }
 
         if (validArticles.isEmpty()) {

@@ -93,7 +93,7 @@ const Purchases = () => {
                             <tr key={purchase.purchaseId}>
                                 <td>{purchase.purchaseId}</td>
                                 <td>{formatDate(purchase.createdAt)}</td>
-                                <td>{purchase.totalValue}</td>
+                                <td>${purchase.totalValue} COP</td>
                                 <td>{purchase.provider.name}</td>
                                 <td>{purchase.user.name}</td>
                                 <td>

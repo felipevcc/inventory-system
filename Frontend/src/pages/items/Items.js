@@ -98,8 +98,8 @@ const Items = () => {
                                 <td>{article.brand}</td>
                                 <td>{article.category.name}</td>
                                 <td>{article.stock}</td>
-                                <td>{article.purchasePrice}</td>
-                                <td>{article.salePrice}</td>
+                                <td>${article.purchasePrice} COP</td>
+                                <td>${article.salePrice} COP</td>
                                 <td>{article.weight}</td>
                                 <td>{article.provider.name}</td>
                                 <td>

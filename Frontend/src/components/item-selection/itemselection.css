@@ -1,3 +1,5 @@
+/* Item selection */
+
 .item-selection-container .top-articles {
     width: 50%;
     margin: auto;
@@ -25,6 +27,46 @@
     margin-top: 40px;
 }
 
+
+/* Sale */
+
+.item-selection-container .top-sale {
+    width: 50%;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.item-selection-container .top-sale hr {
+    margin-bottom: 30px;
+}
+
+.item-selection-container .top-sale label {
+    color: var(--primary-color-light);
+    font-weight: 500;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.item-selection-container .input {
+    background-color: #fff;
+    border: 2px solid #E3E3E5;
+    border-radius: 8px;
+    height: 35px;
+    width: 80px;
+    padding: 0 10px 0 10px;
+    font-size: 16px;
+    transition: var(--tran-03);
+}
+
+.item-selection-container .input:focus {
+    outline: none;
+    border: 2px solid var(--navbar-color);
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+}
+
+.item-selection-container .total {
+    font-weight: 500;
+}
 
 /* ============= CHECKBOX ============= */
 

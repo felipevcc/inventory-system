@@ -93,7 +93,7 @@ const Sales = () => {
                             <tr key={sale.saleId}>
                                 <td>{sale.saleId}</td>
                                 <td>{formatDate(sale.createdAt)}</td>
-                                <td>{sale.totalValue}</td>
+                                <td>${sale.totalValue} COP</td>
                                 <td>{sale.customer.name}</td>
                                 <td>{sale.user.name}</td>
                                 <td>

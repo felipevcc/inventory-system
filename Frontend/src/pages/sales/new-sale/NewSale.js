@@ -26,7 +26,7 @@ const NewSale = () => {
         }
         setFormData({
             ...formData,
-            sessionUserId: userVer.userId
+            sessionUserId: userVer.user.userId
         });
         // eslint-disable-next-line
     }, [navigate]);
@@ -41,12 +41,16 @@ const NewSale = () => {
     const onSelectionChange = (articles) => {
         setFormData({
             ...formData,
-            articles: articles
+            articles: articles.map(a => ({articleId: a.articleId, articleQuantity: a.quantity}))
         });
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (formData.articles.length === 0) {
+            alert('Debe seleccionar al menos un artículo');
+            return;
+        }
         try {
             const response = await fetch(`${API}/api/v1/sale`, {
                 method: 'POST',
@@ -73,7 +77,7 @@ const NewSale = () => {
 
             <div className="text">Nueva Venta</div>
             <div className="form-container">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="grid-form">
                         <SearchSelect
                             label="Cliente"
@@ -88,7 +92,7 @@ const NewSale = () => {
                     <ItemSelection onSelectionChange={onSelectionChange} />
 
                     <div className="button-container">
-                        <button className="btn" type="button" onClick={handleSubmit}>
+                        <button className="btn" type="submit">
                             Crear
                         </button>
                     </div>
