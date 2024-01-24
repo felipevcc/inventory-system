@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen } from '@fortawesome/free-solid-svg-icons';
 import './users.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
@@ -57,15 +57,6 @@ const Users = () => {
         setPage(page);
     }
 
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
-
-        if (confirmDelete) {
-            // Call to the api to delete the record by id, modify the state
-            console.log(`Registro con ID ${id} eliminado`);
-        }
-    }
-
     return (
         <div className="users-container">
 
@@ -89,7 +80,7 @@ const Users = () => {
                             <th>TELÉFONO</th>
                             <th>EMAIL</th>
                             <th>ADMIN</th>
-                            <th>ACCIONES</th>
+                            <th>EDITAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,7 +96,6 @@ const Users = () => {
                                     <Link to={`/edit-user/${user.userId}`}>
                                         <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                     </Link>
-                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(user.userId)} />
                                 </td>
                             </tr>
                         ))}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen } from '@fortawesome/free-solid-svg-icons';
 import './items.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
@@ -52,15 +52,6 @@ const Items = () => {
         setPage(page);
     }
 
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
-
-        if (confirmDelete) {
-            // Call to the api to delete the record by id, modify the state
-            console.log(`Registro con ID ${id} eliminado`);
-        }
-    }
-
     return (
         <div className="items-container">
 
@@ -87,7 +78,7 @@ const Items = () => {
                             <th>PRECIO-VENTA</th>
                             <th>PESO</th>
                             <th>PROVEEDOR</th>
-                            <th>ACCIONES</th>
+                            <th>EDITAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,7 +97,6 @@ const Items = () => {
                                     <Link to={`/edit-item/${article.articleId}`}>
                                         <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                     </Link>
-                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(article.articleId)} />
                                 </td>
                             </tr>
                         ))}

@@ -147,6 +147,7 @@
     width: 20px;
     cursor: pointer;
     transition: var(--tran-03);
+    margin: auto;
 }
 
 .main-content .table .pen-icon:hover {
