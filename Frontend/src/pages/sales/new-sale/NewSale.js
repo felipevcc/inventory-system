@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
-import '../../../styles/new-edit-form.css'
+import '../../../styles/new-edit-form.css';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
 import './new-sale.css';
-import ItemSelection from '../../../components/item-selection/ItemSelection';
+import ItemSelection from './item-selection/ItemSelection';
 
 const NewSale = () => {
     const navigate = useNavigate();
@@ -24,6 +24,8 @@ const NewSale = () => {
             navigate('/login');
             return;
         }
+
+        // Initialize form data
         setFormData({
             ...formData,
             sessionUserId: userVer.user.userId

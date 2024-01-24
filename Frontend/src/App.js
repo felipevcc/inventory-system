@@ -17,6 +17,7 @@ import NewProvider from './pages/providers/new-provider/NewProvider';
 import EditProvider from './pages/providers/edit-provider/EditProvider';
 
 import Purchases from './pages/purchases/Purchases';
+import SelectProvider from './pages/purchases/new-purchase/SelectProvider';
 import NewPurchase from './pages/purchases/new-purchase/NewPurchase';
 import DetailPurchase from './pages/purchases/detail-purchase/DetailPurchase';
 
@@ -114,6 +115,9 @@ const MainLayout = () => {
                         <Purchases />
                     } />
                     <Route path="/new-purchase" element={
+                        <SelectProvider />
+                    } />
+                    <Route path="/new-purchase/:providerId" element={
                         <NewPurchase />
                     } />
                     <Route path="/detail-purchase/:id" element={

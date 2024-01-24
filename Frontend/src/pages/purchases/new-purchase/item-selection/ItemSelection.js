@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './itemselection.css';
-import SearchBox from '../search-box/SearchBox';
-import Pagination from '../pagination/Pagination';
-import { API } from '../../env';
-import userVerification from '../../utils/userVerification';
+import SearchBox from '../../../../components/search-box/SearchBox';
+import Pagination from '../../../../components/pagination/Pagination';
+import { API } from '../../../../env';
+import userVerification from '../../../../utils/userVerification';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-const ItemSelection = ({ onSelectionChange = null }) => {
+const ItemSelection = ({ onSelectionChange, provider }) => {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
@@ -20,6 +20,10 @@ const ItemSelection = ({ onSelectionChange = null }) => {
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
+        if (!provider) {
+            return;
+        }
+
         // Permission validation
         if (!userVerification().isAuthenticated) {
             localStorage.clear();
@@ -32,6 +36,7 @@ const ItemSelection = ({ onSelectionChange = null }) => {
         if (query.length > 0) {
             data.append('searchCriteria', query);
         }
+        data.append('providerId', provider.providerId);
         data.append('page', page);
         data.append('pageSize', pageSize);
 
@@ -43,7 +48,7 @@ const ItemSelection = ({ onSelectionChange = null }) => {
                 .then(data => setPaginator(data))
                 .catch(error => console.log(error))
         })();
-    }, [navigate, query, page]);
+    }, [navigate, query, page, provider]);
 
     const handleSearch = (query) => {
         setQuery(query);
@@ -79,7 +84,7 @@ const ItemSelection = ({ onSelectionChange = null }) => {
 
     const calculateTotal = () => {
         return articles.reduce((total, article) => {
-            return total + article.quantity * article.salePrice;
+            return total + article.quantity * article.purchasePrice;
         }, 0);
     }
 
@@ -135,8 +140,8 @@ const ItemSelection = ({ onSelectionChange = null }) => {
             </div>
 
             {articles.length > 0 && (
-                <div className="saleSummary">
-                    <div className="top-sale">
+                <div className="purchaseSummary">
+                    <div className="top-purchase">
                         <hr></hr>
                         <label>Resumen de la venta</label>
                     </div>
@@ -165,15 +170,14 @@ const ItemSelection = ({ onSelectionChange = null }) => {
                                             <input
                                                 className="input"
                                                 type="number"
-                                                id="stock"
                                                 min="1"
                                                 value={article.quantity}
                                                 onChange={(event) => handleQuantityChange(article, event.target.value)}
                                                 required
                                             />
                                         </td>
-                                        <td>${article.salePrice} COP</td>
-                                        <td>${article.salePrice * article.quantity} COP</td>
+                                        <td>${article.purchasePrice} COP</td>
+                                        <td>${article.purchasePrice * article.quantity} COP</td>
                                         <td>
                                             <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleCheckboxChange(article, false)} />
                                         </td>

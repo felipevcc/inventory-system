@@ -28,19 +28,19 @@
 }
 
 
-/* Sale */
+/* Purchase */
 
-.item-selection-container .top-sale {
+.item-selection-container .top-purchase {
     width: 50%;
     margin: auto;
     margin-top: 70px;
 }
 
-.item-selection-container .top-sale hr {
+.item-selection-container .top-purchase hr {
     margin-bottom: 30px;
 }
 
-.item-selection-container .top-sale label {
+.item-selection-container .top-purchase label {
     color: var(--primary-color-light);
     font-weight: 500;
     padding: 10px;
