@@ -50,11 +50,16 @@ public class PurchaseServiceImp implements PurchaseService {
             if (!articleRepository.existsById(article.getArticleId()) || article.getArticleQuantity() < 1) {
                 continue;
             }
-            // Add valid id
-            validArticles.add(article);
             // Add price to the total value of the purchase
             Article foundArticle = articleRepository.getArticleById(article.getArticleId());
-            totalPurchasePrice += foundArticle.getPurchasePrice();
+            // Validate if the item belongs to the selected provider
+            if (foundArticle.getProviderId() != purchase.getProviderId()) {
+                continue;
+            }
+            // Add valid id
+            validArticles.add(article);
+
+            totalPurchasePrice += foundArticle.getPurchasePrice() * article.getArticleQuantity();
         }
 
         if (validArticles.isEmpty()) {

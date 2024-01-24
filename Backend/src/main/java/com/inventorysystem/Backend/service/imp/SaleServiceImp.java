@@ -54,7 +54,7 @@ public class SaleServiceImp implements SaleService {
             validArticles.add(article);
             // Add price to the total value of the sale
             Article foundArticle = articleRepository.getArticleById(article.getArticleId());
-            totalSalePrice += foundArticle.getSalePrice();
+            totalSalePrice += foundArticle.getSalePrice() * article.getArticleQuantity();
         }
 
         if (validArticles.isEmpty()) {

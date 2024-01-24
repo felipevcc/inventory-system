@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
-import '../../../styles/new-edit-form.css'
+import '../../../styles/new-edit-form.css';
 import './edit-category.css';
 import { API } from '../../../env';
 

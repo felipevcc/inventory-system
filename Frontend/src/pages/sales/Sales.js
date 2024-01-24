@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './sales.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
@@ -46,21 +46,11 @@ const Sales = () => {
     }, [navigate, query, page]);
 
     const handleSearch = (query) => {
-        console.log("Busqueda:", query);
         setQuery(query);
     }
 
     const handlePage = (page) => {
         setPage(page);
-    }
-
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
-
-        if (confirmDelete) {
-            // Call to the api to delete the record by id, modify the state
-            console.log(`Registro con ID ${id} eliminado`);
-        }
     }
 
     return (
@@ -86,7 +76,6 @@ const Sales = () => {
                             <th>CLIENTE</th>
                             <th>USUARIO</th>
                             <th>DETALLES</th>
-                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,19 +83,13 @@ const Sales = () => {
                             <tr key={sale.saleId}>
                                 <td>{sale.saleId}</td>
                                 <td>{formatDate(sale.createdAt)}</td>
-                                <td>{sale.totalValue}</td>
+                                <td>${sale.totalValue} COP</td>
                                 <td>{sale.customer.name}</td>
                                 <td>{sale.user.name}</td>
                                 <td>
                                     <Link to={`/detail-sale/${sale.saleId}`}>
                                         <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
                                     </Link>
-                                </td>
-                                <td>
-                                    <Link to={`/edit-sale/${sale.saleId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(sale.saleId)} />
                                 </td>
                             </tr>
                         ))}

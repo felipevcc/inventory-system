@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen } from '@fortawesome/free-solid-svg-icons';
 import './customers.css';
 import '../../styles/addbox.css';
 import SearchBox from '../../components/search-box/SearchBox';
@@ -44,22 +44,12 @@ const Customers = () => {
         })();
     }, [navigate, query, page]);
 
-    const handleSearch = (query) => {
-        console.log("Busqueda:", query);
+    const handleSearch = (query) => { 
         setQuery(query);
     }
     
     const handlePage = (page) => {
         setPage(page);
-    }
-
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de que quieres eliminar este registro?`);
-
-        if (confirmDelete) {
-            // Call to the api to delete the record by id, modify the state
-            console.log(`Registro con ID ${id} eliminado`);
-        }
     }
 
     return (
@@ -87,7 +77,7 @@ const Customers = () => {
                             <th>DIRECCIÓN</th>
                             <th>DEPARTAMENTO</th>
                             <th>CIUDAD</th>
-                            <th>ACCIONES</th>
+                            <th>EDITAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,7 +95,6 @@ const Customers = () => {
                                     <Link to={`/edit-customer/${customer.customerId}`}>
                                         <FontAwesomeIcon icon={faPen} className="pen-icon" />
                                     </Link>
-                                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleDelete(customer.customerId)} />
                                 </td>
                             </tr>
                         ))}

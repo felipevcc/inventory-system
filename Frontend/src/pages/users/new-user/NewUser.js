@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
-import '../../../styles/new-edit-form.css'
+import '../../../styles/new-edit-form.css';
 
 const NewUser = () => {
     const navigate = useNavigate();

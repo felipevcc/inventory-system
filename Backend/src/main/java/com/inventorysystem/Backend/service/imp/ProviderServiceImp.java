@@ -45,9 +45,6 @@ public class ProviderServiceImp implements ProviderService {
     public ProvidersPageDTO getAllProviders(String criteria, Integer page, Integer pageSize) {
         ProvidersPageDTO pagedProvidersResponse = new ProvidersPageDTO();
 
-        Long totalRecords = providerRepository.countProviders();
-        Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
-
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by("providerId").descending());
 
         Page<Provider> providerPage;

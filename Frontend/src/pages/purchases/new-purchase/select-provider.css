@@ -1,0 +1,8 @@
+.selectProvider-container .grid-form {
+    grid-template-columns: 0.5fr;
+    justify-content: center;
+}
+
+.selectProvider-container span {
+    margin-right: 7px;
+}

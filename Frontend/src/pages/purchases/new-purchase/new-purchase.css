@@ -1,0 +1,16 @@
+.newPurchase-container .form-container {
+    width: 100%;
+    margin: auto;
+}
+
+.newPurchase-container .grid-form {
+    margin-top: 0px;
+    grid-template-columns: 0.5fr;
+    justify-content: center;
+}
+
+/* ===== Button ===== */
+
+.newPurchase-container .button-container {
+    margin-top: 70px;
+}

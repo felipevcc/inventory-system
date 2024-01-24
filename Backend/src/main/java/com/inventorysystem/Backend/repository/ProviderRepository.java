@@ -41,8 +41,5 @@ public interface ProviderRepository extends JpaRepository<Provider, Long> {
     @Procedure(procedureName = "Proc_delete_provider")
     void deleteProvider(@Param("Ip_provider_id") Long providerId);
 
-    @Query("SELECT COUNT(*) FROM Provider provider")
-    Long countProviders();
-
     Page<Provider> findAll(Specification<Provider> providerSpecification, Pageable pageable);
 }

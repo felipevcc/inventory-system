@@ -49,8 +49,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Procedure(procedureName = "Proc_delete_user")
     void deleteUser(@Param("Ip_user_id") Long userId);
 
-    @Query("SELECT COUNT(*) FROM User user")
-    Long countUsers();
+    Long countByAdminIsTrue();
 
     Page<User> findAll(Specification<User> userSpecification, Pageable pageable);
 }

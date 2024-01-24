@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
-import '../../../styles/new-edit-form.css'
+import '../../../styles/new-edit-form.css';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
 
@@ -65,6 +65,20 @@ const EditItem = () => {
         });
     }
 
+    const handleProviderSelect = (provider) => {
+        setFormData({
+            ...formData,
+            providerId: provider.providerId
+        });
+    }
+
+    const handleCategorySelect = (category) => {
+        setFormData({
+            ...formData,
+            categoryId: category.categoryId
+        });
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -86,20 +100,6 @@ const EditItem = () => {
             console.log(error);
             alert("Error al actualizar el artículo");
         }
-    }
-
-    const handleProviderSelect = (provider) => {
-        setFormData({
-            ...formData,
-            providerId: provider.providerId
-        });
-    }
-
-    const handleCategorySelect = (category) => {
-        setFormData({
-            ...formData,
-            categoryId: category.categoryId
-        });
     }
 
     return (

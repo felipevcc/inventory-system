@@ -50,9 +50,6 @@ public class ArticleServiceImp implements ArticleService {
     public ArticlesPageDTO getAllArticles(Long providerId, String criteria, Integer page, Integer pageSize) {
         ArticlesPageDTO pagedArticlesResponse = new ArticlesPageDTO();
 
-        Long totalRecords = articleRepository.countArticles();
-        Integer totalPages = (int) Math.ceil(totalRecords / pageSize);
-
         Page<Article> articlePage;
 
         if (providerId == null && (criteria == null || criteria.length() == 0)) {
