@@ -6,7 +6,10 @@
     margin-top: 20px;
 }
 
-.item-selection-container .top-articles label {
+.item-selection-container .top-articles .provider-item-label {
+    /* display: block;
+    width: 100%;
+    text-align: center; */
     color: var(--primary-color-light);
     font-weight: 500;
     padding: 10px;
@@ -16,7 +19,7 @@
 .item-selection-container .top-articles .options {
     width: 50%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .item-selection-container .table-container {

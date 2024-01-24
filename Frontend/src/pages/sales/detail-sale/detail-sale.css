@@ -1,0 +1,29 @@
+.detailSale-container .top-sale {
+    width: 50%;
+    margin: auto;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.detailSale-container .top-sale h2 {
+    color: var(--primary-color-light);
+    font-weight: 500;
+    font-size: 20px;
+    /* padding: 10px; */
+    cursor: pointer;
+}
+
+.detailSale-container .top-sale p {
+    color: var(--primary-color-light);
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.detailSale-container .table-container {
+    top: 20px;
+}
+
+.detailSale-container .total {
+    font-weight: 500;
+}

@@ -1,0 +1,29 @@
+.detailPurchase-container .top-purchase {
+    width: 50%;
+    margin: auto;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.detailPurchase-container .top-purchase h2 {
+    color: var(--primary-color-light);
+    font-weight: 500;
+    font-size: 20px;
+    /* padding: 10px; */
+    cursor: pointer;
+}
+
+.detailPurchase-container .top-purchase p {
+    color: var(--primary-color-light);
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.detailPurchase-container .table-container {
+    top: 20px;
+}
+
+.detailPurchase-container .total {
+    font-weight: 500;
+}

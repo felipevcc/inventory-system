@@ -91,7 +91,7 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
     return (
         <div className="item-selection-container">
             <div className="top-articles">
-                <label>Seleccionar artículos</label>
+                <label className="provider-item-label">Seleccionar artículos{provider ? " del proveedor " + provider.name : ""}</label>
                 <div className="options">
                     <SearchBox onSearch={handleSearch} />
                 </div>
