@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
 import '../../../styles/new-edit-form.css';
+import trimFormValues from '../../../utils/trimFormValues';
 
 const NewUser = () => {
     const navigate = useNavigate();
@@ -38,13 +39,18 @@ const NewUser = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const pwd = formData.password;
+        const trimmedFormData = trimFormValues(formData);
+        trimmedFormData.password = pwd;
+
         try {
             const response = await fetch(`${API}/api/v1/user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(trimmedFormData),
             });
 
             if (response.ok) {

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
+import trimFormValues from '../../../utils/trimFormValues';
 
 const NewItem = () => {
     const navigate = useNavigate();
@@ -51,13 +52,16 @@ const NewItem = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const trimmedFormData = trimFormValues(formData);
+
         try {
             const response = await fetch(`${API}/api/v1/article`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(trimmedFormData),
             });
 
             if (response.ok) {

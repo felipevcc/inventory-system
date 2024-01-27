@@ -4,6 +4,7 @@ import './new-category.css'
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
+import trimFormValues from '../../../utils/trimFormValues';
 
 const NewCategory = () => {
     const navigate = useNavigate();
@@ -30,13 +31,16 @@ const NewCategory = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const trimmedFormData = trimFormValues(formData);
+
         try {
             const response = await fetch(`${API}/api/v1/category`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(trimmedFormData),
             });
 
             if (response.ok) {

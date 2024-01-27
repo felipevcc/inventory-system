@@ -81,7 +81,7 @@ const Login = () => {
         try {
             // Check login
             const loginData = {
-                email: username,
+                email: username.trim(),
                 password: password
             }
             const response = await fetch(`${API}/api/v1/user/login`, {

@@ -4,6 +4,7 @@ import userVerification from '../../../utils/userVerification';
 import '../../../styles/new-edit-form.css';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
+import trimFormValues from '../../../utils/trimFormValues';
 
 const EditItem = () => {
     const { id } = useParams();
@@ -81,13 +82,16 @@ const EditItem = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const trimmedFormData = trimFormValues(formData);
+
         try {
             const response = await fetch(`${API}/api/v1/article/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(trimmedFormData),
             });
 
             if (response.ok) {
