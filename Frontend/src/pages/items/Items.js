@@ -89,8 +89,8 @@ const Items = () => {
                                 <td>{article.brand}</td>
                                 <td>{article.category.name}</td>
                                 <td>{article.stock}</td>
-                                <td>${article.purchasePrice} COP</td>
-                                <td>${article.salePrice} COP</td>
+                                <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                                 <td>{article.weight}</td>
                                 <td>{article.provider.name}</td>
                                 <td>

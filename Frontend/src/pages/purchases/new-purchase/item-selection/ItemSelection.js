@@ -119,8 +119,8 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                                 <td>{article.brand}</td>
                                 <td>{article.category.name}</td>
                                 <td>{article.stock}</td>
-                                <td>${article.purchasePrice} COP</td>
-                                <td>${article.salePrice} COP</td>
+                                <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                                 <td>{article.provider.name}</td>
                                 <td>
                                     <label className="checkbox-container">
@@ -176,8 +176,8 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                                                 required
                                             />
                                         </td>
-                                        <td>${article.purchasePrice} COP</td>
-                                        <td>${article.purchasePrice * article.quantity} COP</td>
+                                        <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{(article.purchasePrice * article.quantity).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                                         <td>
                                             <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleCheckboxChange(article, false)} />
                                         </td>
@@ -186,7 +186,7 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                                 <tr>
                                     <td colSpan="5"></td>
                                     <td className="total">TOTAL</td>
-                                    <td className="total">${calculateTotal()} COP</td>
+                                    <td className="total">{calculateTotal().toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                                     <td></td>
                                 </tr>
                             </tbody>
