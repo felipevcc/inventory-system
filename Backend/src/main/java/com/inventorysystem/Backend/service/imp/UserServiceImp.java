@@ -65,6 +65,9 @@ public class UserServiceImp implements UserService {
         pagedUsersResponse.setPageSize(userPage.getSize());
         pagedUsersResponse.setTotalRecords(userPage.getTotalElements());
         pagedUsersResponse.setTotalPages(userPage.getTotalPages());
+        if (pagedUsersResponse.getTotalPages() == 0) {
+            pagedUsersResponse.setTotalPages(1);
+        }
         pagedUsersResponse.setUsers(users);
 
         return pagedUsersResponse;

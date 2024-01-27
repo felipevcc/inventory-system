@@ -8,6 +8,7 @@ import './new-sale.css';
 import ItemSelection from './item-selection/ItemSelection';
 
 const NewSale = () => {
+    localStorage.setItem('selectedView', 'sales');
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({

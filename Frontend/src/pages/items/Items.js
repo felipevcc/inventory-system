@@ -10,6 +10,7 @@ import userVerification from '../../utils/userVerification';
 import { API } from '../../env';
 
 const Items = () => {
+    localStorage.setItem('selectedView', 'items');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
@@ -82,24 +83,30 @@ const Items = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.articles && paginator.articles.map(article => (
-                            <tr key={article.articleId}>
-                                <td>{article.articleId}</td>
-                                <td>{article.name}</td>
-                                <td>{article.brand}</td>
-                                <td>{article.category.name}</td>
-                                <td>{article.stock}</td>
-                                <td>${article.purchasePrice} COP</td>
-                                <td>${article.salePrice} COP</td>
-                                <td>{article.weight}</td>
-                                <td>{article.provider.name}</td>
-                                <td>
-                                    <Link to={`/edit-item/${article.articleId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.articles && paginator.articles.length > 0 ? (
+                            paginator.articles.map(article => (
+                                <tr key={article.articleId}>
+                                    <td>{article.articleId}</td>
+                                    <td>{article.name}</td>
+                                    <td>{article.brand}</td>
+                                    <td>{article.category.name}</td>
+                                    <td>{article.stock}</td>
+                                    <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{article.weight}</td>
+                                    <td>{article.provider.name}</td>
+                                    <td>
+                                        <Link to={`/edit-item/${article.articleId}`}>
+                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="10">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

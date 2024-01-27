@@ -63,6 +63,9 @@ public class ProviderServiceImp implements ProviderService {
         pagedProvidersResponse.setPageSize(providerPage.getSize());
         pagedProvidersResponse.setTotalRecords(providerPage.getTotalElements());
         pagedProvidersResponse.setTotalPages(providerPage.getTotalPages());
+        if (pagedProvidersResponse.getTotalPages() == 0) {
+            pagedProvidersResponse.setTotalPages(1);
+        }
         pagedProvidersResponse.setProviders(providers);
 
         return pagedProvidersResponse;

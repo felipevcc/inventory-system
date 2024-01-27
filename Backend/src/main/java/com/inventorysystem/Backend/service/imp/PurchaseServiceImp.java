@@ -114,6 +114,9 @@ public class PurchaseServiceImp implements PurchaseService {
         pagedPurchasesResponse.setPageSize(purchasePage.getSize());
         pagedPurchasesResponse.setTotalRecords(purchasePage.getTotalElements());
         pagedPurchasesResponse.setTotalPages(purchasePage.getTotalPages());
+        if (pagedPurchasesResponse.getTotalPages() == 0) {
+            pagedPurchasesResponse.setTotalPages(1);
+        }
         pagedPurchasesResponse.setPurchases(purchases);
 
         return pagedPurchasesResponse;

@@ -3,8 +3,10 @@ import '../../../styles/new-edit-form.css';
 import { useNavigate } from 'react-router-dom';
 import userVerification from '../../../utils/userVerification';
 import { API } from '../../../env';
+import trimFormValues from '../../../utils/trimFormValues';
 
 const NewCustomer = () => {
+    localStorage.setItem('selectedView', 'customers');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,13 +37,16 @@ const NewCustomer = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const trimmedFormData = trimFormValues(formData);
+
         try {
             const response = await fetch(`${API}/api/v1/customer`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(trimmedFormData),
             });
 
             if (response.ok) {

@@ -7,6 +7,7 @@ import './new-purchase.css';
 import ItemSelection from './item-selection/ItemSelection';
 
 const NewPurchase = () => {
+    localStorage.setItem('selectedView', 'purchases');
     const { providerId } = useParams();
     const navigate = useNavigate();
 

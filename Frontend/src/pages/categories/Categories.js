@@ -10,6 +10,7 @@ import userVerification from '../../utils/userVerification';
 import { API } from '../../env';
 
 const Categories = () => {
+    localStorage.setItem('selectedView', 'categories');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
@@ -75,17 +76,23 @@ const Categories = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.categories && paginator.categories.map(category => (
-                            <tr key={category.categoryId}>
-                                <td>{category.categoryId}</td>
-                                <td>{category.name}</td>
-                                <td>
-                                    <Link to={`/edit-category/${category.categoryId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.categories && paginator.categories.length > 0 ? (
+                            paginator.categories.map(category => (
+                                <tr key={category.categoryId}>
+                                    <td>{category.categoryId}</td>
+                                    <td>{category.name}</td>
+                                    <td>
+                                        <Link to={`/edit-category/${category.categoryId}`}>
+                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="3">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

@@ -112,28 +112,34 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.articles && paginator.articles.map(article => (
-                            <tr key={article.articleId}>
-                                <td>{article.articleId}</td>
-                                <td>{article.name}</td>
-                                <td>{article.brand}</td>
-                                <td>{article.category.name}</td>
-                                <td>{article.stock}</td>
-                                <td>${article.purchasePrice} COP</td>
-                                <td>${article.salePrice} COP</td>
-                                <td>{article.provider.name}</td>
-                                <td>
-                                    <label className="checkbox-container">
-                                        <input
-                                            type="checkbox"
-                                            checked={!!articles.find(a => a.articleId === article.articleId)}
-                                            onChange={(event) => handleCheckboxChange(article, event.target.checked)}
-                                        />
-                                        <span className="checkmark"></span>
-                                    </label>
-                                </td>
+                        {paginator.articles && paginator.articles.length > 0 ? (
+                            paginator.articles.map(article => (
+                                <tr key={article.articleId}>
+                                    <td>{article.articleId}</td>
+                                    <td>{article.name}</td>
+                                    <td>{article.brand}</td>
+                                    <td>{article.category.name}</td>
+                                    <td>{article.stock}</td>
+                                    <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{article.provider.name}</td>
+                                    <td>
+                                        <label className="checkbox-container">
+                                            <input
+                                                type="checkbox"
+                                                checked={!!articles.find(a => a.articleId === article.articleId)}
+                                                onChange={(event) => handleCheckboxChange(article, event.target.checked)}
+                                            />
+                                            <span className="checkmark"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="9">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
                 <Pagination paginator={paginator} onChangePage={handlePage} />
@@ -176,8 +182,8 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                                                 required
                                             />
                                         </td>
-                                        <td>${article.purchasePrice} COP</td>
-                                        <td>${article.purchasePrice * article.quantity} COP</td>
+                                        <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{(article.purchasePrice * article.quantity).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                                         <td>
                                             <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={() => handleCheckboxChange(article, false)} />
                                         </td>
@@ -186,7 +192,7 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                                 <tr>
                                     <td colSpan="5"></td>
                                     <td className="total">TOTAL</td>
-                                    <td className="total">${calculateTotal()} COP</td>
+                                    <td className="total">{calculateTotal().toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                                     <td></td>
                                 </tr>
                             </tbody>

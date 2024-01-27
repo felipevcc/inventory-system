@@ -10,6 +10,7 @@ import { API } from '../../env';
 import userVerification from '../../utils/userVerification';
 
 const Users = () => {
+    localStorage.setItem('selectedView', 'users');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
@@ -84,21 +85,27 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.users && paginator.users.map(user => (
-                            <tr key={user.userId}>
-                                <td>{user.userId}</td>
-                                <td>{user.name}</td>
-                                <td>{user.username}</td>
-                                <td>{user.phoneNumber}</td>
-                                <td>{user.email}</td>
-                                <td>{user.admin ? 'Sí' : 'No'}</td>
-                                <td>
-                                    <Link to={`/edit-user/${user.userId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.users && paginator.users.length > 0 ? (
+                            paginator.users.map(user => (
+                                <tr key={user.userId}>
+                                    <td>{user.userId}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.username}</td>
+                                    <td>{user.phoneNumber}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.admin ? 'Sí' : 'No'}</td>
+                                    <td>
+                                        <Link to={`/edit-user/${user.userId}`}>
+                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="7">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

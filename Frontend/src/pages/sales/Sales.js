@@ -11,6 +11,7 @@ import { API } from '../../env';
 import formatDate from '../../utils/formatDate';
 
 const Sales = () => {
+    localStorage.setItem('selectedView', 'sales');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
@@ -79,20 +80,26 @@ const Sales = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.sales && paginator.sales.map(sale => (
-                            <tr key={sale.saleId}>
-                                <td>{sale.saleId}</td>
-                                <td>{formatDate(sale.createdAt)}</td>
-                                <td>${sale.totalValue} COP</td>
-                                <td>{sale.customer.name}</td>
-                                <td>{sale.user.name}</td>
-                                <td>
-                                    <Link to={`/detail-sale/${sale.saleId}`}>
-                                        <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.sales && paginator.sales.length > 0 ? (
+                            paginator.sales.map(sale => (
+                                <tr key={sale.saleId}>
+                                    <td>{sale.saleId}</td>
+                                    <td>{formatDate(sale.createdAt)}</td>
+                                    <td>{sale.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{sale.customer.name}</td>
+                                    <td>{sale.user.name}</td>
+                                    <td>
+                                        <Link to={`/detail-sale/${sale.saleId}`}>
+                                            <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

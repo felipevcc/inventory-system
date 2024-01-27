@@ -4,8 +4,10 @@ import userVerification from '../../../utils/userVerification';
 import '../../../styles/new-edit-form.css';
 import './edit-category.css';
 import { API } from '../../../env';
+import trimFormValues from '../../../utils/trimFormValues';
 
 const EditCategory = () => {
+    localStorage.setItem('selectedView', 'categories');
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -42,13 +44,16 @@ const EditCategory = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const trimmedFormData = trimFormValues(formData);
+
         try {
             const response = await fetch(`${API}/api/v1/category/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(trimmedFormData),
             });
 
             if (response.ok) {

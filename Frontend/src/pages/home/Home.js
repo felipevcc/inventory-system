@@ -9,6 +9,7 @@ import { faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDo
 import { API } from '../../env';
 
 const Home = () => {
+    localStorage.setItem('selectedView', 'home');
     const navigate = useNavigate();
 
     const [dataSummary, setDataSummary] = useState(null);
@@ -136,7 +137,7 @@ const Home = () => {
                                 <h4>Último mes</h4>
                                 <p>
                                     {dataSummary && dataSummary.purchases.totalPurchasesInLastMonth > 0
-                                        ? ("$" + dataSummary.purchases.purchaseMoneyInLastMonth + " COP en " + dataSummary.purchases.totalPurchasesInLastMonth + " compra" + (dataSummary.purchases.totalPurchasesInLastMonth > 1 ? "s" : ""))
+                                        ? (dataSummary.purchases.purchaseMoneyInLastMonth.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) + " en " + dataSummary.purchases.totalPurchasesInLastMonth + " compra" + (dataSummary.purchases.totalPurchasesInLastMonth > 1 ? "s" : ""))
                                         : "No hay compras en el último mes"
                                     }
                                 </p>
@@ -145,7 +146,7 @@ const Home = () => {
                                 <h4>Última semana</h4>
                                 <p>
                                     {dataSummary && dataSummary.purchases.totalPurchasesInLastWeek > 0
-                                        ? ("$" + dataSummary.purchases.purchaseMoneyInLastWeek + " COP en " + dataSummary.purchases.totalPurchasesInLastWeek + " compra" + (dataSummary.purchases.totalPurchasesInLastWeek > 1 ? "s" : ""))
+                                        ? (dataSummary.purchases.purchaseMoneyInLastWeek.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) + " en " + dataSummary.purchases.totalPurchasesInLastWeek + " compra" + (dataSummary.purchases.totalPurchasesInLastWeek > 1 ? "s" : ""))
                                         : "No hay compras en la última semana"
                                     }
                                 </p>
@@ -154,7 +155,7 @@ const Home = () => {
                                 <h4>Último año</h4>
                                 <p>
                                     {dataSummary && dataSummary.purchases.totalPurchasesInLastYear > 0
-                                        ? ("$" + dataSummary.purchases.purchaseMoneyInLastYear + " COP en " + dataSummary.purchases.totalPurchasesInLastYear + " compra" + (dataSummary.purchases.totalPurchasesInLastYear > 1 ? "s" : ""))
+                                        ? (dataSummary.purchases.purchaseMoneyInLastYear.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) + " en " + dataSummary.purchases.totalPurchasesInLastYear + " compra" + (dataSummary.purchases.totalPurchasesInLastYear > 1 ? "s" : ""))
                                         : "No hay compras en el último año"
                                     }
                                 </p>
@@ -182,7 +183,7 @@ const Home = () => {
                                 <h4>Último mes</h4>
                                 <p>
                                     {dataSummary && dataSummary.sales.totalSalesInLastMonth > 0
-                                        ? ("$" + dataSummary.sales.saleMoneyInLastMonth + " COP en " + dataSummary.sales.totalSalesInLastMonth + " venta" + (dataSummary.sales.totalSalesInLastMonth > 1 ? "s" : ""))
+                                        ? (dataSummary.sales.saleMoneyInLastMonth.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) + " en " + dataSummary.sales.totalSalesInLastMonth + " venta" + (dataSummary.sales.totalSalesInLastMonth > 1 ? "s" : ""))
                                         : "No hay ventas en el último mes"
                                     }
                                 </p>
@@ -191,7 +192,7 @@ const Home = () => {
                                 <h4>Última semana</h4>
                                 <p>
                                     {dataSummary && dataSummary.sales.totalSalesInLastWeek > 0
-                                        ? ("$" + dataSummary.sales.saleMoneyInLastWeek + " COP en " + dataSummary.sales.totalSalesInLastWeek + " venta" + (dataSummary.sales.totalSalesInLastWeek > 1 ? "s" : ""))
+                                        ? (dataSummary.sales.saleMoneyInLastWeek.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) + " en " + dataSummary.sales.totalSalesInLastWeek + " venta" + (dataSummary.sales.totalSalesInLastWeek > 1 ? "s" : ""))
                                         : "No hay ventas en la última semana"
                                     }
                                 </p>
@@ -200,7 +201,7 @@ const Home = () => {
                                 <h4>Último año</h4>
                                 <p>
                                     {dataSummary && dataSummary.sales.totalSalesInLastYear > 0
-                                        ? ("$" + dataSummary.sales.saleMoneyInLastYear + " COP en " + dataSummary.sales.totalSalesInLastYear + " venta" + (dataSummary.sales.totalSalesInLastYear > 1 ? "s" : ""))
+                                        ? (dataSummary.sales.saleMoneyInLastYear.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) + " en " + dataSummary.sales.totalSalesInLastYear + " venta" + (dataSummary.sales.totalSalesInLastYear > 1 ? "s" : ""))
                                         : "No hay ventas en el último año"
                                     }
                                 </p>

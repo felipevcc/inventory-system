@@ -74,6 +74,9 @@ public class ArticleServiceImp implements ArticleService {
         pagedArticlesResponse.setPageSize(articlePage.getSize());
         pagedArticlesResponse.setTotalRecords(articlePage.getTotalElements());
         pagedArticlesResponse.setTotalPages(articlePage.getTotalPages());
+        if (pagedArticlesResponse.getTotalPages() == 0) {
+            pagedArticlesResponse.setTotalPages(1);
+        }
         pagedArticlesResponse.setArticles(articles);
 
         return pagedArticlesResponse;
