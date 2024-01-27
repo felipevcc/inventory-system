@@ -79,20 +79,26 @@ const Purchases = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.purchases && paginator.purchases.map(purchase => (
-                            <tr key={purchase.purchaseId}>
-                                <td>{purchase.purchaseId}</td>
-                                <td>{formatDate(purchase.createdAt)}</td>
-                                <td>{purchase.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                <td>{purchase.provider.name}</td>
-                                <td>{purchase.user.name}</td>
-                                <td>
-                                    <Link to={`/detail-purchase/${purchase.purchaseId}`}>
-                                        <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.purchases && paginator.purchases.length > 0 ? (
+                            paginator.purchases.map(purchase => (
+                                <tr key={purchase.purchaseId}>
+                                    <td>{purchase.purchaseId}</td>
+                                    <td>{formatDate(purchase.createdAt)}</td>
+                                    <td>{purchase.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{purchase.provider.name}</td>
+                                    <td>{purchase.user.name}</td>
+                                    <td>
+                                        <Link to={`/detail-purchase/${purchase.purchaseId}`}>
+                                            <FontAwesomeIcon icon={faShoppingBag} className="details-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

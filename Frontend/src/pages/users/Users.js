@@ -84,21 +84,27 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.users && paginator.users.map(user => (
-                            <tr key={user.userId}>
-                                <td>{user.userId}</td>
-                                <td>{user.name}</td>
-                                <td>{user.username}</td>
-                                <td>{user.phoneNumber}</td>
-                                <td>{user.email}</td>
-                                <td>{user.admin ? 'Sí' : 'No'}</td>
-                                <td>
-                                    <Link to={`/edit-user/${user.userId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.users && paginator.users.length > 0 ? (
+                            paginator.users.map(user => (
+                                <tr key={user.userId}>
+                                    <td>{user.userId}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.username}</td>
+                                    <td>{user.phoneNumber}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.admin ? 'Sí' : 'No'}</td>
+                                    <td>
+                                        <Link to={`/edit-user/${user.userId}`}>
+                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="7">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

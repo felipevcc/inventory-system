@@ -61,6 +61,9 @@ public class CategoryServiceImp implements CategoryService {
         pagedCategoriesResponse.setPageSize(categoryPage.getSize());
         pagedCategoriesResponse.setTotalRecords(categoryPage.getTotalElements());
         pagedCategoriesResponse.setTotalPages(categoryPage.getTotalPages());
+        if (pagedCategoriesResponse.getTotalPages() == 0) {
+            pagedCategoriesResponse.setTotalPages(1);
+        }
         pagedCategoriesResponse.setCategories(categories);
 
         return pagedCategoriesResponse;

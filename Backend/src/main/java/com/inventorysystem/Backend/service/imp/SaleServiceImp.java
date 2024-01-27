@@ -114,6 +114,9 @@ public class SaleServiceImp implements SaleService {
         pagedSalesResponse.setPageSize(salePage.getSize());
         pagedSalesResponse.setTotalRecords(salePage.getTotalElements());
         pagedSalesResponse.setTotalPages(salePage.getTotalPages());
+        if (pagedSalesResponse.getTotalPages() == 0) {
+            pagedSalesResponse.setTotalPages(1);
+        }
         pagedSalesResponse.setSales(sales);
 
         return pagedSalesResponse;

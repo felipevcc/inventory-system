@@ -68,6 +68,9 @@ public class CustomerServiceImp implements CustomerService {
         pagedCustomersResponse.setPageSize(customerPage.getSize());
         pagedCustomersResponse.setTotalRecords(customerPage.getTotalElements());
         pagedCustomersResponse.setTotalPages(customerPage.getTotalPages());
+        if (pagedCustomersResponse.getTotalPages() == 0) {
+            pagedCustomersResponse.setTotalPages(1);
+        }
         pagedCustomersResponse.setCustomers(customers);
 
         return pagedCustomersResponse;

@@ -79,20 +79,26 @@ const Sales = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.sales && paginator.sales.map(sale => (
-                            <tr key={sale.saleId}>
-                                <td>{sale.saleId}</td>
-                                <td>{formatDate(sale.createdAt)}</td>
-                                <td>{sale.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                <td>{sale.customer.name}</td>
-                                <td>{sale.user.name}</td>
-                                <td>
-                                    <Link to={`/detail-sale/${sale.saleId}`}>
-                                        <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.sales && paginator.sales.length > 0 ? (
+                            paginator.sales.map(sale => (
+                                <tr key={sale.saleId}>
+                                    <td>{sale.saleId}</td>
+                                    <td>{formatDate(sale.createdAt)}</td>
+                                    <td>{sale.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                    <td>{sale.customer.name}</td>
+                                    <td>{sale.user.name}</td>
+                                    <td>
+                                        <Link to={`/detail-sale/${sale.saleId}`}>
+                                            <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

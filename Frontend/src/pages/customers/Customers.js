@@ -81,23 +81,29 @@ const Customers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.customers && paginator.customers.map(customer => (
-                            <tr key={customer.customerId}>
-                                <td>{customer.customerId}</td>
-                                <td>{customer.name}</td>
-                                <td>{customer.phoneNumber}</td>
-                                <td>{customer.email}</td>
-                                <td>{customer.document}</td>
-                                <td>{customer.address}</td>
-                                <td>{customer.state}</td>
-                                <td>{customer.city}</td>
-                                <td>
-                                    <Link to={`/edit-customer/${customer.customerId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.customers && paginator.customers.length > 0 ? (
+                            paginator.customers.map(customer => (
+                                <tr key={customer.customerId}>
+                                    <td>{customer.customerId}</td>
+                                    <td>{customer.name}</td>
+                                    <td>{customer.phoneNumber}</td>
+                                    <td>{customer.email}</td>
+                                    <td>{customer.document}</td>
+                                    <td>{customer.address}</td>
+                                    <td>{customer.state}</td>
+                                    <td>{customer.city}</td>
+                                    <td>
+                                        <Link to={`/edit-customer/${customer.customerId}`}>
+                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="9">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 

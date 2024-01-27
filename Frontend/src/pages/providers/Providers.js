@@ -77,19 +77,25 @@ const Providers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginator.providers && paginator.providers.map(provider => (
-                            <tr key={provider.providerId}>
-                                <td>{provider.providerId}</td>
-                                <td>{provider.name}</td>
-                                <td>{provider.phoneNumber}</td>
-                                <td>{provider.email}</td>
-                                <td>
-                                    <Link to={`/edit-provider/${provider.providerId}`}>
-                                        <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                    </Link>
-                                </td>
+                        {paginator.providers && paginator.providers.length > 0 ? (
+                            paginator.providers.map(provider => (
+                                <tr key={provider.providerId}>
+                                    <td>{provider.providerId}</td>
+                                    <td>{provider.name}</td>
+                                    <td>{provider.phoneNumber}</td>
+                                    <td>{provider.email}</td>
+                                    <td>
+                                        <Link to={`/edit-provider/${provider.providerId}`}>
+                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="5">No hay resultados</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
 
