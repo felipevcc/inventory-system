@@ -7,6 +7,7 @@ import SearchSelect from '../../../components/search-select/SearchSelect';
 import trimFormValues from '../../../utils/trimFormValues';
 
 const NewItem = () => {
+    localStorage.setItem('selectedView', 'items');
     const navigate = useNavigate();
 
     useEffect(() => {

@@ -9,6 +9,7 @@ import { faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDo
 import { API } from '../../env';
 
 const Home = () => {
+    localStorage.setItem('selectedView', 'home');
     const navigate = useNavigate();
 
     const [dataSummary, setDataSummary] = useState(null);

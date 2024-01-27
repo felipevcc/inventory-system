@@ -9,6 +9,7 @@ import SearchSelect from '../../../components/search-select/SearchSelect';
 import './select-provider.css';
 
 const SelectProvider = () => {
+    localStorage.setItem('selectedView', 'purchases');
     const navigate = useNavigate();
 
     const [providerId, setProviderId] = useState(0);

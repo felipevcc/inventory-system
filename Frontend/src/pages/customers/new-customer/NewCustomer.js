@@ -6,6 +6,7 @@ import { API } from '../../../env';
 import trimFormValues from '../../../utils/trimFormValues';
 
 const NewCustomer = () => {
+    localStorage.setItem('selectedView', 'customers');
     const navigate = useNavigate();
 
     useEffect(() => {

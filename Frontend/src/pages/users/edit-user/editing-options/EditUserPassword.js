@@ -5,6 +5,7 @@ import { API } from '../../../../env';
 import '../../../../styles/new-edit-form.css';
 
 const EditUserPassword = () => {
+    localStorage.setItem('selectedView', 'users');
     const { id } = useParams();
     const navigate = useNavigate();
 

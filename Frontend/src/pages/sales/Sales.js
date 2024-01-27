@@ -11,6 +11,7 @@ import { API } from '../../env';
 import formatDate from '../../utils/formatDate';
 
 const Sales = () => {
+    localStorage.setItem('selectedView', 'sales');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;

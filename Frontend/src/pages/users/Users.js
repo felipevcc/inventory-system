@@ -10,6 +10,7 @@ import { API } from '../../env';
 import userVerification from '../../utils/userVerification';
 
 const Users = () => {
+    localStorage.setItem('selectedView', 'users');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;

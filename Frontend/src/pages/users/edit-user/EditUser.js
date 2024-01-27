@@ -5,6 +5,7 @@ import '../../../styles/new-edit-form.css';
 import './edit-user.css';
 
 const EditUser = () => {
+    localStorage.setItem('selectedView', 'users');
     const { id } = useParams();
     const navigate = useNavigate();
 

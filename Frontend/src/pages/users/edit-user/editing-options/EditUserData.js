@@ -6,6 +6,7 @@ import '../../../../styles/new-edit-form.css';
 import trimFormValues from '../../../../utils/trimFormValues';
 
 const EditUserData = () => {
+    localStorage.setItem('selectedView', 'users');
     const { id } = useParams();
     const navigate = useNavigate();
 

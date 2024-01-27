@@ -7,6 +7,7 @@ import { API } from '../../../env';
 import trimFormValues from '../../../utils/trimFormValues';
 
 const EditCategory = () => {
+    localStorage.setItem('selectedView', 'categories');
     const { id } = useParams();
     const navigate = useNavigate();
 

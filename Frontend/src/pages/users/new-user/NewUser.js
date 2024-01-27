@@ -6,6 +6,7 @@ import '../../../styles/new-edit-form.css';
 import trimFormValues from '../../../utils/trimFormValues';
 
 const NewUser = () => {
+    localStorage.setItem('selectedView', 'users');
     const navigate = useNavigate();
 
     useEffect(() => {

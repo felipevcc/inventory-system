@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faHouse, faTags, faBoxesStacked, faTruckFast, faBasketShopping, faUsers, faHandHoldingDollar, faUsersGear } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
 import './sidebar.css';
 
 const Sidebar = () => {
+    const location = useLocation();
 
     const [user, setUser] = useState(null);
 
@@ -16,19 +17,15 @@ const Sidebar = () => {
     };
 
     // Selected view
-    const storedSelectedView = localStorage.getItem('selectedView');
-    const [selectedView, setSelectedView] = useState(storedSelectedView || 'home');
-    const handleSelectedView = (view) => {
-        setSelectedView(view);
-    };
+    const [selectedView, setSelectedView] = useState(localStorage.getItem('selectedView') || 'home');
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('user')));
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('selectedView', selectedView); // Save the selected option to local storage
-    }, [selectedView]);
+        setSelectedView(localStorage.getItem('selectedView'));
+    }, [location]);
 
     return (
         <nav className={`sidebar-container ${isSidebarOpen ? 'close' : ''}`}>
@@ -52,43 +49,43 @@ const Sidebar = () => {
                 <div className="menu">
                     <ul className="menu-links">
                         <li className={`nav-link ${selectedView === "home" ? "selected" : ""}`}>
-                            <Link to="/home" onClick={() => handleSelectedView("home")}>
+                            <Link to="/home">
                                 <FontAwesomeIcon icon={faHouse} className="icon" />
                                 <span className="text nav-text">Inicio</span>
                             </Link>
                         </li>
                         <li className={`nav-link ${selectedView === "categories" ? "selected" : ""}`}>
-                            <Link to="/categories" onClick={() => handleSelectedView("categories")}>
+                            <Link to="/categories">
                                 <FontAwesomeIcon icon={faTags} className="icon" />
                                 <span className="text nav-text">Categorías</span>
                             </Link>
                         </li>
                         <li className={`nav-link ${selectedView === "items" ? "selected" : ""}`}>
-                            <Link to="/items" onClick={() => handleSelectedView("items")}>
+                            <Link to="/items">
                                 <FontAwesomeIcon icon={faBoxesStacked} className="icon" />
                                 <span className="text nav-text">Artículos</span>
                             </Link>
                         </li>
                         <li className={`nav-link ${selectedView === "providers" ? "selected" : ""}`}>
-                            <Link to="/providers" onClick={() => handleSelectedView("providers")}>
+                            <Link to="/providers">
                                 <FontAwesomeIcon icon={faTruckFast} className="icon" />
                                 <span className="text nav-text">Proveedores</span>
                             </Link>
                         </li>
                         <li className={`nav-link ${selectedView === "purchases" ? "selected" : ""}`}>
-                            <Link to="/purchases" onClick={() => handleSelectedView("purchases")}>
+                            <Link to="/purchases">
                                 <FontAwesomeIcon icon={faBasketShopping} className="icon" />
                                 <span className="text nav-text">Compras</span>
                             </Link>
                         </li>
                         <li className={`nav-link ${selectedView === "customers" ? "selected" : ""}`}>
-                            <Link to="/customers" onClick={() => handleSelectedView("customers")}>
+                            <Link to="/customers">
                                 <FontAwesomeIcon icon={faUsers} className="icon" />
                                 <span className="text nav-text">Clientes</span>
                             </Link>
                         </li>
                         <li className={`nav-link ${selectedView === "sales" ? "selected" : ""}`}>
-                            <Link to="/sales" onClick={() => handleSelectedView("sales")}>
+                            <Link to="/sales">
                                 <FontAwesomeIcon icon={faHandHoldingDollar} className="icon" />
                                 <span className="text nav-text">Ventas</span>
                             </Link>
@@ -100,7 +97,7 @@ const Sidebar = () => {
                     <div className="bottom-content">
                         <ul>
                             <li className={`${selectedView === "users" ? "selected" : ""}`}>
-                                <Link to="/users" onClick={() => handleSelectedView("users")}>
+                                <Link to="/users">
                                     <FontAwesomeIcon icon={faUsersGear} className="icon" />
                                     <span className="text nav-text">Usuarios</span>
                                 </Link>

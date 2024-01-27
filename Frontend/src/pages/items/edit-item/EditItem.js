@@ -7,6 +7,7 @@ import SearchSelect from '../../../components/search-select/SearchSelect';
 import trimFormValues from '../../../utils/trimFormValues';
 
 const EditItem = () => {
+    localStorage.setItem('selectedView', 'items');
     const { id } = useParams();
     const navigate = useNavigate();
 

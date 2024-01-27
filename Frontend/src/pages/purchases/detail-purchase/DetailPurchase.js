@@ -5,6 +5,7 @@ import { API } from '../../../env';
 import './detail-purchase.css';
 
 const DetailPurchase = () => {
+    localStorage.setItem('selectedView', 'purchases');
     const { id } = useParams();
     const navigate = useNavigate();
 
