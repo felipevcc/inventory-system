@@ -40,6 +40,8 @@ import Navbar from './components/navbar/Navbar';
 import ForgotLogin from './pages/login/forgot-login/ForgotLogin';
 import AccessValidation from './pages/login/forgot-login/AccessValidation';
 
+import NotFound from './pages/not-found/NotFound';
+
 import userVerification from './utils/userVerification';
 
 function App() {
@@ -159,6 +161,7 @@ const MainLayout = () => {
                     <Route path="/edit-user-pass/:id" element={
                         <EditUserPassword />
                     } />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
         </>
