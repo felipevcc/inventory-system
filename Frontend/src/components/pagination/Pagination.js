@@ -6,6 +6,8 @@ import './pagination.css';
 const Pagination = ({paginator, onChangePage}) => {
     if (!paginator) {
         return null;
+    } else if (paginator.page > paginator.totalPages) {
+        onChangePage(paginator.totalPages);
     }
 
     const onMaxLeft = () => {
