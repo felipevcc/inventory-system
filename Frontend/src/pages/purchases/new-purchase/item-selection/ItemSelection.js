@@ -149,7 +149,7 @@ const ItemSelection = ({ onSelectionChange, provider }) => {
                 <div className="purchaseSummary">
                     <div className="top-purchase">
                         <hr></hr>
-                        <label>Resumen de la venta</label>
+                        <label>Resumen de la compra</label>
                     </div>
                     <div className="table-container">
                         <table className="table">

@@ -68,15 +68,15 @@ const DetailPurchase = () => {
                                 <td>{articleData.article.name}</td>
                                 <td>{articleData.article.brand}</td>
                                 <td>{articleData.articleQuantity}</td>
-                                <td>${articleData.price / articleData.articleQuantity} COP</td>
-                                <td>${articleData.price} COP</td>
+                                <td>{(articleData.price / articleData.articleQuantity).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                <td>{articleData.price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                             </tr>
                         ))}
                         {purchase &&
                             <tr>
                                 <td colSpan="4"></td>
                                 <td className="total">TOTAL</td>
-                                <td className="total">${purchase.totalValue} COP</td>
+                                <td className="total">{purchase.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
                             </tr>
                         }
                     </tbody>

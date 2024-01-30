@@ -94,11 +94,13 @@ const NewSale = () => {
 
                     <ItemSelection onSelectionChange={onSelectionChange} />
 
-                    <div className="button-container">
-                        <button className="btn" type="submit">
-                            Crear
-                        </button>
-                    </div>
+                    {formData.articles.length > 0 && (
+                        <div className="button-container">
+                            <button className="btn" type="submit">
+                                Crear
+                            </button>
+                        </div>
+                    )}
                 </form>
             </div>
 

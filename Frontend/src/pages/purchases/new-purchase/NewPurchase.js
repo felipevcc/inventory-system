@@ -96,11 +96,13 @@ const NewPurchase = () => {
 
                     <ItemSelection onSelectionChange={onSelectionChange} provider={provider} />
 
-                    <div className="button-container">
-                        <button className="btn" type="submit">
-                            Crear
-                        </button>
-                    </div>
+                    {formData.articles.length > 0 && (
+                        <div className="button-container">
+                            <button className="btn" type="submit">
+                                Crear
+                            </button>
+                        </div>
+                    )}
                 </form>
             </div>
 
