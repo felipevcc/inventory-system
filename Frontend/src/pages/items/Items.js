@@ -8,12 +8,15 @@ import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
 import userVerification from '../../utils/userVerification';
 import { API } from '../../env';
+import Loading from '../../components/loading/Loading';
 
 const Items = () => {
     localStorage.setItem('selectedView', 'items');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [paginator, setPaginator] = useState({});
 
@@ -40,7 +43,10 @@ const Items = () => {
         (async () => {
             await fetch(url)
                 .then(response => response.json())
-                .then(data => setPaginator(data))
+                .then(data => {
+                    setPaginator(data);
+                    setIsLoading(false);
+                })
                 .catch(error => console.log(error))
         })();
     }, [navigate, query, page]);
@@ -59,59 +65,63 @@ const Items = () => {
             <div className="text">Artículos</div>
 
             <div className="options">
-                <SearchBox onSearch={handleSearch} />
+                <SearchBox onSearch={handleSearch} disabled={isLoading} />
                 <Link to="/new-item" className="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
                     <span className="text">Nuevo artículo</span>
                 </Link>
             </div>
 
-            <div className="table-container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>MARCA</th>
-                            <th>CATEGORIA</th>
-                            <th>STOCK</th>
-                            <th>PRECIO-COMPRA</th>
-                            <th>PRECIO-VENTA</th>
-                            <th>PESO</th>
-                            <th>PROVEEDOR</th>
-                            <th>EDITAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginator.articles && paginator.articles.length > 0 ? (
-                            paginator.articles.map(article => (
-                                <tr key={article.articleId}>
-                                    <td>{article.articleId}</td>
-                                    <td>{article.name}</td>
-                                    <td>{article.brand}</td>
-                                    <td>{article.category.name}</td>
-                                    <td>{article.stock}</td>
-                                    <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                    <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                    <td>{article.weight}</td>
-                                    <td>{article.provider.name}</td>
-                                    <td>
-                                        <Link to={`/edit-item/${article.articleId}`}>
-                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+            {!isLoading ? (
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="10">No hay resultados</td>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>MARCA</th>
+                                <th>CATEGORIA</th>
+                                <th>STOCK</th>
+                                <th>PRECIO-COMPRA</th>
+                                <th>PRECIO-VENTA</th>
+                                <th>PESO</th>
+                                <th>PROVEEDOR</th>
+                                <th>EDITAR</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {paginator.articles && paginator.articles.length > 0 ? (
+                                paginator.articles.map(article => (
+                                    <tr key={article.articleId}>
+                                        <td>{article.articleId}</td>
+                                        <td>{article.name}</td>
+                                        <td>{article.brand}</td>
+                                        <td>{article.category.name}</td>
+                                        <td>{article.stock}</td>
+                                        <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{article.weight}</td>
+                                        <td>{article.provider.name}</td>
+                                        <td>
+                                            <Link to={`/edit-item/${article.articleId}`}>
+                                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="10">No hay resultados</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
 
-                <Pagination paginator={paginator} onChangePage={handlePage} />
-            </div>
+                    <Pagination paginator={paginator} onChangePage={handlePage} />
+                </div>
+            ) : (
+                <Loading />
+            )}
 
         </div>
     );

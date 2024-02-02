@@ -8,12 +8,15 @@ import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
 import userVerification from '../../utils/userVerification';
 import { API } from '../../env';
+import Loading from '../../components/loading/Loading';
 
 const Categories = () => {
     localStorage.setItem('selectedView', 'categories');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [paginator, setPaginator] = useState({});
 
@@ -40,7 +43,10 @@ const Categories = () => {
         (async () => {
             await fetch(url)
                 .then(response => response.json())
-                .then(data => setPaginator(data))
+                .then(data => {
+                    setPaginator(data);
+                    setIsLoading(false);
+                })
                 .catch(error => console.log(error))
         })();
     }, [navigate, query, page]);
@@ -59,46 +65,49 @@ const Categories = () => {
             <div className="text">Categorías</div>
 
             <div className="options">
-                <SearchBox onSearch={handleSearch} />
+                <SearchBox onSearch={handleSearch} disabled={isLoading} />
                 <Link to="/new-category" className="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
                     <span className="text">Nueva categoría</span>
                 </Link>
             </div>
 
-            <div className="table-container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>EDITAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginator.categories && paginator.categories.length > 0 ? (
-                            paginator.categories.map(category => (
-                                <tr key={category.categoryId}>
-                                    <td>{category.categoryId}</td>
-                                    <td>{category.name}</td>
-                                    <td>
-                                        <Link to={`/edit-category/${category.categoryId}`}>
-                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+            {!isLoading ? (
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="3">No hay resultados</td>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>EDITAR</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {paginator.categories && paginator.categories.length > 0 ? (
+                                paginator.categories.map(category => (
+                                    <tr key={category.categoryId}>
+                                        <td>{category.categoryId}</td>
+                                        <td>{category.name}</td>
+                                        <td>
+                                            <Link to={`/edit-category/${category.categoryId}`}>
+                                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3">No hay resultados</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
 
-                <Pagination paginator={paginator} onChangePage={handlePage} />
-            </div>
-
+                    <Pagination paginator={paginator} onChangePage={handlePage} />
+                </div>
+            ) : (
+                <Loading />
+            )}
 
         </div>
     );

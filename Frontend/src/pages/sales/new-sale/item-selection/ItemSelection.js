@@ -7,11 +7,14 @@ import { API } from '../../../../env';
 import userVerification from '../../../../utils/userVerification';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import Loading from '../../../../components/loading/Loading';
 
 const ItemSelection = ({ onSelectionChange }) => {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [paginator, setPaginator] = useState({});
 
@@ -40,7 +43,10 @@ const ItemSelection = ({ onSelectionChange }) => {
         (async () => {
             await fetch(url)
                 .then(response => response.json())
-                .then(data => setPaginator(data))
+                .then(data => {
+                    setPaginator(data);
+                    setIsLoading(false);
+                })
                 .catch(error => console.log(error))
         })();
     }, [navigate, query, page]);
@@ -88,57 +94,62 @@ const ItemSelection = ({ onSelectionChange }) => {
             <div className="top-articles">
                 <label>Seleccionar artículos</label>
                 <div className="options">
-                    <SearchBox onSearch={handleSearch} />
+                    <SearchBox onSearch={handleSearch} disabled={isLoading} />
                 </div>
             </div>
-            <div className="table-container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>MARCA</th>
-                            <th>CATEGORIA</th>
-                            <th>STOCK</th>
-                            <th>PRECIO-COMPRA</th>
-                            <th>PRECIO-VENTA</th>
-                            <th>PROVEEDOR</th>
-                            <th>SELECCIONAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginator.articles && paginator.articles.length > 0 ? (
-                            paginator.articles.map(article => (
-                                <tr key={article.articleId}>
-                                    <td>{article.articleId}</td>
-                                    <td>{article.name}</td>
-                                    <td>{article.brand}</td>
-                                    <td>{article.category.name}</td>
-                                    <td>{article.stock}</td>
-                                    <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                    <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                    <td>{article.provider.name}</td>
-                                    <td>
-                                        <label className="checkbox-container">
-                                            <input
-                                                type="checkbox"
-                                                checked={!!articles.find(a => a.articleId === article.articleId)}
-                                                onChange={(event) => handleCheckboxChange(article, event.target.checked)}
-                                            />
-                                            <span className="checkmark"></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+
+            {!isLoading ? (
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="9">No hay resultados</td>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>MARCA</th>
+                                <th>CATEGORIA</th>
+                                <th>STOCK</th>
+                                <th>PRECIO-COMPRA</th>
+                                <th>PRECIO-VENTA</th>
+                                <th>PROVEEDOR</th>
+                                <th>SELECCIONAR</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
-                <Pagination paginator={paginator} onChangePage={handlePage} />
-            </div>
+                        </thead>
+                        <tbody>
+                            {paginator.articles && paginator.articles.length > 0 ? (
+                                paginator.articles.map(article => (
+                                    <tr key={article.articleId}>
+                                        <td>{article.articleId}</td>
+                                        <td>{article.name}</td>
+                                        <td>{article.brand}</td>
+                                        <td>{article.category.name}</td>
+                                        <td>{article.stock}</td>
+                                        <td>{article.purchasePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{article.salePrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{article.provider.name}</td>
+                                        <td>
+                                            <label className="checkbox-container">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={!!articles.find(a => a.articleId === article.articleId)}
+                                                    onChange={(event) => handleCheckboxChange(article, event.target.checked)}
+                                                />
+                                                <span className="checkmark"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="9">No hay resultados</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <Pagination paginator={paginator} onChangePage={handlePage} />
+                </div>
+            ) : (
+                <Loading />
+            )}
 
             {articles.length > 0 && (
                 <div className="saleSummary">

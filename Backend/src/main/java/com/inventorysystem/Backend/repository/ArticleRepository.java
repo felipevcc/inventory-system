@@ -20,10 +20,10 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Procedure(procedureName = "Proc_get_all_articles")
     List<Article> getAllArticles();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM ARTICLE WHERE provider_id = :providerId")
+    @Query(nativeQuery = true, value = "SELECT * FROM article WHERE provider_id = :providerId")
     Page<Article> findAllArticlesByProvider(@Param("providerId") Long providerId, Pageable pageable);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM ARTICLE " +
+    @Query(nativeQuery = true, value = "SELECT * FROM article " +
         "WHERE provider_id = :providerId " +
         "AND (CAST(article_id AS CHAR) = :searchTerm OR LOWER(name) LIKE %:searchTerm% OR LOWER(brand) LIKE %:searchTerm%)")
     Page<Article> findAllArticlesByProviderAndTerm(@Param("providerId") Long providerId, @Param("searchTerm") String searchTerm, Pageable pageable);

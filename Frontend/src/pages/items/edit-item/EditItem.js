@@ -5,11 +5,15 @@ import '../../../styles/new-edit-form.css';
 import { API } from '../../../env';
 import SearchSelect from '../../../components/search-select/SearchSelect';
 import trimFormValues from '../../../utils/trimFormValues';
+import Loading from '../../../components/loading/Loading';
 
 const EditItem = () => {
     localStorage.setItem('selectedView', 'items');
     const { id } = useParams();
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -41,6 +45,10 @@ const EditItem = () => {
             await fetch(url)
                 .then(response => response.json())
                 .then(data => {
+                    if (!data || data.error) {
+                        navigate('/items');
+                        return;
+                    }
                     setFormData({
                         name: data.name,
                         brand: data.brand,
@@ -55,8 +63,13 @@ const EditItem = () => {
                         provider: data.provider,
                         category: data.category
                     });
+                    setIsLoading(false);
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    console.log(error);
+                    navigate('/items');
+                    return;
+                })
         })();
     }, [id, navigate]);
 
@@ -86,6 +99,7 @@ const EditItem = () => {
 
         const trimmedFormData = trimFormValues(formData);
 
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/article/${id}`, {
                 method: 'PUT',
@@ -105,123 +119,128 @@ const EditItem = () => {
             console.log(error);
             alert("Error al actualizar el artículo");
         }
+        setSubmitDisabled(false);
     }
 
     return (
         <div className="editItem-container">
 
             <div className="text">Editar Artículo</div>
-            <div className="form-container">
-                <form onSubmit={handleSubmit}>
-                    <div className="grid-form">
-                        <div className="form-item">
-                            <label htmlFor="name">Nombre</label>
-                            <input
-                                className="input"
-                                type="text"
-                                id="name"
-                                maxLength="45"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <div className="two-together">
+            {!isLoading ? (
+                <div className="form-container">
+                    <form onSubmit={handleSubmit}>
+                        <div className="grid-form">
                             <div className="form-item">
-                                <label htmlFor="stock">Stock</label>
-                                <input 
-                                    className="input"
-                                    type="number"
-                                    id="stock"
-                                    min="0"
-                                    value={formData.stock}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="form-item">
-                                <label htmlFor="weight">Peso</label>
+                                <label htmlFor="name">Nombre</label>
                                 <input
                                     className="input"
                                     type="text"
-                                    id="weight"
-                                    maxLength="15"
-                                    value={formData.weight}
+                                    id="name"
+                                    maxLength="45"
+                                    value={formData.name}
                                     onChange={handleChange}
                                     required
                                 />
                             </div>
-                        </div>
 
-                        <div className="form-item">
-                            <label htmlFor="brand">Marca</label>
-                            <input
-                                className="input"
-                                type="text"
-                                id="brand"
-                                maxLength="45"
-                                value={formData.brand}
-                                onChange={handleChange}
-                                required
+                            <div className="two-together">
+                                <div className="form-item">
+                                    <label htmlFor="stock">Stock</label>
+                                    <input 
+                                        className="input"
+                                        type="number"
+                                        id="stock"
+                                        min="0"
+                                        value={formData.stock}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-item">
+                                    <label htmlFor="weight">Peso</label>
+                                    <input
+                                        className="input"
+                                        type="text"
+                                        id="weight"
+                                        maxLength="15"
+                                        value={formData.weight}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-item">
+                                <label htmlFor="brand">Marca</label>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    id="brand"
+                                    maxLength="45"
+                                    value={formData.brand}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+
+                            <div className="two-together">
+                                <div className="form-item">
+                                    <label htmlFor="purchasePrice">Precio compra</label>
+                                    <input
+                                        className="input"
+                                        type="number"
+                                        id="purchasePrice"
+                                        min="0"
+                                        value={formData.purchasePrice}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-item">
+                                    <label htmlFor="salePrice">Precio venta</label>
+                                    <input
+                                        className="input"
+                                        type="number"
+                                        id="salePrice"
+                                        min="0"
+                                        value={formData.salePrice}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <SearchSelect
+                                label="Proveedor"
+                                placeholder="Buscar proveedor..."
+                                onSelected={handleProviderSelect}
+                                apiUrl={`${API}/api/v1/provider`}
+                                optionsAttr="providers"
+                                initialSelectedOption={relationalData.provider}
+                                isRequired={true}
+                            />
+
+                            <SearchSelect
+                                label="Categoría"
+                                placeholder="Buscar categoría..."
+                                onSelected={handleCategorySelect}
+                                apiUrl={`${API}/api/v1/category`}
+                                optionsAttr="categories"
+                                initialSelectedOption={relationalData.category}
+                                isRequired={true}
                             />
                         </div>
 
-                        <div className="two-together">
-                            <div className="form-item">
-                                <label htmlFor="purchasePrice">Precio compra</label>
-                                <input
-                                    className="input"
-                                    type="number"
-                                    id="purchasePrice"
-                                    min="0"
-                                    value={formData.purchasePrice}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="form-item">
-                                <label htmlFor="salePrice">Precio venta</label>
-                                <input
-                                    className="input"
-                                    type="number"
-                                    id="salePrice"
-                                    min="0"
-                                    value={formData.salePrice}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                        <div className="button-container">
+                            <button className="btn" type="submit" disabled={submitDisabled}>
+                                Actualizar
+                            </button>
                         </div>
-
-                        <SearchSelect
-                            label="Proveedor"
-                            placeholder="Buscar proveedor..."
-                            onSelected={handleProviderSelect}
-                            apiUrl={`${API}/api/v1/provider`}
-                            optionsAttr="providers"
-                            initialSelectedOption={relationalData.provider}
-                            isRequired={true}
-                        />
-
-                        <SearchSelect
-                            label="Categoría"
-                            placeholder="Buscar categoría..."
-                            onSelected={handleCategorySelect}
-                            apiUrl={`${API}/api/v1/category`}
-                            optionsAttr="categories"
-                            initialSelectedOption={relationalData.category}
-                            isRequired={true}
-                        />
-                    </div>
-
-                    <div className="button-container">
-                        <button className="btn" type="submit">
-                            Actualizar
-                        </button>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+            ) : (
+                <Loading />
+            )}
 
         </div>
     );

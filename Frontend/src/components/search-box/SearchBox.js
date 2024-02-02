@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './searchbox.css';
 
-const SearchBox = ({ onSearch }) => {
+const SearchBox = ({ onSearch, disabled }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -29,6 +29,7 @@ const SearchBox = ({ onSearch }) => {
                 placeholder="Buscar"
                 value={searchQuery}
                 onChange={handleInputChange}
+                disabled={disabled || false}
             />
             {searchQuery && (
                 <FontAwesomeIcon
