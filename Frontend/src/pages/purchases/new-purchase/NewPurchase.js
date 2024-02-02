@@ -11,6 +11,8 @@ const NewPurchase = () => {
     const { providerId } = useParams();
     const navigate = useNavigate();
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [provider, setProvider] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -66,6 +68,7 @@ const NewPurchase = () => {
             alert('Debe seleccionar al menos un artículo');
             return;
         }
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/purchase`, {
                 method: 'POST',
@@ -85,6 +88,7 @@ const NewPurchase = () => {
             console.log(error);
             alert("Error al registrar la compra");
         }
+        setSubmitDisabled(false);
     }
 
     return (
@@ -98,7 +102,7 @@ const NewPurchase = () => {
 
                     {formData.articles.length > 0 && (
                         <div className="button-container">
-                            <button className="btn" type="submit">
+                            <button className="btn" type="submit" disabled={submitDisabled}>
                                 Crear
                             </button>
                         </div>

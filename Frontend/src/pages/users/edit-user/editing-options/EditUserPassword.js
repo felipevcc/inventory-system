@@ -9,6 +9,8 @@ const EditUserPassword = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [formData, setFormData] = useState({
         password: '',
         passwordConfirmation: ''
@@ -60,6 +62,7 @@ const EditUserPassword = () => {
             return;
         }
 
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/user/${id}/${formData.password}`, {
                 method: 'PUT',
@@ -75,9 +78,13 @@ const EditUserPassword = () => {
                 return;
             }
             alert("La contraseña no pudo ser actualizada");
+            navigate(`/edit-user/${id}`);
+            return;
         } catch (error) {
             console.log(error);
             alert("Error al actualizar la contraseña");
+            navigate(`/edit-user/${id}`);
+            return;
         }
     }
 
@@ -115,7 +122,7 @@ const EditUserPassword = () => {
                     </div>
 
                     <div className="button-container">
-                        <button className="btn" type="submit">
+                        <button className="btn" type="submit" disabled={submitDisabled}>
                             Actualizar
                         </button>
                     </div>

@@ -59,6 +59,8 @@ const Login = () => {
         };
     }, []);
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     function handleUsernameChange(event) {
@@ -78,6 +80,7 @@ const Login = () => {
     const navigate = useNavigate();
     async function handleFormSubmit(event) {
         event.preventDefault();
+        setSubmitDisabled(true);
         try {
             // Check login
             const loginData = {
@@ -148,7 +151,7 @@ const Login = () => {
                         </div>
                     </div>
                     {/* <Link to="/forgot-login">¿Olvidaste tu contraseña?</Link> */}
-                    <button type="submit" className="btn">
+                    <button type="submit" className="btn" disabled={submitDisabled}>
                         Entrar
                     </button>
                 </form>

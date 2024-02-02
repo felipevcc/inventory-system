@@ -11,6 +11,8 @@ const NewSale = () => {
     localStorage.setItem('selectedView', 'sales');
     const navigate = useNavigate();
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [formData, setFormData] = useState({
         customerId: 0,
         articles: [],
@@ -54,6 +56,7 @@ const NewSale = () => {
             alert('Debe seleccionar al menos un artículo');
             return;
         }
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/sale`, {
                 method: 'POST',
@@ -73,6 +76,7 @@ const NewSale = () => {
             console.log(error);
             alert("Error al registrar la venta");
         }
+        setSubmitDisabled(false);
     }
 
     return (
@@ -96,7 +100,7 @@ const NewSale = () => {
 
                     {formData.articles.length > 0 && (
                         <div className="button-container">
-                            <button className="btn" type="submit">
+                            <button className="btn" type="submit" disabled={submitDisabled}>
                                 Crear
                             </button>
                         </div>

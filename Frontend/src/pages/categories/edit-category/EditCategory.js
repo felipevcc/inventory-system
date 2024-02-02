@@ -5,11 +5,15 @@ import '../../../styles/new-edit-form.css';
 import './edit-category.css';
 import { API } from '../../../env';
 import trimFormValues from '../../../utils/trimFormValues';
+import Loading from '../../../components/loading/Loading';
 
 const EditCategory = () => {
     localStorage.setItem('selectedView', 'categories');
     const { id } = useParams();
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const [formData, setFormData] = useState({
         name: ''
@@ -28,10 +32,21 @@ const EditCategory = () => {
             const url = new URL(`${API}/api/v1/category/${id}`);
             await fetch(url)
                 .then(response => response.json())
-                .then(data => setFormData({
-                    name: data.name
-                }))
-                .catch(error => console.log(error))
+                .then(data => {
+                    if (!data || data.error) {
+                        navigate('/categories');
+                        return;
+                    }
+                    setFormData({
+                        name: data.name
+                    });
+                    setIsLoading(false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    navigate('/categories');
+                    return;
+                })
         })();
     }, [id, navigate]);
 
@@ -47,6 +62,7 @@ const EditCategory = () => {
 
         const trimmedFormData = trimFormValues(formData);
 
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/category/${id}`, {
                 method: 'PUT',
@@ -66,36 +82,41 @@ const EditCategory = () => {
             console.log(error);
             alert("Error al actualizar la categoría");
         }
+        setSubmitDisabled(false);
     }
 
     return (
         <div className="editCategory-container">
 
             <div className="text">Editar Categoría</div>
-            <div className='form-container'>
-                <form onSubmit={handleSubmit}>
-                    <div className="grid-form">
-                        <div className="form-item">
-                            <label htmlFor="name">Nombre</label>
-                            <input
-                                className='input'
-                                type="text"
-                                id="name"
-                                maxLength="45"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
+            {!isLoading ? (
+                <div className='form-container'>
+                    <form onSubmit={handleSubmit}>
+                        <div className="grid-form">
+                            <div className="form-item">
+                                <label htmlFor="name">Nombre</label>
+                                <input
+                                    className='input'
+                                    type="text"
+                                    id="name"
+                                    maxLength="45"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="button-container">
-                        <button className="btn" type="submit">
-                            Actualizar
-                        </button>
-                    </div>
-                </form>
-            </div>
+                        <div className="button-container">
+                            <button className="btn" type="submit" disabled={submitDisabled}>
+                                Actualizar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            ) : (
+                <Loading />
+            )}
         </div>
     );
 }

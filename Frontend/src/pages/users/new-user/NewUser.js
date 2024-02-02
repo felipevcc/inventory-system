@@ -22,6 +22,8 @@ const NewUser = () => {
         }
     }, [navigate]);
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -45,6 +47,7 @@ const NewUser = () => {
         const trimmedFormData = trimFormValues(formData);
         trimmedFormData.password = pwd;
 
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/user`, {
                 method: 'POST',
@@ -64,6 +67,7 @@ const NewUser = () => {
             console.log(error);
             alert("Error al crear el usuario");
         }
+        setSubmitDisabled(false);
     }
 
     return (
@@ -154,7 +158,7 @@ const NewUser = () => {
                     </div>
 
                     <div className="button-container">
-                        <button className="btn" type="submit">
+                        <button className="btn" type="submit" disabled={submitDisabled}>
                             Crear
                         </button>
                     </div>

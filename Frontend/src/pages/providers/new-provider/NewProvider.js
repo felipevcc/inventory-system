@@ -18,6 +18,8 @@ const NewProvider = () => {
         }
     }, [navigate]);
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         phoneNumber: '',
@@ -36,6 +38,7 @@ const NewProvider = () => {
 
         const trimmedFormData = trimFormValues(formData);
 
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/provider`, {
                 method: 'POST',
@@ -55,6 +58,7 @@ const NewProvider = () => {
             console.log(error);
             alert("Error al crear el proveedor");
         }
+        setSubmitDisabled(false);
     }
 
     return (
@@ -105,7 +109,7 @@ const NewProvider = () => {
                     </div>
 
                     <div className="button-container">
-                        <button className="btn" type="submit">
+                        <button className="btn" type="submit" disabled={submitDisabled}>
                             Crear
                         </button>
                     </div>

@@ -27,16 +27,16 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
             @Param("Ip_user_id") Long userId
     );
 
-    @Query(nativeQuery = true, value = "SELECT purch.* FROM PURCHASE purch " +
-            "JOIN PROVIDER prov ON purch.provider_id = prov.provider_id " +
-            "JOIN USER us ON purch.user_id = us.user_id " +
+    @Query(nativeQuery = true, value = "SELECT purch.* FROM purchase purch " +
+            "JOIN provider prov ON purch.provider_id = prov.provider_id " +
+            "JOIN user us ON purch.user_id = us.user_id " +
             "WHERE CAST(purch.purchase_id AS CHAR) = :searchTerm " +
             "OR LOWER(prov.name) LIKE %:searchTerm% " +
             "OR LOWER(us.name) LIKE %:searchTerm% " +
             "OR LOWER(us.username) LIKE %:searchTerm%",
-            countQuery = "SELECT COUNT(purch.purchase_id) FROM PURCHASE purch " +
-                    "JOIN PROVIDER prov ON purch.provider_id = prov.provider_id " +
-                    "JOIN USER us ON purch.user_id = us.user_id " +
+            countQuery = "SELECT COUNT(purch.purchase_id) FROM purchase purch " +
+                    "JOIN provider prov ON purch.provider_id = prov.provider_id " +
+                    "JOIN user us ON purch.user_id = us.user_id " +
                     "WHERE CAST(purch.purchase_id AS CHAR) = :searchTerm " +
                     "OR LOWER(prov.name) LIKE %:searchTerm% " +
                     "OR LOWER(us.name) LIKE %:searchTerm% " +
@@ -44,25 +44,25 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
     Page<Purchase> findAllPurchases(@Param("searchTerm") String searchTerm, Pageable pageable);
 
     // Data summary queries
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM purchase " +
         "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getTotalPurchasesInLastWeek();
-    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM purchase " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getPurchaseMoneyInLastWeek();
 
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM purchase " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getTotalPurchasesInLastMonth();
-    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM purchase " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getPurchaseMoneyInLastMonth();
 
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM purchase " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
     Long getTotalPurchasesInLastYear();
 
-    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM PURCHASE " +
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM purchase " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
     Long getPurchaseMoneyInLastYear();
 }

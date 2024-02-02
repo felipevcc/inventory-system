@@ -19,6 +19,8 @@ const NewItem = () => {
         }
     }, [navigate]);
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         brand: '',
@@ -56,6 +58,7 @@ const NewItem = () => {
 
         const trimmedFormData = trimFormValues(formData);
 
+        setSubmitDisabled(true);
         try {
             const response = await fetch(`${API}/api/v1/article`, {
                 method: 'POST',
@@ -75,6 +78,7 @@ const NewItem = () => {
             console.log(error);
             alert("Error al crear el artículo");
         }
+        setSubmitDisabled(false);
     }
 
     return (
@@ -183,7 +187,7 @@ const NewItem = () => {
                     </div>
 
                     <div className="button-container">
-                        <button className="btn" type="submit">
+                        <button className="btn" type="submit" disabled={submitDisabled}>
                             Crear
                         </button>
                     </div>

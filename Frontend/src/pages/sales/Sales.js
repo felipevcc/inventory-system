@@ -9,12 +9,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import userVerification from '../../utils/userVerification';
 import { API } from '../../env';
 import formatDate from '../../utils/formatDate';
+import Loading from '../../components/loading/Loading';
 
 const Sales = () => {
     localStorage.setItem('selectedView', 'sales');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [paginator, setPaginator] = useState({});
 
@@ -41,7 +44,10 @@ const Sales = () => {
         (async () => {
             await fetch(url)
                 .then(response => response.json())
-                .then(data => setPaginator(data))
+                .then(data => {
+                    setPaginator(data);
+                    setIsLoading(false);
+                })
                 .catch(error => console.log(error))
         })();
     }, [navigate, query, page]);
@@ -60,51 +66,55 @@ const Sales = () => {
             <div className="text">Ventas</div>
 
             <div className="options">
-                <SearchBox onSearch={handleSearch} />
+                <SearchBox onSearch={handleSearch} disabled={isLoading} />
                 <Link to="/new-sale" className="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
                     <span className="text">Nueva venta</span>
                 </Link>
             </div>
 
-            <div className="table-container">
-            <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>FECHA</th>
-                            <th>TOTAL</th>
-                            <th>CLIENTE</th>
-                            <th>USUARIO</th>
-                            <th>DETALLES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginator.sales && paginator.sales.length > 0 ? (
-                            paginator.sales.map(sale => (
-                                <tr key={sale.saleId}>
-                                    <td>{sale.saleId}</td>
-                                    <td>{formatDate(sale.createdAt)}</td>
-                                    <td>{sale.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
-                                    <td>{sale.customer.name}</td>
-                                    <td>{sale.user.name}</td>
-                                    <td>
-                                        <Link to={`/detail-sale/${sale.saleId}`}>
-                                            <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+            {!isLoading ? (
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="6">No hay resultados</td>
+                                <th>ID</th>
+                                <th>FECHA</th>
+                                <th>TOTAL</th>
+                                <th>CLIENTE</th>
+                                <th>USUARIO</th>
+                                <th>DETALLES</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {paginator.sales && paginator.sales.length > 0 ? (
+                                paginator.sales.map(sale => (
+                                    <tr key={sale.saleId}>
+                                        <td>{sale.saleId}</td>
+                                        <td>{formatDate(sale.createdAt)}</td>
+                                        <td>{sale.totalValue.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
+                                        <td>{sale.customer.name}</td>
+                                        <td>{sale.user.name}</td>
+                                        <td>
+                                            <Link to={`/detail-sale/${sale.saleId}`}>
+                                                <FontAwesomeIcon icon={faCartPlus} className="details-icon" />
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="6">No hay resultados</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
 
-                <Pagination paginator={paginator} onChangePage={handlePage} />
-            </div>
+                    <Pagination paginator={paginator} onChangePage={handlePage} />
+                </div>
+            ) : (
+                <Loading />
+            )}
 
         </div>
     );

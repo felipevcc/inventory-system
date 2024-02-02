@@ -12,6 +12,8 @@ const SelectProvider = () => {
     localStorage.setItem('selectedView', 'purchases');
     const navigate = useNavigate();
 
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [providerId, setProviderId] = useState(0);
 
     useEffect(() => {
@@ -29,7 +31,9 @@ const SelectProvider = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setSubmitDisabled(true);
         navigate(`/new-purchase/${providerId}`);
+        setSubmitDisabled(false);
     }
 
     return (
@@ -50,7 +54,7 @@ const SelectProvider = () => {
                     </div>
 
                     <div className="button-container">
-                        <button className="btn" type="submit">
+                        <button className="btn" type="submit" disabled={submitDisabled}>
                             <span>Continuar</span>
                             <FontAwesomeIcon icon={faArrowRight} className="details-icon" />
                         </button>

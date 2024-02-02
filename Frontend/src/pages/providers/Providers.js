@@ -8,12 +8,15 @@ import Pagination from '../../components/pagination/Pagination';
 import { Link, useNavigate } from 'react-router-dom';
 import userVerification from '../../utils/userVerification';
 import { API } from '../../env';
+import Loading from '../../components/loading/Loading';
 
 const Providers = () => {
     localStorage.setItem('selectedView', 'providers');
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const pageSize = 5;
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [paginator, setPaginator] = useState({});
 
@@ -40,7 +43,10 @@ const Providers = () => {
         (async () => {
             await fetch(url)
                 .then(response => response.json())
-                .then(data => setPaginator(data))
+                .then(data => {
+                    setPaginator(data);
+                    setIsLoading(false);
+                })
                 .catch(error => console.log(error))
         })();
     }, [navigate, query, page]);
@@ -59,49 +65,53 @@ const Providers = () => {
             <div className="text">Proveedores</div>
 
             <div className="options">
-                <SearchBox onSearch={handleSearch} />
+                <SearchBox onSearch={handleSearch} disabled={isLoading} />
                 <Link to="/new-provider" className="add-box">
                     <FontAwesomeIcon icon={faPlus} className="icon" />
                     <span className="text">Nuevo proveedor</span>
                 </Link>
             </div>
 
-            <div className="table-container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>TELÉFONO</th>
-                            <th>EMAIL</th>
-                            <th>EDITAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginator.providers && paginator.providers.length > 0 ? (
-                            paginator.providers.map(provider => (
-                                <tr key={provider.providerId}>
-                                    <td>{provider.providerId}</td>
-                                    <td>{provider.name}</td>
-                                    <td>{provider.phoneNumber}</td>
-                                    <td>{provider.email}</td>
-                                    <td>
-                                        <Link to={`/edit-provider/${provider.providerId}`}>
-                                            <FontAwesomeIcon icon={faPen} className="pen-icon" />
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+            {!isLoading ? (
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="5">No hay resultados</td>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>TELÉFONO</th>
+                                <th>EMAIL</th>
+                                <th>EDITAR</th>
                             </tr>
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {paginator.providers && paginator.providers.length > 0 ? (
+                                paginator.providers.map(provider => (
+                                    <tr key={provider.providerId}>
+                                        <td>{provider.providerId}</td>
+                                        <td>{provider.name}</td>
+                                        <td>{provider.phoneNumber}</td>
+                                        <td>{provider.email}</td>
+                                        <td>
+                                            <Link to={`/edit-provider/${provider.providerId}`}>
+                                                <FontAwesomeIcon icon={faPen} className="pen-icon" />
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5">No hay resultados</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
 
-                <Pagination paginator={paginator} onChangePage={handlePage} />
-            </div>
+                    <Pagination paginator={paginator} onChangePage={handlePage} />
+                </div>
+            ) : (
+                <Loading />
+            )}
 
         </div>
     );

@@ -27,17 +27,17 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
             @Param("Ip_user_id") Long userId
     );
 
-    @Query(nativeQuery = true, value = "SELECT sl.* FROM SALE as sl " +
-            "JOIN CUSTOMER cus ON sl.customer_id = cus.customer_id " +
-            "JOIN USER us ON sl.user_id = us.user_id " +
+    @Query(nativeQuery = true, value = "SELECT sl.* FROM sale sl " +
+            "JOIN customer cus ON sl.customer_id = cus.customer_id " +
+            "JOIN user us ON sl.user_id = us.user_id " +
             "WHERE CAST(sl.sale_id AS CHAR) = :searchTerm " +
             "OR cus.name LIKE %:searchTerm% " +
             "OR cus.document LIKE %:searchTerm% " +
             "OR us.name LIKE %:searchTerm% " +
             "OR us.username LIKE %:searchTerm%",
-            countQuery = "SELECT COUNT(sl.sale_id) FROM SALE sl " +
-                    "JOIN CUSTOMER cus ON sl.customer_id = cus.customer_id " +
-                    "JOIN USER us ON sl.user_id = us.user_id " +
+            countQuery = "SELECT COUNT(sl.sale_id) FROM sale sl " +
+                    "JOIN customer cus ON sl.customer_id = cus.customer_id " +
+                    "JOIN user us ON sl.user_id = us.user_id " +
                     "WHERE CAST(sl.sale_id AS CHAR) = :searchTerm " +
                     "OR cus.name LIKE %:searchTerm% " +
                     "OR cus.document LIKE %:searchTerm% " +
@@ -46,24 +46,24 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
     Page<Sale> findAllSales(@Param("searchTerm") String searchTerm, Pageable pageable);
 
     // Data summary queries
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM sale " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getTotalSalesInLastWeek();
-    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM sale " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)")
     Long getSaleMoneyInLastWeek();
 
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM sale " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getTotalSalesInLastMonth();
-    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM sale " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)")
     Long getSaleMoneyInLastMonth();
 
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM sale " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
     Long getTotalSalesInLastYear();
-    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM SALE " +
+    @Query(nativeQuery = true, value = "SELECT SUM(total_value) FROM sale " +
             "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)")
     Long getSaleMoneyInLastYear();
 }
