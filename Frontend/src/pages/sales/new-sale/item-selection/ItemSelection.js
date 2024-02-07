@@ -132,6 +132,7 @@ const ItemSelection = ({ onSelectionChange }) => {
                                                     type="checkbox"
                                                     checked={!!articles.find(a => a.articleId === article.articleId)}
                                                     onChange={(event) => handleCheckboxChange(article, event.target.checked)}
+                                                    disabled={article.stock === 0}
                                                 />
                                                 <span className="checkmark"></span>
                                             </label>
@@ -183,6 +184,7 @@ const ItemSelection = ({ onSelectionChange }) => {
                                                 className="input"
                                                 type="number"
                                                 min="1"
+                                                max={article.stock}
                                                 value={article.quantity}
                                                 onChange={(event) => handleQuantityChange(article, event.target.value)}
                                                 required
