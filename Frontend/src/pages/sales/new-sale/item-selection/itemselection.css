@@ -77,7 +77,7 @@
     position: relative;
     padding-left: 35px;
     margin-bottom: 12px;
-    cursor: pointer;
+    cursor: default;
     font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -89,7 +89,6 @@
 .checkbox-container input {
     position: absolute;
     opacity: 0;
-    cursor: pointer;
     height: 0;
     width: 0;
 }
@@ -97,6 +96,7 @@
 /* Create a custom checkbox */
 .checkmark {
     position: absolute;
+    cursor: pointer;
     top: 0;
     left: 0;
     height: 25px;
@@ -106,9 +106,17 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.checkbox-container input:disabled ~ .checkmark {
+    cursor: not-allowed;
+}
+
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover input~.checkmark {
     background-color: #ccc;
+}
+
+.checkbox-container:hover input:disabled~.checkmark {
+    background-color: #eee;
 }
 
 /* When the checkbox is checked, add a blue background */
