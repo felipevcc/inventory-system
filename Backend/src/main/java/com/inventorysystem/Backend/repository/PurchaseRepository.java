@@ -31,16 +31,16 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
             "JOIN provider prov ON purch.provider_id = prov.provider_id " +
             "JOIN user us ON purch.user_id = us.user_id " +
             "WHERE CAST(purch.purchase_id AS CHAR) = :searchTerm " +
-            "OR LOWER(prov.name) LIKE %:searchTerm% " +
-            "OR LOWER(us.name) LIKE %:searchTerm% " +
-            "OR LOWER(us.username) LIKE %:searchTerm%",
+            "OR prov.name LIKE %:searchTerm% " +
+            "OR us.name LIKE %:searchTerm% " +
+            "OR us.username LIKE %:searchTerm%",
             countQuery = "SELECT COUNT(purch.purchase_id) FROM purchase purch " +
                     "JOIN provider prov ON purch.provider_id = prov.provider_id " +
                     "JOIN user us ON purch.user_id = us.user_id " +
                     "WHERE CAST(purch.purchase_id AS CHAR) = :searchTerm " +
-                    "OR LOWER(prov.name) LIKE %:searchTerm% " +
-                    "OR LOWER(us.name) LIKE %:searchTerm% " +
-                    "OR LOWER(us.username) LIKE %:searchTerm%")
+                    "OR prov.name LIKE %:searchTerm% " +
+                    "OR us.name LIKE %:searchTerm% " +
+                    "OR us.username LIKE %:searchTerm%")
     Page<Purchase> findAllPurchases(@Param("searchTerm") String searchTerm, Pageable pageable);
 
     // Data summary queries
