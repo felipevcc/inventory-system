@@ -10,13 +10,11 @@
     font-weight: 500;
     font-size: 20px;
     /* padding: 10px; */
-    cursor: pointer;
 }
 
 .detailSale-container .top-sale p {
     color: var(--primary-color-light);
     padding: 20px;
-    cursor: pointer;
     margin-bottom: 20px;
 }
 
